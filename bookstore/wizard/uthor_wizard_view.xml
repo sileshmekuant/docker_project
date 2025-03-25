@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_author_wizard_form" model="ir.ui.view">
+        <field name="name">author.wizard.form</field>
+        <field name="model">author.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create New Author">
+                <group>
+                    <field name="name"/>
+                    <field name="birth_date"/>
+                </group>
+                <footer>
+                    <button string="Create" type="object" name="action_create_author" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

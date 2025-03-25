@@ -1,0 +1,61 @@
+<odoo>
+    <record id="view_estate_property_form" model="ir.ui.view">
+        <field name="name">estate.property.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form string="Property">
+                <sheet>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <!-- <field name="property_id"/>  -->
+                        <field name="site_id"/>
+                        <!-- <field name="address_id"/> -->
+                         <field name="region_id"/> 
+                         <!-- <field name="state_id"/> -->
+                      <field name="sub_city_id" domain="[('region_id', '=', region_id)]"/>
+
+                        <field name="property_type" />
+                  
+                        <field name="price_per_sq_m"/>
+                        <field name="area"/>
+                        <field name="price" />
+                        </group>
+                        <group>
+                        <field name="year_built"/>
+                        <field name="parking_space"/>
+                         <field name="parking_space_id" invisible="not parking_space"/>
+                        <field name="grand_total" /> 
+                    </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+      <record id="view_estate_property_tree" model="ir.ui.view">
+        <field name="name">estate.property.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree string="Property">
+               
+                        <field name="name"/>
+                        <!-- <field name="property_id"/>  -->
+                        <field name="site_id"/>
+                         <!-- <field name="address_id"/>  -->
+                         <field name="region_id"/> 
+                        <field name="price_per_sq_m"/>
+                        <field name="year_built"/>
+                        <field name="parking_space"/>
+            </tree>
+        </field>
+    </record>
+     <record id="action_real_estate_property" model="ir.actions.act_window">
+            <field name="name">Real Estate Properties</field>
+            <field name="res_model">estate.property</field>
+            <field name="view_mode">tree,form</field>
+            
+        </record>
+        <!-- Menu Items -->
+        <menuitem id="menu_real_estate_root" name="Real Estate" sequence="10"/>
+        <menuitem id="menu_real_estate_property" name="Properties" parent="menu_real_estate_root" action="action_real_estate_property"/> 
+</odoo>

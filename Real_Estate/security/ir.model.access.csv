@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_estate_room,estate.room,model_estate_room,base.group_user,1,1,1,1
+access_estate_property,estate.property,model_estate_property,base.group_user,1,1,1,1
+access_estate_floor,estate.floor,model_estate_floor,base.group_user,1,1,1,1
+access_estate_property_type,estate.property.type,model_estate_property_type,base.group_user,1,1,1,1
+access_estate_country,estate.country,model_estate_country,base.group_user,1,1,1,1
+access_estate_region,estate.region,model_estate_region,base.group_user,1,1,1,1
+access_estate_sub_city,estate.sub.city,model_estate_sub_city,base.group_user,1,1,1,1
+access_estate_site, estate.access.site,model_estate_site,base.group_user,1,1,1,1
+access_parking_space,Parking.Space,model_parking_space,base.group_user,1,1,1,1

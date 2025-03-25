@@ -1,0 +1,30 @@
+<odoo>
+    <!-- Wizard Form View -->
+    <record id="view_parking_space_wizard_form" model="ir.ui.view">
+        <field name="name">parking.space.wizard.form</field>
+        <field name="model">parking.space.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Assign Parking Spaces">
+                <group>
+                    <field name="property_id" readonly="1"/>
+                    <field name="parking_space_ids" widget="many2many_tags"/>
+                </group>
+                <footer>
+                    <button name="assign_parking_spaces" string="Assign" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Wizard Action -->
+    <record id="action_parking_wizard" model="ir.actions.act_window">
+        <field name="name">Assign Parking Spaces</field>
+        <field name="res_model">parking.space.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu Item for Wizard -->
+    <menuitem id="menu_parking_wizard" name="Assign Parking Spaces" parent="menu_parking_management" action="action_parking_wizard"/>
+</odoo>
