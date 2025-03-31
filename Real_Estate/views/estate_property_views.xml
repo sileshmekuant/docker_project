@@ -5,9 +5,9 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <sheet>
-                    <footer>
+                    <!-- <footer>
                         <button name="open_wizard" string="Create Offer" type="object" class="btn-primary"/>
-                    </footer>
+                    </footer> -->
                     <group>
                         <group>
                             <group>

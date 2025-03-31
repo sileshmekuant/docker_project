@@ -72,12 +72,12 @@ class EstateProperty(models.Model):
             'price': self.price,  
         })
 
-    def open_wizard(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Make an Offer',
-            'res_model': 'real.estate.wizard',
-            'view_mode': 'form',
-            'target': 'new',
-            'context': {'default_property_id': self.id},
-        }
+    # def open_wizard(self):
+    #     return {
+    #         'type': 'ir.actions.act_window',
+    #         'name': 'Make an Offer',
+    #         'res_model': 'real.estate.wizard',
+    #         'view_mode': 'form',
+    #         'target': 'new',
+    #         # 'context': {'default_property_id': self.id},
+    #     }
