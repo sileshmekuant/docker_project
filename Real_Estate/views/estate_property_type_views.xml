@@ -8,6 +8,7 @@
                 <sheet>
                     <group>
                         <field name="name"/>
+                        <!-- <field name="property_category_id"/>  -->
                         <field name="area"/>
                         <field name="price_per_area"/>
                         <field name="bed_room"/>
@@ -25,7 +26,8 @@
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <tree string="Property Types">
-                <field name="name"/>
+               <field name="name"/> 
+               <!-- <field name="property_category_id"/>  -->
                 <field name="area"/>
                 <field name="price_per_area"/>
                 <field name="bed_room"/>

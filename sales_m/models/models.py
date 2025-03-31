@@ -1,6 +1,10 @@
-from odoo import models , api,fields
-class sales_m(models.Model):
-        _inherit="sale.order"
+from odoo import models, fields
 
+class SaleOrderInherit(models.Model):
+    _inherit = "sale.order"
 
-        payment_date = fields.Date(string="payment.date")
+    active = fields.Boolean(default=True)
+
+# def toggle_active(self):
+#         for order in self:
+#             order.active = not order.active 

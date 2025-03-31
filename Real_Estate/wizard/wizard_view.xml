@@ -1,0 +1,44 @@
+<odoo>
+    <!-- Wizard Form View -->
+    <record id="view_real_estate_wizard_form" model="ir.ui.view">
+        <field name="name">real.estate.wizard.form</field>
+        <field name="model">real.estate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Make an Offer">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="property_id" required="1"/>
+                        <field name="offer_price" required="1"/>
+                        <field name="buyer_id" required="1"/>
+                        <field name="price" />
+                    </group>
+                    <footer>
+                        <button name="confirm_wizard" string="Confirm" type="object" class="btn-primary"/>
+                      <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for the Wizard -->
+    <!-- <record id="action_real_estate_wizard" model="ir.actions.act_window">
+        <field name="name">Create Offer</field>
+        <field name="res_model">real.estate.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_real_estate_wizard_form"/>
+        <field name="target">new</field>
+    </record> -->
+<record id="action_real_estate_wizard" model="ir.actions.act_window">
+    <field name="name">Make an Offer</field>
+    <field name="res_model">real.estate.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_real_estate_wizard_form"/>
+    <field name="target">new</field>
+</record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_real_estate_root" name="Real Estate" sequence="10"/>
+    <menuitem id="menu_real_estate_wizard" name="Wizard" parent="menu_real_estate_root" action="action_real_estate_wizard"/> 
+</odoo>

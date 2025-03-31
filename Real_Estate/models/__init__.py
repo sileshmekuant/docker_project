@@ -8,4 +8,5 @@ from . import region
 from . import sub_city
 from . import parking_space
 from . import parking_wizard
-
+from . import new_region
+from . import city_and_sub_city

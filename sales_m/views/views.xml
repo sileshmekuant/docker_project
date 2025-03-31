@@ -1,15 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+  
 
-  <record id="sale_order_inherit_sale_m" model="ir.ui.view">
-    <field name="name">sale.order.view.form.inherit</field>
-    <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form"/>
-    <field name="arch" type="xml">
-      <xpath expr="//field[@name='partner_ref']" position="after">
-        <field name="payment_date" />
-      </xpath>
-    </field>
-  </record>
-
+    <!-- Inherit Sale Order Form View -->
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//form/sheet/group" position="after">
+                <group>
+                    <field name="active" invisible="1" widget="boolean_toggle" string="Archive"/>
+                </group>
+            </xpath>
+            <xpath expr="//form//header" position="inside">
+            <!-- <field name="active" widget="boolean_toggle" string="Archive" /> -->
+            <!-- <field name="payment_term_id" position="attributes"> -->
+                <!-- Hide the field when the state is 'draft' -->
+                <!-- <attribute name="invisible">[('state', '=', 'draft')]</attribute> -->
+                <button name="toggle_active" type="object" string="Archive"
+                    invisible="not active"
+       class="oe_highlight"/>
+                <button name="toggle_active" type="object" string="Unarchive"
+                      invisible="active" class="oe_highlight"/> 
+            </xpath>
+        </field>
+    </record>
 </odoo>

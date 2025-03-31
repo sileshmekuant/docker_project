@@ -11,8 +11,8 @@
                         <field name="name"/>
                         <field name="code"/>
                         <field name="country_id"/>
-                        <field name="parent_id" string="Parent Region"/>
-                        <field name="sub_city_id"/>
+                        <!-- <field name="parent_id" string="Parent Region"/> -->
+                        <!-- <field name="sub_city_id"/> -->
                     </group>
                 </sheet>
             </form>
@@ -28,7 +28,7 @@
                 <field name="name"/>
                 <field name="code"/>
                 <field name="country_id"/>
-                <field name="parent_id"/>
+                <!-- <field name="parent_id"/> -->
             </tree>
         </field>
     </record>
@@ -43,6 +43,6 @@
     <!-- Menu Structure -->
     <menuitem id="menu_real_estate_root" name="Real Estate" sequence="10"/>
     <menuitem id="menu_address" name="address" parent="menu_real_estate_root"/>
-    <menuitem id="menu_estate_region" name="Regions" parent="menu_address" action="action_estate_region"/>
+    <!-- <menuitem id="menu_estate_region" name="Regions" parent="menu_address" action="action_estate_region"/> -->
     
 </odoo>

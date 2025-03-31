@@ -12,9 +12,13 @@
          'views/estate_property_type_views.xml',
          'views/estate_property_views.xml',
          'views/estate_region_views.xml',
-         'views/estate_sub_city_views.xml',
+         # 'views/estate_sub_city_views.xml',
           'views/parking_space_views.xml',
          'views/parking_wizard.xml',
+         "views/region.xml",
+         'views/city.xml',
+         'wizard/wizard_view.xml',
+
 
          #   'views/menu.xml',
 

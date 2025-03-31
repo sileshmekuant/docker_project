@@ -3,7 +3,8 @@ from odoo import models, fields,api
 class EstatePropertyType(models.Model):
     _name = "estate.property.type"
     _description = "Property Type"
-
+    # _rec_name = "property_category_id"
+    # property_category_id = fields.Many2one("estate.property.category", string="Property Category", required=True)
     name = fields.Char(string="Property Type Name", required=True)
     area = fields.Float(string="Area (sqft)",default=0.0)
     price_per_area = fields.Float(string="Price per Area (sqft)",default=0.0)

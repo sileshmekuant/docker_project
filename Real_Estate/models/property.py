@@ -4,54 +4,80 @@ class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Property"
 
+    listed_date = fields.Date(string="Listed Date", default=fields.Date.context_today)
+    available_from = fields.Datetime(string="Available From", default=fields.Datetime.now)
+    sale_deadline = fields.Datetime(string="Sale Deadline")
     name = fields.Char(string="Property Name", required=True)
-    site_id = fields.Many2one('estate.site', string="Site",)
-    #address_id = fields.Many2one('estate.sub.city', string="address")
-    region_id = fields.Many2one('estate.region', string="Region")  
-    property_type = fields.Many2one('estate.property.type',string="property_type")
-    sub_city_id = fields.Many2one("estate.sub.city", string="Sub Cities")
-    price_per_sq_m = fields.Float(string="Price per_sq_m", compute="_compute_total_price", related="property_type.price_per_area")
+
+    country_id = fields.Many2one('res.country', string="Country")
+    region_ids = fields.Many2many('new.region', string="Regions", compute="_get_regions", store=False)
+
+    region_id = fields.Many2one('new.region', string="Region")
+    city = fields.Many2one('new.city', string="City")
+    sub_city_id = fields.Many2one("sub_city", string="Sub Cities")
+
+    property_type = fields.Many2one('estate.property.type', string="Property Type")
+    price_per_sq_m = fields.Float(string="Price per sq.m", related="property_type.price_per_area")
     area = fields.Float(string="Area (sq.m)", related="property_type.area")
-    price = fields.Float(string="Total Price", related="property_type.price" )
+    price = fields.Float(string="Total Price", related="property_type.price")
     
     year_built = fields.Datetime(string="Year Built")
-    parking_space = fields.Boolean(string="Parking",default=False) 
+    parking_space = fields.Boolean(string="Parking", default=False)
     parking_space_id = fields.Many2one('parking.space', string="Parking Space")
-    #parking_name = fields.Char(related='parking_space_id.name', string="Parking Space Name", store=True)
-    grand_total = fields.Float(string="Grand Total", compute="_compute_grand_total")
 
-    # @api.onchange('region_id')
-    # def _onchange_region_id(self):
-    #     if self.region_id:
-    #         return {'domain': {'sub_city_id': [('region_id', '=', self.region_id.id)]}}
-    #     return {'domain': {'sub_city_id': []}}
-    @api.depends('price')
-    def _compute_grand_total(self):
-        for record in self:
-            record.grand_total = record.price 
+    grand_total = fields.Float(string="Grand Total", compute="_compute_grand_total")
+    total_price = fields.Float(string="Total Price", compute="_compute_total_price")
+
+    # Fix: Define missing fields
+    address_id = fields.Many2one('estate.sub.city', string="Address")
+    site_id = fields.Many2one('estate.site', string="Site")
+
+    @api.depends('country_id')
+    def _get_regions(self):
+        for rec in self:
+            rec.region_ids = self.env['new.region'].search([('country', '=', rec.country_id.id)]).ids if rec.country_id else []
+
+    @api.depends('city')
+    def _get_sub_city(self):
+        for rec in self:
+            rec.sub_city_ids = self.env['sub_city'].search([('city_id', '=', rec.city.id)]).ids if rec.city else []
+
     @api.depends('address_id')
     def _compute_site(self):
         for record in self:
-            if record.address_id:
-                
-                site = self.env['estate.site'].search([('partner_id', '=', record.address_id.id)], limit=1)
-                record.site_id = site.id if site else False
-            else:
-                record.site_id = False
+            site = self.env['estate.site'].search([('partner_id', '=', record.address_id.id)], limit=1)
+            record.site_id = site.id if site else False
 
-    @api.depends('price_per_area', 'area')
+    @api.depends('price_per_sq_m', 'area')
     def _compute_price(self):
         for record in self:
-            record.price = record.price_per_area * record.area if record.area and record.price_per_area else 0.0
-     
-    
+            record.price = record.price_per_sq_m * record.area if record.area and record.price_per_sq_m else 0.0
 
-    @api.depends('area', 'price_per_area', 'parking_space')
+    @api.depends('area', 'price_per_sq_m', 'parking_space')
     def _compute_total_price(self):
         for record in self:
-            record.total_price = record.area * record.price_per_area if record.area and record.price_per_area else 0.0
-    @api.depends('price', 'parking_space','parking_space_id')
+            record.total_price = record.area * record.price_per_sq_m if record.area and record.price_per_sq_m else 0.0
+
+    @api.depends('price', 'parking_space', 'parking_space_id')
     def _compute_grand_total(self):
         for record in self:
-            parking_fee = record.parking_space_id.price_per_month if record.parking_space else 0  # Example parking fee
+            parking_fee = record.parking_space_id.price_per_month if record.parking_space else 0
             record.grand_total = record.price + parking_fee
+
+    def confirm_wizard(self):
+        """Method to create an offer for the selected property"""
+        self.ensure_one()
+        offer = self.env['estate.property'].create({
+            'name': "Offer for " + self.name,
+            'price': self.price,  
+        })
+
+    def open_wizard(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Make an Offer',
+            'res_model': 'real.estate.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_property_id': self.id},
+        }
