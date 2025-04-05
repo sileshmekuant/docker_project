@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="asset_assignment_report_template">
+        <t t-call="web.html_container">
+            <t t-set="doc" t-value="docs[0]"/>
+            <t t-if="doc">
+                <style>
+                    .page {
+                        font-family: Arial, sans-serif;
+                        padding: 20px;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        margin: 10px;
+                        background-color: #f9f9f9;
+                    }
+                    h2 {
+                        text-align: center;
+                        color: green;
+                    }
+                    p {
+                        font-size: 14px;
+                        margin: 5px 0;
+                    }
+                    strong {
+                        color: blue;
+                    }
+                </style>
+                <div class="page">
+                    <h2>Asset Assignment Report</h2>
+                    <p><strong>Asset Name:</strong> <t t-esc="doc.name"/></p>
+                    <p><strong>Asset ID:</strong> <t t-esc="doc.asset_id.name"/></p>
+                    <p><strong>Assignment Date:</strong> <t t-esc="doc.assignment_date"/></p>
+                    <p><strong>Return Deadline:</strong> <t t-esc="doc.return_deadline"/></p>
+                    <p><strong>Return Date:</strong> <t t-esc="doc.return_date"/></p>
+                    <p><strong>Employee ID:</strong> <t t-esc="doc.employee_id.name"/></p>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

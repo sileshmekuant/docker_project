@@ -2,13 +2,14 @@ from odoo import models, fields, api
 
 class EstateProperty(models.Model):
     _name = "estate.property"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Property"
 
     listed_date = fields.Date(string="Listed Date", default=fields.Date.context_today)
     available_from = fields.Datetime(string="Available From", default=fields.Datetime.now)
     sale_deadline = fields.Datetime(string="Sale Deadline")
-    name = fields.Char(string="Property Name", required=True)
-
+    name = fields.Char(string="Property Name", required=True,tracking=True)
+    image = fields.Image(string="Property Image",required=True)
     country_id = fields.Many2one('res.country', string="Country")
     region_ids = fields.Many2many('new.region', string="Regions", compute="_get_regions", store=False)
 
@@ -27,7 +28,7 @@ class EstateProperty(models.Model):
 
     grand_total = fields.Float(string="Grand Total", compute="_compute_grand_total")
     total_price = fields.Float(string="Total Price", compute="_compute_total_price")
-
+    sold = fields.Boolean(string="Sold", default=False)
     # Fix: Define missing fields
     address_id = fields.Many2one('estate.sub.city', string="Address")
     site_id = fields.Many2one('estate.site', string="Site")
@@ -71,13 +72,16 @@ class EstateProperty(models.Model):
             'name': "Offer for " + self.name,
             'price': self.price,  
         })
+    def action_sold(self):
+        """Method to mark property as sold and show rainbow effect"""
+        self.ensure_one()
+        self.sold = True
+        return {
+            'effect': {
+                'fadeout': 'slow',
+                'message': 'Congratulations! The property is sold!',
+                'type': 'rainbow_man',
+            }
+        }
 
-    # def open_wizard(self):
-    #     return {
-    #         'type': 'ir.actions.act_window',
-    #         'name': 'Make an Offer',
-    #         'res_model': 'real.estate.wizard',
-    #         'view_mode': 'form',
-    #         'target': 'new',
-    #         # 'context': {'default_property_id': self.id},
-    #     }
+    
