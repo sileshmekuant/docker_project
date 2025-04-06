@@ -1,0 +1,20 @@
+<odoo>
+    <template id="plan_report_template">
+        <t t-call="web.external_layout">
+        <t t-foreach="docs" t-as="doc">
+            
+    
+            <div class="page">
+                <h2 t-esc="doc.name"/>
+                <p t-esc="doc.description"/>
+                <h3>Tasks</h3>
+                <ul>
+                    <t t-foreach="doc.task_ids" t-as="task">
+                        <li t-esc="task.name"/>
+                    </t>
+                </ul>
+            </div>
+                </t>
+        </t>
+    </template>
+</odoo>

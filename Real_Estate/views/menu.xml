@@ -1,0 +1,24 @@
+<odoo>
+    <!-- Root menu for Real Estate -->
+    <menuitem id="menu_real_estate_root" name="Real Estate" sequence="10"/>
+    
+    <!-- Properties menu under Real Estate -->
+    <menuitem id="menu_real_estate_properties" name="Properties" parent="menu_real_estate_root" sequence="20"/>
+
+    <!-- Action for Properties -->
+    <record id="action_property" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">real.estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Menu item for Properties -->
+    <menuitem id="menu_action_property" parent="menu_real_estate_properties" action="action_property"/>
+
+    <!-- Action for Estate Floor -->
+   
+    
+    <!-- Menu item for Estate Floor, under Properties -->
+     
+    <menuitem id="menu_estate_floor" name="Estate Floor" action="action_estate_floor" parent="menu_real_estate_properties"/>
+</odoo>

@@ -1,0 +1,115 @@
+<odoo>
+    <data>
+        <!-- Search View -->
+        <record id="view_property_search" model="ir.ui.view">
+            <field name="name">real.estate.property.search</field>
+            <field name="model">real.estate.property</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="property_type"/>
+                    <field name="state"/>
+                    <field name="owner_id"/>
+                    <field name="buyer_id"/>
+                    <field name="salesperson_id"/>
+
+                    <!-- Filters -->
+                    <filter string="New Properties" name="new_properties" domain="[('state', '=', 'new')]"/>
+                    <filter string="Sold Properties" name="sold_properties" domain="[('state', '=', 'sold')]"/>
+                    <filter string="Offer Received" name="offer_received" domain="[('state', '=', 'offer_received')]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_property_tree" model="ir.ui.view">
+            <field name="name">real.estate.property.tree</field>
+            <field name="model">real.estate.property</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="price"/>
+                    <field name="property_type"/>
+                    <field name="state"/>
+                    <field name="buyer_id"/>
+                    <field name="salesperson_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_property_form" model="ir.ui.view">
+            <field name="name">real.estate.property.form</field>
+            <field name="model">real.estate.property</field>
+            <field name="arch" type="xml">
+                <form string="Real Estate Property">
+                  <header>
+                    <button name="action_mark_as_sold"
+                            string="Mark as Sold"
+                            type="object"
+                            class="btn btn-primary"/>
+   <field name="state" widget="statusbar"/>
+
+                </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="postcode"/>
+                                <field name="available_from"/>
+                            </group>
+                            <group>
+                                <!-- <field name="expected_price"/> -->
+                                <field name="selling_price"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page name="description" string="Description">
+                                <group>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="property_type"/>
+                                        <field name="price"/>
+                                        <field name="area"/>
+                                        <field name="bedrooms"/>
+                                        <field name="agent_ids" widget="many2many_tags" />
+                                    </group>
+
+                                    <group>
+                                        <field name="bathrooms"/>
+                                     
+                                        <field name="owner_id"/>
+                                        <field name="tax"/>
+                                        <field name="garden" widget="boolean_toggle"/>
+                                        <field name="garden_area"/>
+                                        <field name="garden_orientation"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page name="sales" string="Sales Information">
+                                <group>
+                                    <field name="buyer_id"/>
+                                    <field name="salesperson_id"/>
+                                </group>
+                            </page>
+                        </notebook>
+                      
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action Window -->
+        <record id="action_real_estate_property" model="ir.actions.act_window">
+            <field name="name">Real Estate Properties</field>
+            <field name="res_model">real.estate.property</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_property_search"/>
+        </record>
+
+        <!-- Menu Items -->
+        <menuitem id="menu_real_estate_root" name="Real Estate" sequence="10"/>
+        <menuitem id="menu_real_estate_property" name="Properties" parent="menu_real_estate_root" action="action_real_estate_property"/>
+    </data>
+</odoo>

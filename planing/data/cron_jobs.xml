@@ -1,0 +1,11 @@
+<odoo>
+    <record id="ir_cron_auto_approve_plans" model="ir.cron">
+        <field name="name">Auto Approve Plans</field>
+        <field name="model_id" ref="model_plan_plan"/>
+        <field name="state">code</field>
+        <field name="code">model.auto_approve_plans()</field>
+        <field name="interval_number">10</field>  <!-- Runs every 10 minutes -->
+        <field name="interval_type">minutes</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

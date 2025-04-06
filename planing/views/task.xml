@@ -1,0 +1,47 @@
+<odoo>
+    <!-- Form View for Task -->
+    <record id="view_task_form" model="ir.ui.view">
+        <field name="name">plan.task.form</field>
+        <field name="model">plan.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_verify" type="object" string="Verify" class="oe_highlight" 
+                        modifiers="{'invisible': [('is_verified', '=', True)]}"/>
+                    <button name="action_print_plan" type="object" string="Print Plan"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="plan_id"/>
+                        <field name="is_verified" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Task -->
+    <record id="view_task_tree" model="ir.ui.view">
+        <field name="name">plan.task.tree</field>
+        <field name="model">plan.task</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="plan_id"/>
+                <field name="is_verified"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action for Task -->
+    <record id="action_task" model="ir.actions.act_window">
+        <field name="name">Tasks</field>
+        <field name="res_model">plan.task</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu for Task -->
+     <menuitem id="menu_root" name="Planning" sequence="1"/>
+    <menuitem id="menu_task" name="Tasks" parent="menu_root" action="action_task"/>
+</odoo>
