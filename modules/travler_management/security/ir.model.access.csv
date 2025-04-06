@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_travler_management_travler_management,travler_management.travler_management,model_travler_management_travler_management,base.group_user,1,1,1,1
