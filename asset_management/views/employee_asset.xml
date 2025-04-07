@@ -1,0 +1,32 @@
+<odoo> 
+<!-- Smart Button on Employee Form
+<record id="view_hr_employee_form_asset_button" model="ir.ui.view">
+    <field name="name">hr.employee.form.asset.assignment</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//div[@name='button_box']" position="inside">
+            <button name="%(action_asset_assignment_from_employee)d"
+                    type="action"
+                    class="oe_stat_button"
+                    icon="fa-laptop">
+                <field name="asset_assignment_count" widget="statinfo" string="Assets"/>
+            </button>
+        </xpath>
+    </field>
+</record>
+
+ Action for smart button 
+<record id="action_asset_assignment_from_employee" model="ir.actions.act_window">
+    <field name="name">Asset Assignments</field>
+    <field name="res_model">asset.assignment</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('employee_id', '=', active_id)]</field>
+    <field name="context">{'default_employee_id': active_id}</field>
+</record> -->
+
+
+
+
+
+</odoo>

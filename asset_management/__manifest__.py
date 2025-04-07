@@ -6,6 +6,7 @@
     'depends': ['base','product','hr'],
     'data': [
           'views/asset_view.xml',
+          # 'views/employee_asset.xml',
         'security/ir.model.access.csv',
         'report/asset_report.xml',
          'report/asset_report_template.xml',
