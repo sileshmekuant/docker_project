@@ -128,6 +128,10 @@ class AssetAssignment(models.Model):
             vals['category_id'] = asset.category_id.id  # Auto-fill category
         vals['name'] = f"{asset_name} - {employee_name}"
         return super(AssetAssignment, self).create(vals)
+    
+        
+
+
     # def toggle_action_buttons(self):
     #     # This is a dummy method just to trigger JS toggle from the form
     #     return {
