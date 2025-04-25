@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_category_form_view_inherit_sale_to_mrp_plan_name" model="ir.ui.view">
+        <field name="name">product.category.view.form.inherit</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+            <field name="is_raw_material" widget="boolean_toggle" />
+                
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,5 +1,5 @@
 <odoo>
-    <record id="view_asset_assignment_form" model="ir.ui.view">
+    <!-- <record id="view_asset_assignment_form" model="ir.ui.view">
         <field name="name">asset.assignment.form</field>
         <field name="model">asset.assignment</field>
         <field name="arch" type="xml">
@@ -8,7 +8,7 @@
                         <field name="image" widget="image" class="oe_avatar"/>
                     </group>
                      <field name="state" widget="statusbar" icon="fa-info-circle" class="oe_stat_button"/>
-
+             
                 <sheet>
                    
                     <div class="oe_button_box" name="button_box">
@@ -53,6 +53,7 @@
                         <field name="return_deadline"/>
                         <field name="return_date"/>
                         <field name="state" readonly="1"/>
+                        
                     </group>
                     </group>
                 </sheet>
@@ -155,6 +156,24 @@
         </xpath>
     </field>
 </record>
+
+<record id="action_asset_assignment_archive" model="ir.actions.server">
+    <field name="name">Archive</field>
+    <field name="model_id" ref="model_asset_assignment"/>
+    <field name="binding_model_id" ref="model_asset_assignment"/>
+    <field name="binding_view_types">list,form</field>
+    <field name="state">code</field>
+    <field name="code">records.action_archive()</field>
+</record>
+
+<record id="action_asset_assignment_unarchive" model="ir.actions.server">
+    <field name="name">Unarchive</field>
+    <field name="model_id" ref="model_asset_assignment"/>
+    <field name="binding_model_id" ref="model_asset_assignment"/>
+    <field name="binding_view_types">list,form</field>
+    <field name="state">code</field>
+    <field name="code">records.action_unarchive()</field>
+</record> -->
 
 
 </odoo>

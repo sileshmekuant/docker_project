@@ -11,7 +11,7 @@ class EstateProperty(models.Model):
     name = fields.Char(string="Property Name", required=True,tracking=True)
     image = fields.Image(string="Property Image",required=True)
     country_id = fields.Many2one('res.country', string="Country")
-    region_ids = fields.Many2many('new.region', string="Regions", compute="_get_regions", store=False)
+    region_ids = fields.Many2one('new.region', string="Regions", compute="_get_regions", store=False)
 
     region_id = fields.Many2one('new.region', string="Region")
     city = fields.Many2one('new.city', string="City")
@@ -83,5 +83,9 @@ class EstateProperty(models.Model):
                 'type': 'rainbow_man',
             }
         }
+    # @api.depends('region_ids')
+    # def _compute_region_domain_ids(self):
+    #     for rec in self:
+    #         rec.region_domain_ids = rec.region_ids
 
     

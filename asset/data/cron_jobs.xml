@@ -1,0 +1,12 @@
+<odoo>
+    <record id="cron_check_overdue_assets" model="ir.cron">
+        <field name="name">Check Overdue Assets</field>
+        <field name="model_id" ref="model_asset_assignment"/>
+        <field name="state">code</field>
+        <field name="code">model.action_check_overdue()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

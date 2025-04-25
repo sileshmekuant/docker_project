@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<record id="book_detail_view_form" model="ir.ui.view">
+	<!-- <record id="book_detail_view_form" model="ir.ui.view">
 		<field name="name">book.detail.view.form</field>
 		<field name="model">book.detail</field>
 		<field name="arch" type="xml">
-			<form string="">
-				<sheet>
+			<form string="Book Detail">
+				<sheet> 
 					<group>
-						<field name="title" />
-                                                            <field name="author" />
-						<field name="publisher" />
-						<field name="published_date" />
-						<field name="book_age" />
+						<field name="title"/>
+						<field name="author"/>
+						<field name="publisher"/>
+						<field name="published_date"/>
+						<field name="book_age"/>
 					</group>
 				</sheet>
 			</form>
 		</field>
 	</record>
+
 	<record id="book_detail_view_tree" model="ir.ui.view">
 		<field name="name">book.detail.view.tree</field>
 		<field name="model">book.detail</field>
 		<field name="arch" type="xml">
-			<tree string="">
-				<field name="title" />
-				<field name="author" />
-				<field name="publisher" />
-						<field name="published_date" />
-						<field name="book_age" />
+			<tree string="Book Details">
+				<field name="title"/>
+				<field name="author"/>
+				<field name="publisher"/>
+				<field name="published_date"/>
+				<field name="book_age"/>
 			</tree>
 		</field>
-	</record>
+	</record> -->
+
 	<record id="book_detail_action" model="ir.actions.act_window">
-		<field name="name">Action Name</field>
+		<field name="name">Book Details</field>
 		<field name="res_model">book.detail</field>
 		<field name="view_mode">tree,form</field>
 	</record>
-	<menuitem id="bookstore.menu_root" name="Bookstore" sequence="10"/>
-	<menuitem id="book_detail_menu" name="book detail" action="book_detail_action" parent="book_store_menu" sequence="10" />
+
+	<menuitem id="bookstore.menu_root" name="Bookstore" sequence="0"/>
+	<menuitem id="book_detail_menu" name="Book Detail" action="book_detail_action" parent="bookstore.menu_root" sequence="10"/>
 </odoo>

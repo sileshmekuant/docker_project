@@ -1,0 +1,88 @@
+<odoo>
+    <template id="report_mrp_planing_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 style="text-align:center;">Job Order</h2>
+                  <!--Top Header Layout -->
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            
+                            <div style="text-align: right;">
+                                <p><strong>Reference:</strong> <span t-field="doc.name"/></p>
+                                <p><strong>Date:</strong> <span t-field="doc.date"/></p>
+                            </div>
+                        </div>
+                        <!-- Basic Info -->
+                        <table style="width:100%; margin-top:20px;" class="table table-sm">
+                            
+                            <tr>
+                                <td><strong>Sales Order:</strong> <span t-field="doc.sales_order.name"/></td>
+                                <td><strong>Scheduled Date:</strong> <span t-field="doc.scheduled_date"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Customer:</strong> <span t-field="doc.customer_id.name"/></td>
+                                <td><strong>Deadline:</strong> <span t-field="doc.expiration_date"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Product:</strong> <span t-field="doc.product.name"/></td>
+                                <td><strong>Specification:</strong> <span t-field="doc.product_specification"/></td>
+                            </tr>
+                        </table>
+
+                        <!-- Product Specs -->
+                        <h4 class="mt32">Product Specifications</h4>
+                        <table style="width:100%;" class="table table-sm">
+                            <tr>
+                                <td><strong>Diameter:</strong> <span t-esc="doc.diameter"/> mm</td>
+                                <td><strong>Color:</strong> <span t-esc="doc.color"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Thickness:</strong> <span t-esc="doc.thickness"/> mm</td>
+                                <td><strong>Weight:</strong> <span t-esc="doc.weight"/> kg</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Length:</strong> <span t-esc="doc.length"/> mm</td>
+                                <td>
+                                    <strong>Socket Type:</strong>
+                                    <span t-esc="dict(doc._fields['socket_type'].selection).get(doc.socket_type)"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Description -->
+                        <h4 class="mt32">Description</h4>
+                        <div style="border:1px solid #000; padding:10px; min-height:60px;">
+                            <span t-field="doc.description"/>
+                        </div>
+
+                        <!-- Note -->
+                        <h4 class="mt32">Note</h4>
+                        <div style="border:1px solid #000; padding:10px; min-height:60px;">
+                            <span t-field="doc.note"/>
+                        </div>
+
+                        <!-- Approval & Signature -->
+                        <h4 class="mt32">Approval Information</h4>
+                        <table class="table table-sm" style="width:100%;">
+                            <tr>
+                                <td><strong>Approved By:</strong> <span t-field="doc.approved_by.name"/></td>
+                                <td><strong>Approval Date:</strong> <span t-field="doc.approval_date"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Received By:</strong> <span t-field="doc.recieved_by.name"/></td>
+                                <td><strong>Received Date:</strong> <span t-field="doc.recieved_date"/></td>
+                            </tr>
+                        </table>
+
+                        <t t-if="doc.signature">
+                            <h4 class="mt32">Signature</h4>
+                            <img t-att-src="'data:image/png;base64,%s' % doc.signature" style="max-height:100px;"/>
+                        </t>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

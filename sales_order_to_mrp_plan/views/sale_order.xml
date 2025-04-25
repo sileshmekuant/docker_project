@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_order_form_inherit_create_job_order" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.create.job.order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Add button to the header -->
+            <xpath expr="//header" position="inside">
+                <button name="action_create_job_order"
+                        string="Create Job Order"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="state != 'draft' or job_order_created"
+                        groups="sales_order_to_mrp_plan.group_sales_manager"
+                        confirm="Are you sure you want to proceed?"
+                        />
+                <field name="job_order_created" invisible="1"/>
+            </xpath>
+            <xpath expr="//header/button[@id='action_confirm']" position="attributes">
+                <attribute name="string">Create Sale Order</attribute>
+            </xpath>
+
+            <xpath expr="(//header/button[@name='action_confirm'])[2]" position="attributes">
+                <attribute name="string">Create Sale Order</attribute>
+            </xpath>
+
+             <xpath expr="//field[@name='validity_date']" position="attributes">
+                <attribute name="string">Delivery</attribute>
+            </xpath>
+        </field>
+    </record>
+
+                
+
+    <record id="view_mrp_production_form_inherit_shift" model="ir.ui.view">
+        <field name="name">mrp.production.form.inherit.shift</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Add shift field in the first group of the sheet -->
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="shift"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
