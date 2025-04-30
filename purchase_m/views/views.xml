@@ -1,16 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <record id="purchase_order_inherit_purchase_m" model="ir.ui.view">
-    <field name="name">purchase.order.view.form.inherit</field>
+  
+   <record id="purchase_order_form_view_custom" model="ir.ui.view">
+    <field name="name">purchase.order.form.inherit.send.email</field>
     <field name="model">purchase.order</field>
     <field name="inherit_id" ref="purchase.purchase_order_form"/>
     <field name="arch" type="xml">
-    <xpath expr="//group[1]" position="after">
-  <field name="payment_date" string="Payment Date"/>
-</xpath>
-      <!-- <xpath expr="//field[@name='partner_ref']" position="remove">
-        <field name="payment_date" string="Payment Date"/>
-      </xpath> -->
+      <xpath expr="//header" position="inside">
+        <button name="action_send_email"
+                string="Send Email"
+                type="object"
+                class="btn-primary"/>
+      </xpath>
+      <!-- <field name="email_sent" readonly="1"/> -->
+
     </field>
   </record>
+
 </odoo>
