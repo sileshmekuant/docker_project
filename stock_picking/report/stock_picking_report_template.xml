@@ -1,0 +1,65 @@
+<odoo>
+  <template id="report_stock_picking_custom">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="doc">
+        <div class="page" style="font-size: 13px;">
+          <!-- Header Section -->
+          <div style="display: flex; justify-content: space-between;">
+            <div style="width: 65%; text-align: right;">
+              <p><strong>scheduled_date:</strong> <t t-esc="doc.scheduled_date.strftime('%Y-%m-%d') if doc.scheduled_date else ''"/></p>
+              <p><strong>No:</strong> <t t-esc="doc.name"/></p>
+            </div>
+            <div style="width: 65%; text-align: left;">
+              <p><strong>To:</strong> <t t-esc="doc.location_dest_id.name or ''"/></p>
+              <p><strong>From:</strong> <t t-esc="doc.location_id.name or ''"/></p>
+              <p><strong>Purpose:</strong> <t t-esc="doc.origin or ''"/></p>
+              <p><strong>Place of Delivery:</strong> <t t-esc="doc.partner_id.name or ''"/></p>
+            </div>
+          </div>
+
+          <p><strong>Further Description:</strong> <t t-esc="doc.note or ''"/></p>
+
+          <!-- Table Section -->
+          <table class="table table-sm" style="width: 100%; border: 1px solid black; border-collapse: collapse; margin-top: 10px;">
+            <thead>
+              <tr>
+                <th style="border: 1px solid black; width: 5%;">No</th>
+                <th style="border: 1px solid black; width: 15%;">Part No</th>
+                <th style="border: 1px solid black;">Item Description</th>
+                <th style="border: 1px solid black; width: 10%;">U/M</th>
+                <th style="border: 1px solid black; width: 10%;">Qty</th>
+                <th style="border: 1px solid black; width: 20%;">Remark</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-set="lines" t-value="doc.move_ids_without_package or []"/>
+              <t t-foreach="lines" t-as="line" t-foreach-index="idx">
+                <tr>
+                  <td style="border: 1px solid black; text-align: center;"><t t-esc="(idx or 0) + 1"/></td>
+                  <td style="border: 1px solid black;"><t t-esc="line.product_id.default_code or ''"/></td>
+                  <td style="border: 1px solid black;"><t t-esc="line.product_id.display_name"/></td>
+                  <td style="border: 1px solid black;"><t t-esc="line.product_uom.name"/></td>
+                  <td style="border: 1px solid black; text-align: right;"><t t-esc="line.product_uom_qty"/></td>
+                  <td style="border: 1px solid black;"></td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+
+          <!-- Footer Section -->
+          <div style="display: flex; justify-content: space-between; margin-top: 40px; text-align: center;">
+            <div style="width: 33%;">
+              <p><strong>Prepared By:</strong> <t t-esc="doc.register_by_id.name or ''"/></p>
+            </div>
+            <div style="width: 33%;">
+              <p><strong>Certified By:</strong> <t t-esc="doc.certified_by_id.name or ''"/></p>
+            </div>
+            <div style="width: 33%;">
+              <p><strong>Approved By:</strong> <t t-esc="doc.approved_by_id.name or ''"/></p>
+            </div>
+          </div>
+        </div>
+      </t>
+    </t>
+  </template>
+</odoo>
