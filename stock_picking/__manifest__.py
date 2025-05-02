@@ -26,9 +26,8 @@ Long description of module's purpose
         'views/views.xml',
         'views/templates.xml',
         'report/stock_picking_report_template.xml',
-    'report/report.xml',
+    'report/print_menu.xml',
     'report/store_finsh_report_template.xml',
-    'report/report2.xml',
  
     ],
     # only loaded in demonstration mode

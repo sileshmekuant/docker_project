@@ -6,9 +6,13 @@
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='origin']" position="after">
-                <field name="register_by_id"/>
-                 <field name="approved_by_id"/>
-                 <field name="certified_by_id"/>
+<field name="is_store_fp" invisible="1"/>
+<field name="is_pick_components" invisible="1" />
+                <field name="register_by_id" string="Prepared By"/>
+               <field name="approved_by_id" invisible=" is_store_fp"/>
+<field name="approved_by_id" string="Received By" invisible=" is_pick_components"/>
+<field name="certified_by_id" invisible=" is_store_fp"/>
+
             </xpath>
         </field>
     </record>
