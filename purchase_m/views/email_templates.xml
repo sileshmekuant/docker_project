@@ -1,14 +1,22 @@
 <odoo>
-    <data>
+    
         <record id="email_template_purchase_request" model="mail.template">
             <field name="name">Purchase Request Email</field>
-            <field name="model_id" ref="purchase_m.model_purchase_order"/>
-            <field name="subject">{{ object.company_id.name }}</field>
-            <field name="email_from">{{ object.user_id.email }}</field>
-            <field name="partner_to">{{ object.partner_id.id }}</field>
-            <field name="description">Email sent for Purchase Requests</field>
-            
-            
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="subject">Purchase Order: ${object.name}</field>
+            <field name="email_from">${'tsadikuk@gmail.com'}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="body_html" type="html">
+              
+                <html>
+              <body>
+                <p>Hello ${sileshi},</p>
+                <p>This is a notification regarding Purchase Order <strong>${odoo_projecte}</strong>.</p>
+                <p>Thank you,<br/>Your Company</p>
+              </body>
+            </html>
+              
+            </field>
         </record>
-    </data>
+    
 </odoo>
