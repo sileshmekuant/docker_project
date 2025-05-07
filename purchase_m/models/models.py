@@ -4,7 +4,7 @@ class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
     def action_send_email(self):
-        sender_email = self.env.user.company_id.email
+        sender_email = self.env
 
         # Use hardcoded recipient or fetch dynamically
         recipient_email = "sileshmekuant@gmail.com"

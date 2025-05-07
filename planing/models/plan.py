@@ -60,7 +60,7 @@ class Plan(models.Model):
 
 
 
-
+      
     # @api.depends('state')
     # def _compute_state_color(self):
     #     """Compute state color for decoration in tree view"""
