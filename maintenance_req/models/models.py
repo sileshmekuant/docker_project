@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields,api
 
 class MaintenanceRequestCustom(models.Model):
     _inherit = 'maintenance.request'
@@ -31,6 +31,14 @@ class MaintenanceRequestCustom(models.Model):
     approved_by = fields.Many2one('res.users', string='Approved By', ondelete='set null')
     # signature = fields.Binary(string='Signature')
     date = fields.Date(string='Approval Date')
+    
+    @api.model
+    def _get_stage_mapping(self):
+       return {
+        'draft': self.env.ref('maintenance.stage_new').id,  # Example ID
+        'request': self.env.ref('maintenance.stage_in_progress').id,
+        'approved': self.env.ref('maintenance.stage_done').id,
+      }
     
     
     def action_approve(self):

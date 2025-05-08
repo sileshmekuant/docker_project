@@ -11,3 +11,5 @@ class StockScrap(models.Model):
            ('bottle','Bottle Reject'),
 
     ],string="Reason",default="perform")
+    
+    reason_id = fields.Many2one('reason.model', string='Reason')
