@@ -1,60 +1,68 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="maintenance_req.list">
-      <field name="name">maintenance_req list</field>
-      <field name="model">maintenance_req.maintenance_req</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
--->
+    <record id="maintenance_request_custom_form" model="ir.ui.view">
+        <field name="name">maintenance.request.custom.form</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="maintenance_req.action_window">
-      <field name="name">maintenance_req window</field>
-      <field name="res_model">maintenance_req.maintenance_req</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
+            <!-- Replace stage_id with a statusbar -->
+            <!-- <xpath expr="//header//field[@name='stage_id']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,request,approved" options="{'clickable': '1'}"/>
+            </xpath> -->
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="maintenance_req.action_server">
-      <field name="name">maintenance_req server</field>
-      <field name="model_id" ref="model_maintenance_req_maintenance_req"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
+            <!-- Add buttons inside header -->
+             <xpath expr="//header" position="replace">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,request,approved" clickable="1"/>
+                    <button 
+                        name="action_approve" 
+                        type="object" 
+                        string="Approve" 
+                        class="oe_highlight" 
+                
+                        
+                    />
+                    <button 
+                        name="action_draft" 
+                        type="object" 
+                        string="Draft" 
+                        
+                    />
+                    
+                    <button 
+                        name="action_request" 
+                        type="object" 
+                        string="Request" 
+                        class="oe_highlight" 
+                        
+                    />
+                </header>
+            </xpath>
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="maintenance_req" id="maintenance_req.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="maintenance_req.menu_1" parent="maintenance_req.menu_root"/>
-    <menuitem name="Menu 2" id="maintenance_req.menu_2" parent="maintenance_req.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="maintenance_req.menu_1_list" parent="maintenance_req.menu_1"
-              action="maintenance_req.action_window"/>
-    <menuitem name="Server to list" id="maintenance_req" parent="maintenance_req.menu_2"
-              action="maintenance_req.action_server"/>
--->
-  </data>
+            <!-- Inject custom fields after maintenance_type -->
+            <xpath expr="//field[@name='maintenance_type']" position="after">
+                <field name="request_for"/>
+                <field name="MAINTENANCE_REQUEST_PRIORITY"/>
+                <field name="asset_code"/>
+            </xpath>
+
+            <!-- Inject content inside the form sheet -->
+            <xpath expr="//sheet" position="inside">
+                <field name="state" invisible="1"/> 
+                <group>
+                    <field name="comment"/>
+                </group>
+                <group>
+                    <field name="approved_by"/> 
+                    <field name="date"/>
+                </group>
+            </xpath>
+
+            <!-- Rename first notebook tab -->
+            <xpath expr="//notebook/page[1]" position="attributes">
+                <attribute name="string">Work Description</attribute>
+            </xpath>
+
+        </field>
+    </record>
 </odoo>
