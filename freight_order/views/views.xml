@@ -8,19 +8,22 @@
       <field name="arch" type="xml">
         <form>
           <sheet>
+          <group>
             <group>
               <field name="type_of_machinery"/>
               <field name="plate_no"/>
               <field name="driver_name"/>
             </group>
+             <group>
+              <field name="starting_km"/>
+                  <field name="place_of_starting"/>
+                  <field name="place_of_destination"/>
+            </group>
+            </group>
 
             <notebook>
               <page string="Details">
-                <group>
-                  <field name="starting_km"/>
-                  <field name="place_of_starting"/>
-                  <field name="place_of_destination"/>
-                </group>
+               
 
                 <field name="material_tracking_line_ids">
                   <tree editable="bottom">
@@ -34,7 +37,9 @@
                   </tree>
                 </field>
 
-                <group>
+              </page>
+            </notebook>
+            <group>
                   <field name="purpose_of_receive"/>
                 </group>
 
@@ -43,8 +48,6 @@
                   <field name="checked_by"/>
                   <field name="authorized_by"/>
                 </group>
-              </page>
-            </notebook>
           </sheet>
         </form>
       </field>

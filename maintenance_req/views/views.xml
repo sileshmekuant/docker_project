@@ -5,35 +5,43 @@
         <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//header/button[@name='action_confirm']" position="replace"/>
-            <xpath expr="//header/button[@name='action_cancel']" position="replace"/>
-            <!-- Add buttons inside header -->
-             <xpath expr="//header" position="replace">
-                <header>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,request,approved" clickable="1"/>
-                    <button 
-                        name="action_approve" 
-                        type="object" 
-                        string="Approve" 
-                        class="oe_highlight" 
-                        invisible="[('state', '!=', 'request')]"
-                        
-                    />
-                    <button 
-                        name="action_draft" 
-                        type="object" 
-                        string="Draft" 
-                        invisible="[('state', '!=', 'request')]"
-                    />
-                    <button 
-                        name="action_request" 
-                        type="object" 
-                        string="Request" 
-                        class="oe_highlight" 
-                        invisible="[('state', '!=', 'draft')]"
-                    />
-                </header>
+              <xpath expr="//form" position="attributes">
+                <attribute name="edit">state != 'approved'</attribute>
             </xpath>
+
+            <!-- Add buttons inside header -->
+              <xpath expr="//form" position="attributes">
+                <attribute name="edit">state != 'approved'</attribute>
+            </xpath>
+
+            <!-- Replace the header -->
+            <xpath expr="//header" position="replace">
+    <header>
+        <field name="state" widget="statusbar" statusbar_visible="draft,request,approved" clickable="1"/>
+
+        <button 
+            name="action_approve" 
+            type="object" 
+            string="Approve" 
+            class="oe_highlight" 
+            invisible="state != 'request'"
+        />
+        <button 
+            name="action_request" 
+            type="object" 
+            string="Request" 
+            invisible="state != 'draft'"
+        />
+        <button 
+            name="action_draft" 
+            type="object" 
+            string="Reset to Draft" 
+            class="oe_highlight" 
+            invisible="state != 'approved'"
+        />
+    </header>
+</xpath>
+
 
             <!-- Inject custom fields after maintenance_type -->
             <xpath expr="//field[@name='maintenance_type']" position="after">

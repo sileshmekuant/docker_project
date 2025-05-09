@@ -42,13 +42,13 @@ class MaintenanceRequestCustom(models.Model):
     
     
     def action_approve(self):
-        for record in self:
-            record.state = 'approved'
+        self.write({'state': 'approved'})
+        return True
 
     def action_draft(self):
-        for record in self:
-            record.state = 'draft'
+        self.write({'state': 'draft'})
+        return True
 
     def action_request(self):
-        for record in self:
-            record.state = 'request'
+        self.write({'state': 'request'})
+        return True
