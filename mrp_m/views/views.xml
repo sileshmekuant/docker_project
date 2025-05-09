@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="stock.stock_scrap_form_view2"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='product_id']" position="after">
-                <field name="reason"/>
+                <field name="reason" string="reason"/>
             </xpath>
         </field>
     </record>
@@ -15,8 +15,26 @@
         <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='product_id']" position="after">
-                <field name="reason"/>
+                <field name="reason" string="reason"/>
             </xpath>
         </field>
     </record>
+                <!-- Action -->
+                <record id="action_scrap_reason" model="ir.actions.act_window">
+                    <field name="name">Reasons</field>
+                    <field name="res_model">scrap.reason</field>
+                    <field name="view_mode">tree,form</field>
+                    
+                </record>
+
+                <!-- Menu Item -->
+                <menuitem id="menu_scrap_root" name="Scrap" sequence="10"/>
+                <menuitem
+                    id="menu_scrap_reason"
+                    name="Scrap Reason"
+                    parent="mrp.menu_mrp_configuration"
+                    action="action_scrap_reason"
+                    sequence="30"
+                />
+
 </odoo>
