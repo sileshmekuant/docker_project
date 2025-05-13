@@ -19,9 +19,11 @@ class FreightOrder(models.Model):
 
     material_tracking_line_ids = fields.One2many(
         'freight_order.material_tracking_line',
-        'freight_order_id',
+        'freight_order_id',  
         string="Material Tracking Lines"
     )
+
+
 class MaterialTrackingLine(models.Model):
     _name = 'freight_order.material_tracking_line'
     _description = 'Material Tracking Line'

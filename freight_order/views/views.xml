@@ -25,7 +25,7 @@
               <page string="Details">
                
 
-                <field name="material_tracking_line_ids">
+                <field name="material_tracking_line_ids" readonly="state=='confirmed'">
                   <tree editable="bottom">
                     <field name="item_no"/>
                     <field name="description"/>
