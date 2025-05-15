@@ -1,0 +1,103 @@
+<odoo>
+    <template id="report_maintenance_request_custom">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <div class="page" style="font-size: 12px;">
+                    <div class="row" style="margin-bottom: 15px;">
+                        <div class="col-6">
+                            <strong>EQUIPMENT TYPE:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 70%;"/>
+                        </div>
+                        
+                    </div>
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-3">
+                            <strong>ASSET CODE/PLATE NO:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 60%;" t-field="doc.asset_code"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>TIME:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 60%;"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>MR NO:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 70%;"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>REQUEST DATE:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 60%;" t-field="doc.create_date" t-options='{"format": "yyyy-MM-dd"}'/>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 15px;">
+                        <div class="col-3">
+                            <strong>REQUEST FOR:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 60%;" t-field="doc.request_for" t-options='{"format": "yyyy-MM-dd"}'/>
+     
+                            
+                        </div>
+                        
+                        
+                        <div class="col-3">
+                            <strong>METER READING:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 60%;"/>
+                        </div>
+                    </div>
+
+                    <!-- Removed WORK DESCRIPTION table and replaced with COMMENT field -->
+                        <div style="border: 1px solid black; margin-bottom: 15px;">
+                            <div style="background-color: #f2f2f2; padding: 8px; font-weight: bold; text-align: center;">
+                                WORK DESCRIPTION 
+                            </div>
+                            <div style="padding: 8px; min-height: 100px; white-space: pre-wrap;"/>
+                        </div>
+
+
+                    <div class="row">
+                        <div class="col-6" style="border: 1px solid black; padding: 8px;">
+                            <strong>MAINTENANCE REQUEST PRIORITY</strong>
+                            <div style="margin-left: 10px;">
+                                <div><input type="radio" t-att-checked="doc.MAINTENANCE_REQUEST_PRIORITY == 'URGENT'"/> URGENT</div>
+                                <div><input type="radio" t-att-checked="doc.MAINTENANCE_REQUEST_PRIORITY == 'HIGH'"/> HIGH</div>
+                                <div><input type="radio" t-att-checked="doc.MAINTENANCE_REQUEST_PRIORITY == 'MEDIUM'"/> MEDIUM</div>
+                                <div><input type="radio" t-att-checked="doc.MAINTENANCE_REQUEST_PRIORITY == 'LOW'"/> LOW</div>
+                            </div>
+                            <strong style="display: block; margin-top: 10px;">COMMENT:</strong>
+                            
+                                <pre style="white-space: pre-wrap;" t-field="doc.comment"/>
+                            
+                        </div>
+                        <div class="col-6" style="border: 1px solid black; padding: 8px;">
+                            <strong>REQUEST BY (DRIVER, OPERATOR):</strong>
+                            <div style="margin-top: 10px;">
+                                <strong>SIGNATURE:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 70%;"/>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <strong>DATE:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 75%;"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 1px solid black; padding-top: 10px;">
+                        <strong>(EQUIP ADMIN)</strong>
+                        <div class="row" style="margin-top
+                        : 10px;">
+                            <div class="col-4">
+                                <strong>APPROVED BY:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 70%;" t-field="doc.approved_by"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>SIGNATURE:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 70%;"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>DATE:</strong> <span style="border-bottom: 1px solid black; display: inline-block; width: 60%;" t-field="doc.date" t-options='{"format": "yyyy-MM-dd"}'/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+    </t>
+</template>
+
+    <record id="action_report_maintenance_request_custom" model="ir.actions.report">
+        <field name="name">Maintenance Request Custom</field>
+        <field name="model">maintenance.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">maintenance_req.report_maintenance_request_custom</field>
+        <field name="report_file">maintenance_req.report_maintenance_request_custom</field>
+        <field name="print_report_name">'Maintenance Request - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

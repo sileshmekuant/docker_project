@@ -1,0 +1,72 @@
+<odoo>
+    <record id="maintenance_request_custom_form" model="ir.ui.view">
+        <field name="name">maintenance.request.custom.form</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+
+              <xpath expr="//form" position="attributes">
+                <attribute name="edit">state != 'approved'</attribute>
+            </xpath>
+
+            <!-- Add buttons inside header -->
+              <xpath expr="//form" position="attributes">
+                <attribute name="edit">state != 'approved'</attribute>
+            </xpath>
+
+            <!-- Replace the header -->
+            <xpath expr="//header" position="replace">
+    <header>
+        <field name="state" widget="statusbar" statusbar_visible="draft,request,approved" clickable="1"/>
+
+        <button 
+            name="action_approve" 
+            type="object" 
+            string="Approve" 
+            class="oe_highlight" 
+            invisible="state != 'request'"
+        />
+        <button 
+            name="action_request" 
+            type="object" 
+            string="Request" 
+            invisible="state != 'draft'"
+        />
+        <button 
+            name="action_draft" 
+            type="object" 
+            string="Reset to Draft" 
+            class="oe_highlight" 
+            invisible="state != 'approved'"
+        />
+    </header>
+</xpath>
+
+
+            <!-- Inject custom fields after maintenance_type -->
+            <xpath expr="//field[@name='maintenance_type']" position="after">
+                <field name="request_for"/>
+                <field name="MAINTENANCE_REQUEST_PRIORITY"/>
+                <field name="asset_code"/>
+            </xpath>
+
+            <!-- Inject content inside the form sheet -->
+            <xpath expr="//sheet" position="inside">
+                <field name="state" invisible="1"/> 
+                <group>
+                    <field name="comment"/>
+                </group>
+                <group>
+                    <field name="approved_by"/> 
+                    <field name="date"/>
+                </group>
+            </xpath>
+
+            <!-- Rename first notebook tab -->
+            <xpath expr="//notebook/page[1]" position="attributes">
+                <attribute name="string">Work Description</attribute>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

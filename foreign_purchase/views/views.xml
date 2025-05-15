@@ -1,0 +1,84 @@
+<odoo>
+    <record id="view_form_foreign_purchase" model="ir.ui.view">
+        <field name="name">foreign.purchase.workflow.form</field>
+        <field name="model">foreign.purchase.workflow</field>
+        <field name="arch" type="xml">
+            <form string="Foreign Purchase Workflow">
+                <header>
+
+                    <button name="set_state_invoice" string="Invoice" type="object" class="btn btn-secondary"/>
+                    
+                    <button name="set_state_lt_form" string="LT Form" type="object" class="btn btn-secondary"/>
+                    
+                    <button name="set_state_currency" string="Currency" type="object" class="btn btn-secondary"/>
+                    
+                    <button name="set_state_bank_import" string="Bank Import" type="object" class="btn btn-secondary"/>
+                    
+                    <button name="set_state_bill" string="Bill" type="object" class="btn btn-secondary"/>
+                    
+                    <button name="set_state_clearance" string="Clearance" type="object" class="btn btn-secondary"/>
+                    
+                    <field name="state" widget="statusbar" class="oe_stat_button" statusbar_visible="invoice,lt_form,currency,bank_import,bill,clearance"/>
+                </header>
+
+                <sheet>
+                <group>
+                    <group string="Document">
+                    
+                        <field name="proforma_invoice" readonly="state in ['lt_form','currency','bank_import','bill','clearance']"/>
+                        <field name="lt_form" readonly="state in ['invoice','currency','bank_import','bill','clearance']"/>
+                        <field name="currency_approval" readonly="state in ['lt_form','invoice','bank_import','bill','clearance']"/>
+                        <field name="import_permit" readonly="state in ['lt_form','currency','invoice','bill','clearance']"/>
+                        <field name="awb" readonly="state in ['lt_form','currency','bank_import','invoice','clearance']"/>
+                        <field name="clearance_form" readonly="state in ['lt_form','currency','bank_import','bill','invoice']"/>
+                        </group>
+                  <group string="Cost">
+                    
+                        <field name="proforma_invoice_cost" readonly="state in ['lt_form','currency','bank_import','bill','clearance']"/>
+                        <field name="lt_form_cost" readonly="state in ['invoice','currency','bank_import','bill','clearance']"/>
+                        <field name="currency_approval_cost" readonly="state in ['lt_form','invoice','bank_import','bill','clearance']"/>
+                        <field name="import_permit_cost" readonly="state in ['lt_form','currency','invoice','bill','clearance']"/>
+                        <field name="awb_cost" readonly="state in ['lt_form','currency','invoice','bank_import','clearance']"/>
+                        <field name="clearance_form_cost" readonly="state in ['lt_form','currency','bill','bank_import','invoice']"/>
+                        </group>
+                  
+                    
+
+                </group>
+                   
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_foreign_purchase" model="ir.ui.view">
+        <field name="name">foreign.purchase.workflow.tree</field>
+        <field name="model">foreign.purchase.workflow</field>
+        <field name="arch" type="xml">
+            <tree string="Foreign Purchase Workflows">
+                
+                    
+                        <field name="proforma_invoice_cost"/>
+                        <field name="lt_form_cost"/>
+                        <field name="currency_approval_cost"/>
+                        <field name="import_permit_cost" />
+                        <field name="awb_cost"/>
+                        <field name="clearance_form_cost"/>
+                        
+                
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_foreign_purchase_workflow" model="ir.actions.act_window">
+        <field name="name">Foreign Purchase</field>
+        <field name="res_model">foreign.purchase.workflow</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_foreign_purchase_root" name="Foreign Purchase"/>
+    <menuitem id="menu_foreign_purchase" name="Workflow" parent="menu_foreign_purchase_root"/>
+    <menuitem id="menu_foreign_purchase_action" name="Purchase Flow"
+              parent="menu_foreign_purchase"
+              action="action_foreign_purchase_workflow"/>
+</odoo>

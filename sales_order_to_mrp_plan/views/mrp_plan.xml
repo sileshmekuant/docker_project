@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+             
+                <record id="mrp_production_action" model="ir.actions.act_window">
+                    <field name="name">Manufacturing Orders</field>
+                    <field name="res_model">mrp.production</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="view_id" ref="mrp.mrp_production_tree_view"/>
+                  <field name="domain">[('mrp_plan', '=', active_id)]</field>
+                    <!-- Context to pass the current record's ID -->
+                    <field name="context">
+                        {'default_mrp_plan': active_id}
+                    </field>
+
+                </record>
+    <!-- Form View -->
+    <record id="mrp_planing_view_form" model="ir.ui.view">
+        <field name="name">mrp.planing.view.form</field>
+        <field name="model">mrp.planing</field>
+        <field name="arch" type="xml">
+            <form string="Job Order">
+                <header>
+                <field name="status" widget="statusbar" />
+                <button string="Confirm" name="action_approve" invisible="status !='draft'" type="object" class="oe_highlight"  groups="az_quality.approval_group"/>
+                <button string="Recieved" name="action_recieve" invisible="status !='confirmed'" type="object" class="oe_highlight" groups="mrp_staging.group_production_manager"/>
+                <button string="Create Manufacturing Order" name="action_open_create_mo_wizard" invisible="quantity == 0 or status != 'recieved'" type="object" class="oe_highlight"/>
+                    
+                </header>
+                <sheet>
+                            <div class="oe_button_box" name="button_box">
+                                <button type="action"
+                                        name="%(mrp_production_action)d"
+                                        class="oe_stat_button"
+                                        icon="fa-industry"
+                                        domain="[('mrp_plan', '=', id)]"
+                                        invisible="production_count == 0">
+                                    <field name="production_count" string="Manufacturing Orders" widget="statinfo"/>
+                                </button>
+                            </div>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1" />
+                            <field name="date" />
+                            <field name="product" />
+                            <field name="sales_order" />
+                            <field name="customer_id" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="quantity" />
+                            <field name="scheduled_date" />
+                            <field name="expiration_date" />
+                            <field name="production_line" />
+                            <field name="recipie_domain" invisible="1" />
+                            <field name="recipie" domain="[('id', 'in', recipie_domain)]"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Specifications">
+                            <field name="diameter" />
+                            <field name="thickness" />
+                            <field name="length" />
+                            <field name="color" />
+                            <field name="weight" />
+                            <field name="socket_type" />
+                        </group>
+                        <group string="Approval">
+                            <field name="approved_by" readonly="1" />
+                            <field name="approval_date" readonly="1" />
+                             <field name="recieved_by" readonly="1" />
+                            <field name="recieved_date" readonly="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                         <group>
+                        <field name="description" />
+                        </group>
+                            
+                        </page>
+                        <page string="Product Specification">
+                        <group>
+                                <field name="product_specification" />
+
+                        </group>
+                        </page>
+                        <page string="Notes">
+                        <group>
+                        <field name="note" />
+                        </group>
+                            
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="mrp_planing_view_tree" model="ir.ui.view">
+        <field name="name">mrp.planing.view.tree</field>
+        <field name="model">mrp.planing</field>
+        <field name="arch" type="xml">
+            <tree string="MRP Planning">
+                <field name="name" />
+                <field name="date" />
+                <field name="product" />
+                <field name="sales_order" />
+                <field name="customer_id" />
+                <field name="quantity" />
+                <field name="scheduled_date" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="mrp_planing_action" model="ir.actions.act_window">
+        <field name="name">Job Order</field>
+        <field name="res_model">mrp.planing</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Plan and track manufacturing processes
+            </p>
+            <p>
+                Click "Create" to start a new MRP planning record.
+            </p>
+        </field>
+    </record>
+
+   
+</odoo>

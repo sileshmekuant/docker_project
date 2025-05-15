@@ -1,0 +1,118 @@
+<odoo>
+  <data>
+
+    <!-- Form View for Freight Order -->
+    <record id="freight_order_form_view" model="ir.ui.view">
+      <field name="name">freight.order.form</field>
+      <field name="model">freight_order.freight_order</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="type_of_machinery"/>
+                <field name="plate_no"/>
+                <field name="driver_name"/>
+              </group>
+              <group>
+                <field name="starting_km"/>
+                <field name="place_of_starting"/>
+                <field name="place_of_destination"/>
+              </group>
+            </group>
+
+            <notebook>
+              <page string="Details">
+                <field name="material_tracking_line_ids">
+                  <tree editable="bottom">
+                    <field name="freight_order_id" invisible="1"/>
+                    <field name="item_no"/>
+                    <field name="description"/>
+                    <field name="unit"/>
+                    <field name="quantity"/>
+                    <field name="approved_qty"/>
+                    <field name="total_price"/>
+                    <field name="remark"/>
+                  </tree>
+                  <form>
+                    <group>
+                      <field name="item_no"/>
+                      <field name="description"/>
+                      <field name="unit"/>
+                      <field name="quantity"/>
+                      <field name="approved_qty"/>
+                      <field name="total_price"/>
+                      <field name="remark"/>
+                    </group>
+                  </form>
+                </field>
+              </page>
+            </notebook>
+
+            <group>
+              <field name="purpose_of_receive"/>
+            </group>
+
+            <group>
+              <field name="request_by"/>
+              <field name="checked_by"/>
+              <field name="authorized_by"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Form View for Material Tracking Line -->
+    <record id="view_material_tracking_line_form" model="ir.ui.view">
+      <field name="name">material.tracking.line.form</field>
+      <field name="model">freight_order.material_tracking_line</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="item_no"/>
+            <field name="description"/>
+            <field name="unit"/>
+            <field name="quantity"/>
+            <field name="approved_qty"/>
+            <field name="total_price"/>
+            <field name="remark"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action to open views -->
+    <record id="freight_order_action_window" model="ir.actions.act_window">
+      <field name="name">Freight Orders</field>
+      <field name="res_model">freight_order.freight_order</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Server Action -->
+    <record id="freight_order_action_server" model="ir.actions.server">
+      <field name="name">Freight Order Server Action</field>
+      <field name="model_id" ref="model_freight_order_freight_order"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="freight_order.menu_root" name="Freight Orders"/>
+    <menuitem id="freight_order.menu_1" name="Menu 1" parent="freight_order.menu_root"/>
+    <menuitem id="freight_order.menu_2" name="Menu 2" parent="freight_order.menu_root"/>
+
+    <menuitem id="freight_order.menu_1_list" name="List" parent="freight_order.menu_1"
+              action="freight_order_action_window"/>
+
+    <menuitem id="freight_order.menu_2_server" name="Server to List" parent="freight_order.menu_2"
+              action="freight_order_action_server"/>
+
+  </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="crm_lead_inherit_crm_m" model="ir.ui.view">
+    <field name="name">crm.lead.view.form.inherit</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='priority']" position="after">
+        <field name="payment_date" />
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

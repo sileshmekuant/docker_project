@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define the Wizard Action -->
+    <record id="action_author_wizard" model="ir.actions.act_window">
+        <field name="name">Create New Author</field>
+        <field name="res_model">author.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_author_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Add a Sub-Menu for the Wizard -->
+    <menuitem id="bookstore.menu_root" name="Bookstore" sequence="10"/>
+
+</odoo>

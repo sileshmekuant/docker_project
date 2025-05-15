@@ -1,0 +1,100 @@
+<odoo>
+    <record id="view_estate_property_form" model="ir.ui.view">
+        <field name="name">estate.property.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form string="Property">
+            <header>
+                 <button name="action_sold" string="Mark as Sold" type="object" class="btn-primary"/>
+                </header>
+            <field name="image" widget="image" class="oe_avatar"/>
+                <sheet>
+                
+                
+                    <group>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <!-- <field name="image"/> -->
+                                <field name="country_id"/>
+                                <field name="region_ids" invisible="1"/>
+                                <field name="region_id"/>
+                                <field name="city"/>
+                                <!-- <field name="sub_city_id" invisible="1"/> -->
+                                <!-- <field name="sub_city_id" domain="[('region_id', '=', region_id)]"/> -->
+                            </group>
+                            <group>
+                                <field name="listed_date"/>
+                                <field name="available_from"/>
+                                <field name="sale_deadline"/>
+                            </group>
+                            <group>
+                                <field name="property_type"/>
+                                <field name="price_per_sq_m"/>
+                                <field name="area"/>
+                                <field name="price"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="year_built"/>
+                            <field name="parking_space"/>
+                            <field name="parking_space_id" invisible="not parking_space"/>
+                            <field name="grand_total"/>
+                        </group>
+                    </group>
+                
+                </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_estate_property_tree" model="ir.ui.view">
+        <field name="name">estate.property.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree string="Property">
+                <field name="name"/>
+                <field name="country_id"/>
+                <!-- <field name="region_ids" invisible="1"/>  -->
+                <field name="region_id"/>
+
+                <!-- <field name="region_id" domain="[('id','in',region_ids.ids)]"/> -->
+                <field name="price_per_sq_m"/>
+                <field name="year_built"/>
+                <field name="parking_space"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_real_estate_property" model="ir.actions.act_window">
+        <field name="name">Real Estate Properties</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- Excel export action -->
+
+    <record id="action_estate_property_export_excel" model="ir.actions.server">
+    <field name="name">print to Excel</field>
+    <field name="model_id" ref="Real_Estate.model_estate_property"/>
+    <field name="binding_model_id" ref="Real_Estate.model_estate_property"/>
+    <field name="binding_view_types">list</field>
+    <field name="state">code</field>
+    <field name="code">
+        action = {
+            'type': 'ir.actions.act_url',
+            'url': '/estate_property/export/excel',
+            'target': 'self',
+        }
+    </field>
+</record>
+
+
+    <!-- Menu Items -->
+    <menuitem id="menu_real_estate_root" name="Real Estate" sequence="10"/>
+    <menuitem id="menu_real_estate_property" name="Properties" parent="menu_real_estate_root" action="action_real_estate_property"/>
+</odoo>

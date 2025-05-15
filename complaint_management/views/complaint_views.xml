@@ -1,0 +1,82 @@
+<odoo>
+    <!-- Form View -->
+    <record id="view_complaint_form" model="ir.ui.view">
+        <field name="name">complaint.management.form</field>
+        <field name="model">complaint.management</field>
+        <field name="arch" type="xml">
+            <form string="Complaint" create="true" edit="true">
+                <!-- Header with state transition buttons -->
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,marked,resolved"/>
+
+                    <button 
+                        name="action_send" 
+                        type="object" 
+                        string="Send" 
+                        class="oe_highlight"
+                        invisible="state !='draft'"/>
+
+                    <button 
+                        name="action_mark" 
+                        type="object" 
+                        string="Mark as Issue" 
+                        class="oe_highlight"
+                       invisible="state !='sent'"/>
+
+                    <button 
+                        name="action_resolve" 
+                        type="object" 
+                        string="Resolve" 
+                        class="oe_highlight"
+                        invisible="state !='marked'"/>
+
+                    <button 
+                        name="action_reject" 
+                        type="object" 
+                        string="Reject" 
+                        class="oe_highlight"
+                        invisible="state !='sent'"/>
+                </header>
+
+
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="complaint"/>
+                        <field name="rejection_reason" invisible="state != 'rejected'" />
+                    </group>
+                </sheet>
+
+                <div groups="complaint_management.group_complaint_super">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_complaint_tree" model="ir.ui.view">
+        <field name="name">complaint.management.tree</field>
+        <field name="model">complaint.management</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_complaint" model="ir.actions.act_window">
+        <field name="name">Complaints</field>
+        <field name="res_model">complaint.management</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_complaint_root" name="Complaint Management" sequence="10"/>
+    <menuitem id="menu_complaint" name="Complaints" parent="menu_complaint_root" action="action_complaint"/>
+</odoo>

@@ -1,0 +1,11 @@
+<odoo>
+    <record id="group_complaint_mgmt" model="res.groups">
+        <field name="name">Complaint Management</field>
+        <field name="category_id" ref="base.module_category_services"/>
+    </record>
+
+    <record id="group_complaint_super" model="res.groups">
+        <field name="name">Complaint Super</field>
+        <field name="category_id" ref="base.module_category_services"/>
+    </record>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="category_confirm" model="ir.module.category">
+        <field name="name">confirm Management</field>
+        <field name="description">Access rights for confirm module</field>
+        <field name="sequence">10</field>
+    </record>
+    
+        <record id="group_confirm_manager" model="res.groups">
+            <field name="name">confirm Manager</field>
+            <field name="category_id" ref="category_confirm"/>
+        </record>
+</odoo>

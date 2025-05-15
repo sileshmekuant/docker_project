@@ -1,0 +1,174 @@
+<odoo>
+    <!-- Form View (unchanged) -->
+    <record id="view_asset_assignment_form" model="ir.ui.view">
+        <field name="name">asset.assignment.form</field>
+        <field name="model">asset.assignment</field>
+        <field name="arch" type="xml">
+            <form string="Asset Assignment">
+                <group>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                </group>
+                <field name="state" widget="statusbar" icon="fa-info-circle" class="oe_stat_button"/>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_request_return" type="object" string="Request Return" icon="fa-hand-paper-o" class="btn-primary" modifiers="{'invisible': [('state', '!=', 'assigned')]}"/>
+                        <button name="action_verify_return" type="object" string="Verify Return" icon="fa-check-square" class="btn-secondary" modifiers="{'invisible': [('state', '!=', 'return_requested')]}"/>
+                        <button name="action_return_asset" type="object" string="Mark as Returned" icon="fa-reply" class="btn-success" modifiers="{'invisible': [('state', '!=', 'return_verified')]}"/>
+                        <button name="action_mark_overdue" type="object" string="Mark as Overdue" icon="fa-exclamation-triangle" class="btn-danger" modifiers="{'invisible': [('state', '!=', 'assigned')]}"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_id"/>
+                            <field name="employee_id"/>
+                            <field name="assignment_date"/>
+                        </group>
+                        <group>
+                            <field name="return_deadline"/>
+                            <field name="return_date"/>
+                            <field name="state" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- ✅ Tree View with row coloring -->
+    <record id="view_asset_assignment_tree" model="ir.ui.view">
+        <field name="name">asset.assignment.tree</field>
+        <field name="model">asset.assignment</field>
+        <field name="arch" type="xml">
+            <tree string="Asset Assignments"
+                  decoration-info="state == 'assigned'"
+                  decoration-warning="state == 'return_requested'"
+                  decoration-success="state == 'returned'"
+                  decoration-danger="state == 'overdue'">
+                <field name="asset_id"/>
+                <field name="employee_id"/>
+                <field name="assignment_date"/>
+                <field name="return_deadline"/>
+                <field name="return_date"/>
+                <field name="state"/>
+                 <field name="activity_state" widget="activity"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="view_asset_assignment_graph" model="ir.ui.view">
+        <field name="name">asset.assignment.graph</field>
+        <field name="model">asset.assignment</field>
+        <field name="arch" type="xml">
+            <graph string="Asset Assignments by Employee" type="bar">
+                <field name="category_id" type="row"/>
+                <field name="id" type="measure" operator="category_id"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_asset_assignment_kanban" model="ir.ui.view">
+        <field name="name">asset.assignment.kanban</field>
+        <field name="model">asset.assignment</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column">
+                <field name="asset_id"/>
+                <field name="employee_id"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <strong><field name="asset_id"/></strong><br/>
+                            Assigned to: <field name="employee_id"/><br/>
+                            Status: <field name="state"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action for main menu -->
+    <record id="action_asset_assignment" model="ir.actions.act_window">
+        <field name="name">Asset Assignments</field>
+        <field name="res_model">asset.assignment</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+        <field name="view_ids" eval="[
+            (5,0,0),
+            (0,0,{'view_mode': 'tree', 'view_id': ref('view_asset_assignment_tree')}),
+            (0,0,{'view_mode': 'form', 'view_id': ref('view_asset_assignment_form')}),
+            (0,0,{'view_mode': 'kanban', 'view_id': ref('view_asset_assignment_kanban')}),
+            (0,0,{'view_mode': 'graph', 'view_id': ref('view_asset_assignment_graph')})
+        ]"/>
+    </record>
+
+    <!-- Menu items -->
+    <menuitem id="menu_asset_root" name="Asset manage" sequence="10"/>
+    <menuitem id="menu_asset_assignment" name="Asset Assignments" parent="menu_asset_root" action="action_asset_assignment" sequence="20"/>
+
+    <!-- Action for smart button -->
+    <record id="action_asset_assignment_from_employee" model="ir.actions.act_window">
+        <field name="name">Asset Assignments</field>
+        <field name="res_model">asset.assignment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('employee_id', '=', active_id)]</field>
+        <field name="context">{'default_employee_id': active_id}</field>
+    </record>
+
+    <!-- Smart button on Employee Form -->
+    <record id="view_hr_employee_form_asset_button" model="ir.ui.view">
+        <field name="name">hr.employee.form.asset.assignment</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(action_asset_assignment_from_employee)d"
+                        type="action"
+                        class="btn-success"
+                        icon="fa-laptop">
+                    <field name="asset_assignment_count" widget="statinfo" string="Assets"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Archive and Unarchive actions -->
+    <record id="action_asset_assignment_archive" model="ir.actions.server">
+        <field name="name">Archive</field>
+        <field name="model_id" ref="model_asset_assignment"/>
+        <field name="binding_model_id" ref="model_asset_assignment"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">records.action_archive()</field>
+    </record>
+
+    <record id="action_asset_assignment_unarchive" model="ir.actions.server">
+        <field name="name">Unarchive</field>
+        <field name="model_id" ref="model_asset_assignment"/>
+        <field name="binding_model_id" ref="model_asset_assignment"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">records.action_unarchive()</field>
+    </record>
+
+    <!-- Excel export action -->
+    <record id="action_asset_assignment_export_excel" model="ir.actions.server">
+        <field name="name">Export to Excel</field>
+        <field name="model_id" ref="model_asset_assignment"/>
+        <field name="binding_model_id" ref="model_asset_assignment"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+                'type': 'ir.actions.act_url',
+                'url': '/asset_assignment/export/excel',
+                'target': 'self',
+            }
+        </field>
+    </record>
+</odoo>

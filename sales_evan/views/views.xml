@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_order_form_inherit_approval" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="(//button[@name='action_confirm'])[2]" position="attributes">
+                <attribute name="groups">sales_evan.group_confirm_manager</attribute>
+                    <attribute name="invisible">is_approved == False</attribute>
+            </xpath>
+
+            <xpath expr="(//button[@name='action_preview_sale_order'])[1]" position="attributes">
+                <attribute name="groups">sales_evan.group_confirm_manager</attribute>
+                    <attribute name="invisible">is_approved == False</attribute>
+            </xpath>
+
+            <xpath expr="(//button[@name='action_quotation_send'])[1
+            ]" position="attributes">
+                <attribute name="groups">sales_evan.group_confirm_manager</attribute>
+                    <attribute name="invisible">is_approved == False</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+              <field name="sale_type" />
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+            <field name="is_approved" invisible="1"/>
+            <button name="action_approve_order"
+                        type="object"
+                        string="Approve"
+                        class="btn-primary"
+                         invisible="is_approved == True"/>
+
+        </xpath>
+            
+        </field>
+    </record>
+</odoo>

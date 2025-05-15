@@ -1,0 +1,51 @@
+<!-- views/appointment_views.xml -->
+<odoo>
+    <!-- Tree View -->
+    <record id="view_appointment_tree" model="ir.ui.view">
+        <field name="name">appointment.tree</field>
+        <field name="model">appointment.appointment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="appointment_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_appointment_form" model="ir.ui.view">
+        <field name="name">appointment.form</field>
+        <field name="model">appointment.appointment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" modifiers="draft"/>
+                    <button name="action_done" string="Mark as Done" type="object" modifiers="confirmed"/>
+                    <button name="action_cancel" string="Cancel" type="object" modifiers="draft,confirmed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="patient_id"/>
+                        <field name="appointment_date"/>
+                        <field name="notes"/>
+                        <field name="state"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_appointment" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
+        <field name="res_model">appointment.appointment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_appointment_root" name="Appointments"/>
+    <menuitem id="menu_appointment_main" name="Manage Appointments" parent="menu_appointment_root" action="action_appointment" sequence="10"/>
+</odoo>
