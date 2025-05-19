@@ -1,0 +1,13 @@
+<!-- views/report.xml -->
+<odoo>
+  <record id="action_report_compliant_register" model="ir.actions.report">
+    <field name="name">Complaint Report</field>
+    <field name="model">compliant.register</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">customer_complient.report_compliant_register</field>
+    <field name="report_file">customer_complient.report_compliant_register</field>
+    <field name="print_report_name">'Complaint - %s' % (object.compliant_no)</field>
+    <field name="binding_model_id" ref="model_compliant_register"/> <!-- ✅ THIS LINE ADDS IT TO THE PRINT MENU -->
+    <field name="binding_type">report</field> <!-- Optional, but clear -->
+  </record>
+</odoo>

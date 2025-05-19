@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_compliant_register,compliant.register,model_compliant_register,base.group_user,1,1,1,1
+azpip.access_damaged_goods,access_damaged_goods,model_damaged_goods,base.group_user,1,1,1,1
+azpip.access_damaged_goods_receiving_notes,access_damaged_goods_receiving_notes,model_damaged_goods_receiving_notes,base.group_user,1,1,1,1
+azpip.access_good_pass,access_good_pass,model_good_pass,base.group_user,1,1,1,1
+azpip.access_damaged_goods_pass,access_damaged_goods_pass,model_damaged_goods_pass,base.group_user,1,1,1,1
+azpip.access_order_registration,access_order_registration,model_order_registration,base.group_user,1,1,1,1
+azpip.access_name_store,access_name_store,model_name_store,base.group_user,1,1,1,1

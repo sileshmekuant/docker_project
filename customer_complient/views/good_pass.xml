@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_good_pass_tree" model="ir.ui.view">
+        <field name="name">good.pass.tree</field>
+        <field name="model">good.pass</field>
+        <field name="arch" type="xml">
+            <tree string="Good Pass">
+                <field name="client_name"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_good_pass_form" model="ir.ui.view">
+        <field name="name">good.pass.form</field>
+        <field name="model">good.pass</field>
+        <field name="arch" type="xml">
+            <form string="Damaged Goods">
+             <header>
+                        <button name="action_set_draft" type="object" string="Set to Draft" invisible="state =='draft'"/>
+                        <button name="action_set_received" type="object" string="Set to Inspected By"  invisible="state !='draft'"/>
+                        <button name="action_set_delivered" type="object" string="Set to Approved"  invisible="state !='inspectedby'"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,inspectedby,authorized"/>
+                    </header>
+
+                <sheet>
+                   
+                    <group>
+                        <group>
+                            <field name="client_name"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+
+                        <page string="Gate Pass">
+                            <field name="damaged_goods_pass_ids">
+                                <tree editable="bottom">
+                                    <field name="product_no"/>
+                                    <field name="description"/>
+                                    <field name="quantity"/>
+                                    <field name="isue_no"/>  <!-- Fixed from unity_measure to unit_measure -->
+                                    <field name="remark"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="product_no"/>
+                                        <field name="description" placeholder="Description"/>
+                                        <field name="quantity"/>
+                                        <field name="isue_no"/>  <!-- Fixed from unity_measure to unit_measure -->
+                                        <field name="remark"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+
+                    </notebook>
+                    <group>
+                        <group>
+                            <field name="inspected_by" readonly="1"/>
+                            <!-- <field name="signature" widget="signature"/> -->
+                        </group>
+                        <group>
+                            <field name="approved_by" readonly="1"/>
+                            <!-- <field name="signature1" widget="signature"/> -->
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_good_pass_search" model="ir.ui.view">
+        <field name="name">good.pass.search</field>
+        <field name="model">good.pass</field>
+        <field name="arch" type="xml">
+            <search string="Search Damaged Goods">
+                <!-- Uncomment if needed -->
+                <!-- <field name="compliant_no"/> -->
+                <!-- <field name="customer_name"/> -->
+                <!-- <field name="date"/> -->
+                <!-- <field name="issue_status"/> -->
+
+                <!-- Uncomment if needed -->
+                <!-- <filter string="Closed" domain="[('issue_status','=','closed')]"/> -->
+                <!-- <filter string="Outstanding" domain="[('issue_status','=','outstanding')]"/> -->
+                <!-- <filter string="Not Taken" domain="[('issue_status','=','action_not_taken')]"/> -->
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_good_pass" model="ir.actions.act_window">
+        <field name="name">Good Pass</field>
+        <field name="res_model">good.pass</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Register and manage damaged goods here.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <!-- Uncomment and adjust if needed -->
+    <menuitem id="menu_compliance_root" name="Compliance Management" sequence="10"/>
+
+    <menuitem id="menu_damaged_goods_item"
+              name="Good Pass"
+                     parent="stock.menu_stock_warehouse_mgmt"
+
+              action="action_good_pass"
+              sequence="50"
+    />
+
+</odoo>

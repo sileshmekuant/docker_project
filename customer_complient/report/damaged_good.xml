@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_damaged_goods">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Department:
+                                    <t t-esc="doc.department.name"/>
+                                </p>
+                                <p>Reason:
+                                    <t t-esc="doc.reason"/>
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <p>Source Location:
+                                    <t t-esc="doc.source_location.name"/>
+                                </p>
+                                <p>Destination Location:
+                                    <t t-esc="doc.destination_location.name"/>
+                                </p>
+                            </div>
+                        </div>
+                        <table class="table mt-3">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Transfer No</th>
+                                    <th scope="col">Thickness Voucher No.</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">UOM</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="doc.damaged_goods_receiving_ids">
+                                    <t t-set="counter" t-value="1"/>
+                                    <t t-foreach="doc.damaged_goods_receiving_ids" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <t t-esc="counter"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.ref"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.voucher_no"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.description"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.unit_measure.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.quantity"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.remark"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="counter" t-value="counter+1"/>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <tr>
+                                        <td colspan="7">No damaged goods records found.</td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Delivered By:
+                                    <t t-esc="doc.delivered_by.name"/>
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <p>Received By:
+                                    <t t-esc="doc.received_by.name"/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="action_report_damaged_goods" model="ir.actions.report">
+        <field name="name">Damaged Goods</field>
+        <field name="model">damaged.goods</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">customer_complient.report_damaged_goods</field>
+        <field name="report_file">customer_complient.report_damaged_goods</field>
+        <field name="print_report_name">'%s' % ('Damaged Goods Report')</field>
+        <field name="binding_model_id" ref="model_damaged_goods"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,74 @@
+<odoo>
+    <record id="view_order_registration_form" model="ir.ui.view">
+        <field name="name">order.registration.form</field>
+        <field name="model">order.registration</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type="object" name="action_send_sorry_report"  string="Send Sorry Email" class="btn btn-danger" />
+                    <button type="object" name="action_send_technical_spec"  string="Send Accepted Email" class="btn btn-success" />
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Order Registration">
+                            <field name="date_registered"/>
+                            <field name="order_number"/>
+                            <field name="entered_by"/>
+                            <field name="order_type" widget="radio"/>
+                        </group>
+                        <group string="Customer Information">
+                            <field name="customer_name" placeholder="Enter Name"/>
+                            <field name="customer_requirements" placeholder="Customer Needs"/>
+                        </group>
+                    </group>
+                   
+                        <group string="Order Review">
+                            <field name="review_result" palceholder="Review Result" widget="boolean_toggle"/>
+                        </group>
+                       
+                            <group invisible="not review_result" >
+                                <field name="technical_spec_attachment" filename="technical_spec_filename"/>
+                                <group string="Technical Specification Verification">
+                                    <field name="customer_verification_result"/>
+                                    <field name="date_confirmed"
+                                           invisible="not (customer_verification_result== 'accepted')" placeholder="Select Option"/>
+                                    <field name="amendment_details"
+                                           invisible="not (customer_verification_result== 'amendment')" placeholder="Ammendment Details"/>
+                                    <field name="amendment_accepted"
+                                           invisible="not (customer_verification_result== 'amendment')" placeholder="Select Options"/>
+                                    <field name="communicated_to_om"/>
+                                    <field name="communicated_to_others"/>
+                                </group>
+                            </group>
+                            <!-- Rejected fields -->
+                            <group invisible="review_result">
+                                <field name="rejection_reason" placeholder="Rejection Reason"/>
+                                <field name="send_sorry_report"/>
+                            </group>
+                      
+                  
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_order_registration_tree" model="ir.ui.view">
+        <field name="name">order.registration.tree</field>
+        <field name="model">order.registration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_number"/>
+                <field name="date_registered"/>
+                <field name="customer_name"/>
+                <field name="review_result"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_order_registration" model="ir.actions.act_window">
+        <field name="name">Order Registrations</field>
+        <field name="res_model">order.registration</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!--        <menuitem id="menu_order_registration_root" name="Order Management"/>-->
+    <menuitem id="menu_order_registration" name="Order Registration" parent="menu_compliance_root"
+              action="action_order_registration" sequence="60"/>
+</odoo>

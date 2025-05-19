@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_compliant_register_tree" model="ir.ui.view">
+        <field name="name">compliant.register.tree</field>
+        <field name="model">compliant.register</field>
+        <field name="arch" type="xml">
+            <tree string="Compliance Register">
+                <field name="date" optional="show"/>
+                <field name="compliant_no" optional="show"/>
+                <field name="customer_name" optional="show"/>
+                <field name="address" optional="show"/>
+                <field name="description" optional="show"/>
+                <field name="compliant_received" optional="show"/>
+                <field name="job_position" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_compliant_register_form" model="ir.ui.view">
+        <field name="name">compliant.register.form</field>
+        <field name="model">compliant.register</field>
+        <field name="arch" type="xml">
+            <form string="Compliance Register">
+            <header>
+            <button string="Confirm" name="action_outstanding" type="object" class="oe_highlight" invisible="issue_status != 'draft'"/>
+            <button string="Close" name="action_closed" type="object" class="oe_highlight" invisible="issue_status != 'outstanding'"/>
+
+<field name="issue_status" widget="statusbar" statusbar_visiblle="draft,outstanding,action_not_taken,closed" />
+            </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="compliant_no"/>
+                            <field name="customer_name"/>
+                            <field name="address"/>
+                        </group>
+                        <group>
+                            <field name="compliant_received"  readonly="1"/>
+                            <field name="description" placeholder="Description"/>
+                            <field name="job_position"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Reason ">
+                            <field name="reason" placeholder="Reason"/>
+                        </page>
+                        <page string="Customer Feedback">
+                            <form>
+                                <group>
+                                    <group>
+
+                                        <field name="correction_taken"/>
+                                        <field name="correction_date"/>
+                                        <field name="corrective_action"/>
+                                    </group>
+                                    <group>
+                                        <field name="corrective_dat"/>
+                                        <field name="investigated_by" readonly="1"/>
+                                     </group>
+                                
+                                 </group>
+                            </form>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+
+    <record id="view_compliant_register_search" model="ir.ui.view">
+        <field name="name">compliant.register.search</field>
+        <field name="model">compliant.register</field>
+        <field name="arch" type="xml">
+            <search string="Search Complaints">
+                <field name="compliant_no"/>
+                <field name="customer_name"/>
+                <field name="date"/>
+                <field name="issue_status"/>
+<!--                <filter string="Closed" domain="[('issue_status','=','closed')]"/>-->
+<!--                <filter string="Outstanding" domain="[('issue_status','=','outstanding')]"/>-->
+<!--                <filter string="Not Taken" domain="[('issue_status','=','action_not_taken')]"/>-->
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_compliant_register" model="ir.actions.act_window">
+        <field name="name">Compliance Register</field>
+        <field name="res_model">compliant.register</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Register and manage customer complaints here.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_compliance_root" name="Customer Compliant " sequence="10"/>
+
+    <menuitem id="menu_compliance_register_items"
+              name="Register"
+              parent="menu_compliance_root"
+              action="action_compliant_register"
+              sequence="30"/>
+
+</odoo>

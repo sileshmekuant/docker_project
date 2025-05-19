@@ -1,0 +1,19 @@
+<odoo>
+    <!-- Define a new module category -->
+    <record id="module_purchase_goods" model="ir.module.category">
+        <field name="name">Azpip</field>
+        <field name="description">Customer Feedback Form</field>
+    </record>
+
+    <!-- Group: Delivered -->
+    <record id="group_employee_delivered" model="res.groups">
+        <field name="name">Delivered</field>
+        <field name="category_id" ref="customer_complient.module_purchase_goods"/>
+    </record>
+
+    <!-- Group: Approved -->
+    <record id="group_goods_manager_checked" model="res.groups">
+        <field name="name">Approved</field>
+        <field name="category_id" ref="customer_complient.module_purchase_goods"/>
+    </record>
+</odoo>

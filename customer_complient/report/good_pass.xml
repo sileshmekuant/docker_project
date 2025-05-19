@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_good_pass">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        
+                        <div class="row">
+                            <div class="col-6">
+                                <p><strong>Client Name:</strong>
+                                    <t t-esc="doc.client_name.name or 'N/A'"/>
+                                </p>
+                                <p><strong>Date:</strong>
+                                    <t t-esc="doc.date" />
+                                </p>
+                                <p><strong>State:</strong>
+                                    <t t-esc="doc.state.capitalize()"/>
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <p><strong>Inspected By:</strong>
+                                    <t t-esc="doc.inspected_by.name or 'N/A'"/>
+                                </p>
+                                <p><strong>Approved By:</strong>
+                                    <t t-esc="doc.approved_by.name or 'N/A'"/>
+                                </p>
+                            </div>
+                        </div>
+                        <table class="table table-bordered mt-3">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Product No</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Issue No</th>
+                                    <th scope="col">Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="doc.damaged_goods_pass_ids">
+                                    <t t-set="counter" t-value="1"/>
+                                    <t t-foreach="doc.damaged_goods_pass_ids" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <t t-esc="counter"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.product_no"/>
+                                            </td>
+                                            <td>
+                                                <t t-raw="line.description or 'N/A'"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.quantity"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.isue_no"/>
+                                            </td>
+                                            <td>
+                                                <t t-raw="line.remark or 'N/A'"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="counter" t-value="counter+1"/>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <tr>
+                                        <td colspan="6">No damaged goods records found.</td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="action_report_good_pass" model="ir.actions.report">
+        <field name="name">Goods Pass</field>
+        <field name="model">good.pass</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">customer_complient.report_good_pass</field>
+        <field name="report_file">customer_complient.report_good_pass</field>
+        <field name="print_report_name">'Goods Pass - %s' % (object.client_name.name or object.id)</field>
+        <field name="binding_model_id" ref="model_good_pass"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,88 @@
+<odoo>
+  <template id="report_compliant_register">
+    <t t-call="web.external_layout">
+      <t t-foreach="docs" t-as="doc">
+        <main class="page">
+          <div style="font-size: 13px;">
+
+            <h2 style="text-align: center; margin-bottom: 10px;">Complaint Report</h2>
+            <hr/>
+
+            <table style="width:100%; margin-bottom: 15px;">
+              <tr>
+                <td><strong>Date Received:</strong></td>
+                <td><t t-esc="doc.date"/></td>
+              </tr>
+              <tr>
+                <td><strong>Complaint No:</strong></td>
+                <td><t t-esc="doc.compliant_no"/></td>
+              </tr>
+              <tr>
+                <td><strong>Customer Name:</strong></td>
+                <td><t t-esc="doc.customer_name.name"/></td>
+              </tr>
+              <tr>
+                <td><strong>Address:</strong></td>
+                <td><t t-esc="doc.address"/></td>
+              </tr>
+            </table>
+
+            <p><strong>Complaint Description:</strong></p>
+            <div t-if="doc.description" t-raw="doc.description" style="margin-bottom: 10px;"/>
+
+            <table style="width:100%; margin-bottom: 15px;">
+              <tr>
+                <td><strong>Received By:</strong></td>
+                <td><t t-esc="doc.compliant_received.name or ''"/></td>
+              </tr>
+              <tr>
+                <td><strong>Job Position:</strong></td>
+                <td><t t-esc="doc.job_position.name or ''"/></td>
+              </tr>
+            </table>
+
+            <p><strong>Reason:</strong></p>
+            <div t-if="doc.reason" t-raw="doc.reason" style="margin-bottom: 10px;"/>
+
+            <table style="width:100%; margin-bottom: 15px;">
+              <tr>
+                <td><strong>Correction Taken:</strong></td>
+                <td><t t-esc="doc.correction_taken.name or ''"/></td>
+              </tr>
+              <tr>
+                <td><strong>Correction Date:</strong></td>
+                <td><t t-esc="doc.correction_date"/></td>
+              </tr>
+            </table>
+
+            <p><strong>Corrective Action:</strong></p>
+            <div t-if="doc.corrective_action" t-raw="doc.corrective_action" style="margin-bottom: 10px;"/>
+
+            <p><strong>Corrective Date:</strong> <t t-esc="doc.corrective_dat"/></p>
+            <p><strong>Investigated By:</strong> <t t-esc="doc.investigated_by.name or ''"/></p>
+            <p><strong>Issue Status:</strong> <t t-esc="doc.issue_status"/></p>
+
+            <p><strong>Remarks:</strong></p>
+            <div t-if="doc.remarks" t-raw="doc.remarks" style="margin-bottom: 10px;"/>
+
+            <!-- Signature section -->
+            <br/><br/>
+            <table style="width:100%; text-align:center; margin-top: 30px;">
+              <tr>
+                <td>
+                  <strong>Certified By:</strong><br/><br/><br/>
+                  <span style="display: inline-block; border-bottom: 1px solid #000; width: 80%; height: 20px;"></span>
+                </td>
+                <td>
+                  <strong>Approved By:</strong><br/><br/><br/>
+                  <span style="display: inline-block; border-bottom: 1px solid #000; width: 80%; height: 20px;"></span>
+                </td>
+              </tr>
+            </table>
+
+          </div>
+        </main>
+      </t>
+    </t>
+  </template>
+</odoo>

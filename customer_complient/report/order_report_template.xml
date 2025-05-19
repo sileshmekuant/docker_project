@@ -1,0 +1,100 @@
+<!-- views/report_order_registration_template.xml -->
+<odoo>
+  <template id="report_order_registration_template">
+    <t t-call="web.external_layout">
+      <main class="page">
+        <t t-foreach="docs" t-as="doc">
+          <div class="page">
+            <h2 class="text-center" style="margin-bottom: 20px;">Order Registration Report</h2>
+
+              <table class="table table-borderless" style="width: 100%; font-size: 13px;">
+              <tbody>
+                <tr>
+                  <td><strong>Date Registered:</strong></td>
+                  <td><t t-esc="doc.date_registered"/></td>
+                  <td><strong>Order No:</strong></td>
+                  <td><t t-esc="doc.order_number.name"/></td>
+                </tr>
+                <tr>
+                  <td><strong>Customer:</strong></td>
+                  <td><t t-esc="doc.customer_name.name"/></td>
+                  <td><strong>Order Type:</strong></td>
+                  <td><t t-esc="dict(do(venv) silesh@silesh-HP-250-G7-(venv) silesh@silesh-HP-250-G7-Notebook-PC:~/Downloads/odoo-17.0/custom_addons$ git add .Notebook-PC:~/Downloads/odoo-17.0/custom_addons$ git add .c._fields['order_type'].selection).get(doc.order_type)"/></td>
+                </tr>  <table class="table table-borderless" style="width: 100%; font-size: 13px;">
+                <tbody>
+                  <tr>
+                    <td><strong>Date Registered:</strong></td>
+                    <td><t t-esc="doc.date_registered"/></td>
+                    <td><strong>Order No:</strong></td>
+                    <td><t t-esc="doc.order_number.name"/></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Customer:</strong></td>
+                    <td><t t-esc="doc.customer_name.name"/></td>
+                    <td><strong>Order Type:</strong></td>
+                    <td><t t-esc="dict(doc._fields['order_type'].selection).get(doc.order_type)"/></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Entered By:</strong></td>
+                    <td><t t-esc="doc.entered_by.name"/></td>
+                    <td><strong>Review Result:</strong></td>
+                    <td><t t-esc="doc.review_result and 'Accepted' or 'Rejected'"/></td>
+                  </tr>
+                </tbody>
+              </table>
+
+                <tr>
+                  <td><strong>Entered By:</strong></td>
+                  <td><t t-esc="doc.entered_by.name"/></td>
+                  <td><strong>Review Result:</strong></td>
+                  <td><t t-esc="doc.review_result and 'Accepted' or 'Rejected'"/></td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <p style="margin-top: 15px;"><strong>Customer Requirements:</strong></p>
+            <p style="margin-left: 10px;"><t t-esc="doc.customer_requirements"/></p>
+
+            <t t-if="doc.review_result">
+              <p><strong>Technical Specification Filename:</strong> <t t-esc="doc.technical_spec_filename"/></p>
+            </t>
+            <t t-if="not doc.review_result">
+              <p><strong>Rejection Reason:</strong></p>
+              <div t-if="doc.rejection_reason" t-raw="doc.rejection_reason" style="margin-left: 10px;"/>
+            </t>
+
+            <p style="margin-top: 20px;"><strong>Customer Verification Result:</strong>
+              <t t-esc="dict(doc._fields['customer_verification_result'].selection).get(doc.customer_verification_result)"/>
+            </p>
+
+            <p><strong>Date Confirmed:</strong> <t t-esc="doc.date_confirmed"/></p>
+
+            <t t-if="doc.amendment_details">
+              <p><strong>Amendment Details:</strong></p>
+              <div t-raw="doc.amendment_details" style="margin-left: 10px;"/>
+            </t>
+
+            <table class="table table-borderl(venv) silesh@silesh-HP-250-G7-Notebook-PC:~/Downloads/odoo-17.0/custom_addons$ git add .ess" style="width: 100%; font-size: 13px; margin-top: 10px;">
+              <tbody>
+                <tr>
+                  <td><strong>Amendment Accepted by AZ:</strong></td>
+                  <td><t t-esc="dict(doc._fields['amendment_accepted'].selection).get(doc.amendment_accepted)"/></td>
+                  <td><strong>Communicated to OM:</strong></td>
+                  <td><t t-esc="doc.communicated_to_om and 'Yes' or 'No'"/></td>
+                </tr>Page break in reports
+￼
+
+                <tr>
+                  <td><strong>Communicated to Others:</strong></td>
+                  <td colspan="3"><t t-esc="doc.communicated_to_others.name"/></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </t>
+      </main>
+    </t>
+  </template>
+</odoo>

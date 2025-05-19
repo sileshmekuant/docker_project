@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <record id="sequence_dmanaged_good_sequence" model="ir.sequence">
+        <field name="name">Damaged Goods Sequence</field>
+        <field name="code">damaged.goods</field>
+        <field name="prefix">DG/</field>
+        <field name="padding">4</field>
+    </record>
+
+</odoo>
