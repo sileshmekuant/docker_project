@@ -1,0 +1,67 @@
+<odoo>
+
+<record id="view_vehicle_stock_form" model="ir.ui.view">
+    <field name="name">vehicle.stock.form</field>
+    <field name="model">vehicle.stock</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="date"/>
+                    <field name="receiving_note"/>
+                    <field name="vehicle_exit"/>
+                    <field name="description"/>
+                    <field name="chassis_no"/>
+                    <field name="engine_no"/>
+                    <field name="model_year"/>
+                    <field name="plate_no"/>
+                    <field name="sold_date"/>
+                    <field name="remark"/>
+                    <field name="beginning_balance"/>
+                    <field name="stock_in"/>
+                    <field name="stock_out"/>
+                    <field name="ending_balance"/>
+                    <field name="team_code"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="view_vehicle_stock_tree" model="ir.ui.view">
+    <field name="name">vehicle.stock.tree</field>
+    <field name="model">vehicle.stock</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="date"/>
+            <field name="receiving_note"/>
+            <field name="vehicle_exit"/>
+            <field name="description"/>
+            <field name="chassis_no"/>
+            <field name="engine_no"/>
+            <field name="model_year"/>
+            <field name="plate_no"/>
+            <field name="sold_date"/>
+            <field name="remark"/>
+            <field name="beginning_balance"/>
+            <field name="stock_in"/>
+            <field name="stock_out"/>
+            <field name="ending_balance"/>
+            <field name="team_code"/>
+        </tree>
+    </field>
+</record>
+
+<record id="action_vehicle_stock" model="ir.actions.act_window">
+        <field name="name">Vehicle Stock</field>
+        <field name="res_model">vehicle.stock</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+
+    <menuitem id="menu_vehicle_stock_root" name="Vehicle Management"/>
+    <menuitem id="menu_vehicle_stock" name="Vehicle Stock" parent="menu_vehicle_stock_root" action="action_vehicle_stock"/>
+
+</odoo>
