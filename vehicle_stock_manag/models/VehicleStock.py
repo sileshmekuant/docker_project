@@ -19,3 +19,5 @@ class VehicleStock(models.Model):
     stock_out = fields.Integer(string='Stock Out')
     ending_balance = fields.Integer(string='Ending Balance')
     team_code = fields.Char(string='Team Code')
+    year = fields.Char(string='Year')
+    location = fields.Char(string='Location')

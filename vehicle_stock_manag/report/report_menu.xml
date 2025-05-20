@@ -1,0 +1,13 @@
+<!-- report/vehicle_stock_report_action.xml -->
+<odoo>
+  <record id="action_report_vehicle_stock" model="ir.actions.report">
+    <field name="name">Vehicle Stock Report</field>
+    <field name="model">vehicle.stock</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">vehicle_stock_manag.report_vehicle_stock_template</field>
+    <field name="report_file">vehicle_stock_manag.report_vehicle_stock_template</field>
+    <field name="print_report_name">'Vehicle_Stock_Report'</field>
+    <field name="binding_model_id" ref="vehicle_stock_manag.model_vehicle_stock"/>
+    <field name="binding_type">report</field>
+  </record>
+</odoo>

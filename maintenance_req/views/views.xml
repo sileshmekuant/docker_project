@@ -51,6 +51,9 @@
             </xpath>
 
             <!-- Inject content inside the form sheet -->
+
+
+
             <xpath expr="//sheet" position="inside">
                 <field name="state" invisible="1"/> 
                 <group>

@@ -1,0 +1,24 @@
+<templates xml:space="preserve">
+    <t t-name="asset_assignment.Dashboard">
+        <div class="o_dashboard">
+            <div class="row">
+                <div class="col-3 alert alert-info">
+                    <h4>Total Assignments</h4>
+                    <span t-esc="state.total"/>
+                </div>
+                <div class="col-3 alert alert-primary">
+                    <h4>Assigned</h4>
+                    <span t-esc="state.assigned"/>
+                </div>
+                <div class="col-3 alert alert-success">
+                    <h4>Returned</h4>
+                    <span t-esc="state.returned"/>
+                </div>
+                <div class="col-3 alert alert-danger">
+                    <h4>Overdue</h4>
+                    <span t-esc="state.overdue"/>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

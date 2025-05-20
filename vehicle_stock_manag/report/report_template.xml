@@ -1,0 +1,63 @@
+<odoo>
+  <template id="report_vehicle_stock_template">
+    <t t-call="web.external_layout">
+      <main class="page">
+        <t t-foreach="docs" t-as="line">
+          <div class="page">
+            <h2 class="text-center" style="margin-bottom: 10px;">Vehicle Stock Report</h2>
+            <h4 class="text-center">
+              MERYEM MOHAMMED SEID GENERAL IMPORTER<br/>
+              SAADA MUHAMMED SEID GENERAL IMPORTER<br/>
+              AHMED NAJI GENERAL IMPORTER
+            </h4>
+
+            <p><strong>Report Period:</strong> July 8, 2021 - August 6, 2021</p>
+
+            <table class="table table-sm table-bordered" style="width:100%; font-size:11px;">
+              <thead style="background-color:#f2f2f2;">
+                <tr>
+                  <th>Beginning Date</th>
+                  <th>Receiving Note</th>
+                  <th>Vehicle Exit</th>
+                  <th>Description</th>
+                  <th>Chassis No</th>
+                  <th>Engine No</th>
+                  <th>Model</th>
+                  <th>Year</th>
+                  <th>Location</th>
+                  <th>Sold Date</th>
+                  <th>Remark</th>
+                  <th class="text-right">Beginning Balance</th>
+                  <th class="text-right">Stock In</th>
+                  <th class="text-right">Stock Out</th>
+                  <th class="text-right">Ending Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><t t-esc="line.date"/></td>
+                  <td><t t-esc="line.receiving_note or ''"/></td>
+                  <td><t t-esc="line.vehicle_exit or ''"/></td>
+                  <td><t t-esc="line.description"/></td>
+                  <td><t t-esc="line.chassis_no"/></td>
+                  <td><t t-esc="line.engine_no"/></td>
+                  <td><t t-esc="line.model_year"/></td>
+                  <td><t t-esc="line.year"/></td>
+                  <td><t t-esc="line.location"/></td>
+                  <td><t t-esc="line.sold_date"/></td>
+                  <td><t t-esc="line.remark or ''"/></td>
+                  <td class="text-right"><t t-esc="line.beginning_balance"/></td>
+                  <td class="text-right"><t t-esc="line.stock_in"/></td>
+                  <td class="text-right"><t t-esc="line.stock_out"/></td>
+                  <td class="text-right"><t t-esc="line.ending_balance"/></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top: 20px;"><strong>Measurement:</strong> Unit</p>
+          </div>
+        </t>
+      </main>
+    </t>
+  </template>
+</odoo>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "vehicle_stock_report",
+    'name': "vehicle_stock_manag",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -23,6 +23,8 @@ Long description of module's purpose
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'report/report_menu.xml',
+        'report/report_template.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

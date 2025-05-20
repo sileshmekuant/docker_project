@@ -54,7 +54,7 @@
 
 <record id="action_vehicle_stock" model="ir.actions.act_window">
         <field name="name">Vehicle Stock</field>
-        <field name="res_model">vehicle.stock</field>
+         <field name="res_model">vehicle.stock</field> 
         <field name="view_mode">tree,form</field>
     </record>
 

@@ -33,6 +33,19 @@ class AssetAssignment(models.Model):
     return_date = fields.Date(string="Return Date")
     active = fields.Boolean(default=True)
 
+    @api.model
+    def get_dashboard_data(self):
+        total = self.search_count([])
+        assigned = self.search_count([('state', '=', 'assigned')])
+        returned = self.search_count([('state', '=', 'returned')])
+        overdue = self.search_count([('state', '=', 'overdue')])
+        return {
+            'total': total,
+            'assigned': assigned,
+            'returned': returned,
+            'overdue': overdue,
+        }
+
 
 
     state = fields.Selection([
@@ -143,23 +156,3 @@ class AssetAssignment(models.Model):
 
 
 
-
-
-
-    # def action_archive(self):
-    #     for record in self:
-    #         record.active = False
-
-    # def action_unarchive(self):
-    #     for record in self:
-    #         record.active = True
-
-        
-
-
-    # def toggle_action_buttons(self):
-    #     # This is a dummy method just to trigger JS toggle from the form
-    #     return {
-    #             'type': 'ir.actions.client',
-    #             'tag': 'reload',  # optional, or use JS directly
-                #}
