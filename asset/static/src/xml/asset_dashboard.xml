@@ -2,19 +2,19 @@
     <t t-name="asset_assignment.Dashboard">
         <div class="o_dashboard">
             <div class="row">
-                <div class="col-3 alert alert-info">
+                <div class="col-3 alert alert-info" t-on-click="() => this.openListView()">
                     <h4>Total Assignments</h4>
                     <span t-esc="state.total"/>
                 </div>
-                <div class="col-3 alert alert-primary">
+                <div class="col-3 alert alert-primary" t-on-click="() => this.openListView('assigned')">
                     <h4>Assigned</h4>
                     <span t-esc="state.assigned"/>
                 </div>
-                <div class="col-3 alert alert-success">
+                <div class="col-3 alert alert-success" t-on-click="() => this.openListView('returned')">
                     <h4>Returned</h4>
                     <span t-esc="state.returned"/>
                 </div>
-                <div class="col-3 alert alert-danger">
+                <div class="col-3 alert alert-danger" t-on-click="() => this.openListView('overdue')">
                     <h4>Overdue</h4>
                     <span t-esc="state.overdue"/>
                 </div>

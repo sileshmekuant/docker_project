@@ -170,7 +170,7 @@
                 'target': 'self',
             }
         </field>
-    </record>
+</record>
     <record id="action_asset_dashboard" model="ir.actions.client">
     <field name="name">Asset Dashboard</field>
     <field name="tag">asset_assignment_dashboard</field>
