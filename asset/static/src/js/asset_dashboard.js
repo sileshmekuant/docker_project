@@ -38,7 +38,7 @@ export class AssetAssignmentDashboard extends Component {
             name: "Asset Assignments",
             res_model: "asset.assignment",
             view_mode: "list,form",
-            views: [[false, "list"], [false, "form"]],  // <-- required
+            views: [[false, "list"], [false, "form"]],
             domain: domain,
             target: "current",
         });

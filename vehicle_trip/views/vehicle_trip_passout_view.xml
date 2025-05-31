@@ -1,0 +1,66 @@
+<odoo>
+    <record id="view_vehicle_trip_printout_form" model="ir.ui.view">
+        <field name="name">vehicle.trip.printout.form</field>
+        <field name="model">vehicle.trip.printout</field>
+        <field name="arch" type="xml">
+            <form string="Vehicle Trip Printout">
+                <sheet>
+                    <group string="General">
+                        <field name="vehicle_type" readonly="1"/>
+                        <field name="plate_number"/>
+                        <field name="driver_name"/>
+                        <field name="date" readonly="1"/>
+                        <field name="destination" readonly="1"/>
+                        <field name="duration_from" readonly="1"/>
+                        <field name="duration_to"/>
+                        <field name="total_duration"/>
+                        <field name="reason"/>
+                    </group>
+                    <group string="Requester">
+                        <field name="requester_name"/>
+                        <field name="requester_title"/>
+                        <!-- <field name="requester_signature"/> -->
+                    </group>
+                    <group string="Authorizer">
+                        <field name="authorizer_name"/>
+                        <field name="authorizer_title"/>
+                        <!-- <field name="authorizer_signature"/> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_vehicle_trip_printout_tree" model="ir.ui.view">
+        <field name="name">vehicle.trip.printout.tree</field>
+        <field name="model">vehicle.trip.printout</field>
+        <field name="arch" type="xml">
+            <tree string="Vehicle Trip Printouts">
+                <field name="vehicle_type"/>
+                <field name="plate_number"/>
+                <field name="driver_name"/>
+                <field name="date"/>
+                <field name="destination"/>
+                <field name="duration_from"/>
+                <field name="duration_to"/>
+                <field name="total_duration"/>
+                <field name="requester_name"/>
+                <field name="authorizer_name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_vehicle_trip_printout" model="ir.actions.act_window">
+        <field name="name">Trip Printouts</field>
+        <field name="res_model">vehicle.trip.printout</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_vehicle_trip_printout"
+              name="Trip Printouts"
+              parent="menu_vehicle_trip_root"
+              action="action_vehicle_trip_printout"
+              sequence="30"/>
+</odoo>
