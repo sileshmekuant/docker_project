@@ -1,0 +1,12 @@
+<odoo>
+  <record id="action_report_vehicle_trip" model="ir.actions.report">
+    <field name="name">Vehicle Trip Report</field>
+    <field name="model">vehicle.trip</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">vehicle_trip.report_vehicle_trip_document</field>
+    <field name="report_file">vehicle_trip.report_vehicle_trip_document</field>
+    <field name="binding_model_id" ref="model_vehicle_trip"/>
+    <field name="binding_type">report</field>
+    <field name="print_report_name">'Vehicle Trip - %s' % (object.date)</field>
+  </record>
+</odoo>

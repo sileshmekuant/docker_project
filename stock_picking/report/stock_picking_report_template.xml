@@ -55,6 +55,8 @@
               <p><strong>Certified By:</strong> <t t-esc="doc.certified_by_id.name or ''"/></p>
             </div>
             <div style="width: 33%;">
+            ...
+        </form>
               <p><strong>Approved By:</strong> <t t-esc="doc.approved_by_id.name or ''"/></p>
             </div>
           </div>

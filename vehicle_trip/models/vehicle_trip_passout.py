@@ -31,12 +31,11 @@ class VehicleTripPrintout(models.Model):
             employee = self.env['hr.employee'].search([('user_id', '=', record.requester_name.id)], limit=1)
             record.requester_title = employee.job_id.id if employee.job_id else False
 
-            employee1 = self.env['hr.employee'].search([('user_id', '=', record.authorizer_title.id)], limit=1)
+            employee1 = self.env['hr.employee'].search([('user_id', '=', record.authorizer_name.id)], limit=1)
             record.authorizer_title=employee1.job_id.id if employee1.job_id else False
 
     
-
-
+    
 
 
     # @api.depends('requester_name')

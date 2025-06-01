@@ -1,0 +1,58 @@
+<odoo>
+  <template id="report_vehicle_trip_document">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="trip">
+        <div class="page" style="font-size: 13px;">
+
+          <!-- Header Section -->
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <div style="width: 50%;">
+              <p><strong>Date:</strong> <t t-esc="trip.date.strftime('%Y-%m-%d') if trip.date else ''"/></p>
+              <p><strong>Vehicle:</strong> <t t-esc="trip.vehicle_type.name or ''"/></p>
+              <p><strong>Driver:</strong> <t t-esc="trip.driver_name.name or ''"/></p>
+            </div>
+            <div style="width: 50%;">
+              <p><strong>From:</strong> <t t-esc="trip.start_location or ''"/></p>
+              <p><strong>To:</strong> <t t-esc="trip.destination or ''"/></p>
+              <p><strong>Fuel Consumption (L):</strong> <t t-esc="trip.fuel_consumption or 0.0"/></p>
+            </div>
+          </div>
+
+          <!-- Trip Table -->
+          <table class="table table-sm" style="width: 100%; border: 1px solid black; border-collapse: collapse; margin-top: 10px;">
+            <thead>
+              <tr>
+                <th style="border: 1px solid black;">Start Time</th>
+                <th style="border: 1px solid black;">Odometer Start</th>
+                <th style="border: 1px solid black;">End Date</th>
+                <th style="border: 1px solid black;">Odometer End</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="border: 1px solid black;"><t t-esc="trip.start_time.strftime('%Y-%m-%d') if trip.start_time else ''"/></td>
+                <td style="border: 1px solid black;"><t t-esc="trip.odoo_meter or 0.0"/></td>
+                <td style="border: 1px solid black;"><t t-esc="trip.end_date.strftime('%Y-%m-%d') if trip.end_date else ''"/></td>
+                <td style="border: 1px solid black;"><t t-esc="trip.current_odoo_meter or 0.0"/></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Footer Section -->
+          <div style="display: flex; justify-content: space-between; margin-top: 40px; text-align: center;">
+            <div style="width: 33%;">
+              <p><strong>Requested By:</strong><br/><t t-esc="trip.request_by.name if trip.request_by else ''"/></p>
+            </div>
+            <div style="width: 33%;">
+              <p><strong>Confirmed By:</strong><br/><t t-esc="trip.confirmed_by.name if trip.confirmed_by else ''"/></p>
+            </div>
+            <div style="width: 33%;">
+              <p><strong>Approved By:</strong><br/><t t-esc="trip.approved_by.name if trip.approved_by else ''"/></p>
+            </div>
+          </div>
+
+        </div>
+      </t>
+    </t>
+  </template>
+</odoo>

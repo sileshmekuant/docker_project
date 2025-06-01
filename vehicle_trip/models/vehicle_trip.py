@@ -42,7 +42,7 @@ class VehicleTrip(models.Model):
     approved_date = fields.Date(string="Approved Date", readonly=True)
 
     #Action buttons
-    def action_prepare(self):
+    def action_request(self):
         for rec in self:
             if rec.state != 'draft':
                 raise UserError("Only draft records can be request.")

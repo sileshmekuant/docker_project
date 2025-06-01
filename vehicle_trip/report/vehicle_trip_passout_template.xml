@@ -1,0 +1,47 @@
+<odoo>
+  <template id="report_vehicle_trip_printout_document">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="printout">
+        <div class="page">
+          <h2>Vehicle Trip Printout</h2>
+
+          <p><strong>Date:</strong> <t t-esc="printout.date"/></p>
+          <p><strong>Vehicle:</strong> <t t-esc="printout.vehicle_type.name"/></p>
+          <p><strong>Plate Number:</strong> <t t-esc="printout.plate_number"/></p>
+          <p><strong>Driver:</strong> <t t-esc="printout.driver_name.name"/></p>
+
+          <p><strong>Destination:</strong> <t t-esc="printout.destination"/></p>
+          <p><strong>From:</strong> <t t-esc="printout.duration_from"/></p>
+          <p><strong>To:</strong> <t t-esc="printout.duration_to"/></p>
+          <p><strong>Total Duration:</strong> <t t-esc="printout.total_duration"/></p>
+
+          <p><strong>Reason:</strong></p>
+          <p><t t-esc="printout.reason"/></p>
+
+          <br/>
+          <table style="width:100%; margin-top: 40px;">
+            <tr>
+              <td>
+                <strong>Requester:</strong><br/>
+                <t t-esc="printout.requester_name.name"/><br/>
+                <t t-if="printout.requester_title">
+                  <t t-esc="printout.requester_title.name"/>
+                </t>
+                
+              </td>
+              <td>
+                <strong>Authorizer:</strong><br/>
+                <t t-esc="printout.authorizer_name.name"/><br/>
+                <t t-if="printout.authorizer_title">
+                  <t t-esc="printout.authorizer_title.name"/>
+                </t>
+                
+                
+              </td>
+            </tr>
+          </table>
+        </div>
+      </t>
+    </t>
+  </template>
+</odoo>

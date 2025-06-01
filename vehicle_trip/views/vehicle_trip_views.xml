@@ -7,7 +7,7 @@
                   <header>
                     <field name="state" widget="statusbar" statusbar_visible="draft,request,confirmed,approved"/>
 
-                    <button name="action_prepare" type="object" string="Prepare"
+                    <button name="action_request" type="object" string="request"
                             class="btn-primary"
                             invisible="state != 'draft'"/>
 
