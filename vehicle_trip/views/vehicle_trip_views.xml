@@ -39,8 +39,8 @@
                         </group>
 
                         <group>
-                            <field name="destination"/>
-                            <field name="end_date"/>
+                            <field name="destination_location"/>
+                            <field name="end_time"/>
                             <field name="current_odoo_meter"/>
                             <field name="fuel_consumption"/>
                         </group>
@@ -81,7 +81,7 @@
                 <field name="plate_number"/>
                 <field name="driver_name"/>
                 <field name="start_location"/>
-                <field name="destination"/>
+                <field name="destination_location"/>
                 <field name="state"/>
             </tree>
         </field>
@@ -95,15 +95,13 @@
     </record>
 
     <!-- Menus -->
-    <menuitem id="menu_vehicle_trip_root" name="vehicle Mngt" sequence="10"/>
-
-    <menuitem id="menu_vehicle_trip_main"
-              name="Trips"
-              parent="menu_vehicle_trip_root"
+    <!-- <menuitem id="menu_vehicle_trip_root" name="vehicle Mngt" sequence="10"/> -->
+  
+    <menuitem id="menu_vehicle_trip"
+              name="Vehicle Trip"
+               parent="fleet.menu_root"
               action="action_vehicle_trip"
-              sequence="20"/>
-
-
+              sequence="10"/>
 
 
 </odoo>

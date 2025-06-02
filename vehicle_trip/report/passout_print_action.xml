@@ -1,6 +1,6 @@
 <odoo>
   <record id="action_report_vehicle_trip_passout" model="ir.actions.report">
-    <field name="name">Vehicle Trip passout Report</field>
+    <field name="name">gate pass</field>
     <field name="model">vehicle.trip.printout</field>
     <field name="report_type">qweb-pdf</field>
     <field name="report_name">vehicle_trip.report_vehicle_trip_printout_document</field>

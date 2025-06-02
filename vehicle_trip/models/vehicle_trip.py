@@ -13,14 +13,14 @@ class VehicleTrip(models.Model):
     driver_name = fields.Many2one('res.partner',related="vehicle_type.driver_id", string="driver")
 
     # Trip Start Info
-    date = fields.Date("Trip Date")
+    date = fields.Date("Date")
     start_location = fields.Char("Start Location")
-    start_time = fields.Date("Start Time")
+    start_time = fields.Char("Start Time")
     odoo_meter = fields.Float("Odometer Start")
 
     # Trip End Info
-    destination = fields.Char("Destination")
-    end_date = fields.Date("End Date")
+    destination_location = fields.Char("Destination location")
+    end_time = fields.Char("End time")
     current_odoo_meter = fields.Float("Odometer End")
     fuel_consumption = fields.Float("Fuel Consumption (L)")
 
@@ -79,11 +79,11 @@ class VehicleTrip(models.Model):
             trip.approved_date = date.today()
 
             # Compute total duration
-            if trip.start_time and trip.end_date:
-                duration = trip.end_date - trip.start_time
-                total_duration = str(duration)
-            else:
-                total_duration = ''
+            # if trip.start_time and trip.end_date:
+            #     duration = trip.end_date - trip.start_time
+            #     total_duration = str(duration)
+            # else:
+            #     total_duration = ''
 
         # Create related printout and store in variable
         printout = self.env['vehicle.trip.printout'].create({
@@ -91,12 +91,13 @@ class VehicleTrip(models.Model):
             'vehicle_type': trip.vehicle_type.id,
             # 'plate_number': trip.plate_number,
             'driver_name': trip.driver_name.id,
+            'start_location': trip.start_location,
             'date': trip.date,
-            'destination': trip.destination,
-            'duration_from': trip.start_time,
-            'duration_to': trip.end_date,
-            'total_duration': total_duration,
-            'reason': 'Trip approved and ready',
+            'destination_location': trip.destination_location,
+            'start_time': trip.start_time,
+            'end_time': trip.end_time,
+            #'total_duration': total_duration,
+            'reason': '',
             'requester_name': trip.request_by.id if trip.request_by else '',
             'authorizer_name': trip.approved_by.id if trip.approved_by else '',
         })

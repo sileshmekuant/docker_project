@@ -2,41 +2,82 @@
   <template id="report_vehicle_trip_printout_document">
     <t t-call="web.html_container">
       <t t-foreach="docs" t-as="printout">
-        <div class="page">
-          <h2>Vehicle Trip Printout</h2>
+        <div class="page" style="background-color: white; color: black;">
+          <h2 style="text-align: center;">Gate Pass</h2>
 
-          <p><strong>Date:</strong> <t t-esc="printout.date"/></p>
-          <p><strong>Vehicle:</strong> <t t-esc="printout.vehicle_type.name"/></p>
-          <p><strong>Plate Number:</strong> <t t-esc="printout.plate_number"/></p>
-          <p><strong>Driver:</strong> <t t-esc="printout.driver_name.name"/></p>
+          <!-- General Info -->
+          <div style="margin-top: 20px; text-align: center; background-color: white; padding: 15px; border-radius: 10px;">
+            <h3 style="text-align: left;">General</h3>
+            <table style="width: 100%; text-align: left; margin-top: 10px;">
+              <tr>
+                <td style="width: 50%; padding: 5px;">
+                  <p><strong>Vehicle Type:</strong>
+                    <span><t t-esc="printout.vehicle_type.name"/></span></p>
+                  <p><strong>Driver:</strong>
+                    <span><t t-esc="printout.driver_name.name"/></span></p>
+                </td>
+                <td style="width: 50%; padding: 5px;">
+                  <p><strong>Plate Number:</strong>
+                    <span><t t-esc="printout.plate_number"/></span></p>
+                  <p><strong>Start Location:</strong>
+                    <span><t t-esc="printout.start_location"/></span></p>
+                </td>
+              </tr>
+            </table>
+          </div>
 
-          <p><strong>Destination:</strong> <t t-esc="printout.destination"/></p>
-          <p><strong>From:</strong> <t t-esc="printout.duration_from"/></p>
-          <p><strong>To:</strong> <t t-esc="printout.duration_to"/></p>
-          <p><strong>Total Duration:</strong> <t t-esc="printout.total_duration"/></p>
+          <!-- Destination Info -->
+          <div style="margin-top: 30px; text-align: center; background-color: white; padding: 15px; border-radius: 10px;">
+            <h3 style="text-align: left;">Destination</h3>
+            <table style="width: 100%; text-align: left; margin-top: 10px;">
+              <tr>
+                <td style="width: 50%; padding: 5px;">
+                  <p><strong>Date:</strong>
+                    <span><t t-esc="printout.date"/></span></p>
+                  <p><strong>Start Time:</strong>
+                    <span><t t-esc="printout.start_time"/></span></p>
+                </td>
+                <td style="width: 50%; padding: 5px;">
+                  <p><strong>Destination Location:</strong>
+                    <span><t t-esc="printout.destination_location"/></span></p>
+                  <p><strong>End Time:</strong>
+                    <span><t t-esc="printout.end_time"/></span></p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="padding: 5px;">
+                  <p><strong>Reason:</strong>
+                  <span><t t-esc="printout.reason"/></span></p>
+                  <!-- <p><t t-esc="printout.reason"/></p> -->
+                </td>
+              </tr>
+            </table>
+          </div>
 
-          <p><strong>Reason:</strong></p>
-          <p><t t-esc="printout.reason"/></p>
-
-          <br/>
+          <!-- Signatures -->
           <table style="width:100%; margin-top: 40px;">
             <tr>
-              <td>
+              <td style="width: 50%; vertical-align: top;">
                 <strong>Requester:</strong><br/>
                 <t t-esc="printout.requester_name.name"/><br/>
                 <t t-if="printout.requester_title">
-                  <t t-esc="printout.requester_title.name"/>
+                  <t t-esc="printout.requester_title.name"/><br/>
                 </t>
-                
+                <div style="margin-top: 30px;">
+                  <strong>Signature:</strong><br/>
+                  <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+                </div>
               </td>
-              <td>
+              <td style="width: 50%; vertical-align: top;">
                 <strong>Authorizer:</strong><br/>
                 <t t-esc="printout.authorizer_name.name"/><br/>
                 <t t-if="printout.authorizer_title">
-                  <t t-esc="printout.authorizer_title.name"/>
+                  <t t-esc="printout.authorizer_title.name"/><br/>
                 </t>
-                
-                
+                <div style="margin-top: 30px;">
+                  <strong>Signature:</strong><br/>
+                  <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+                </div>
               </td>
             </tr>
           </table>

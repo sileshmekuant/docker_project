@@ -10,12 +10,13 @@ class VehicleTripPrintout(models.Model):
     vehicle_type = fields.Many2one('fleet.vehicle',string="Vehicle Name/Type")
     plate_number = fields.Char(string="License Plate No.",related="vehicle_type.license_plate")
     driver_name = fields.Many2one('res.partner',related="vehicle_type.driver_id",string="Driver's Name")
+    start_location = fields.Char("Start Location")
+    date = fields.Date(string="Date")   
+    start_time= fields.Char(string="start time")
 
-    date = fields.Date(string="Date")
-    destination = fields.Char(string="Destination/Location")
-    duration_from = fields.Datetime(string="Estimated Duration From")
-    duration_to = fields.Datetime(string="Estimated Duration To")
-    total_duration = fields.Char(string="Total Duration")  # or Float with units
+    destination_location = fields.Char(string="Destination Location")
+    end_time= fields.Char(string="Estimated Duration To")
+    #total_duration = fields.Char(string="Total Duration")  # or Float with units
 
     reason = fields.Text(string="Reason")
 
