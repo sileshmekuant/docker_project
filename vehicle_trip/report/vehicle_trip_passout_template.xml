@@ -12,7 +12,7 @@
               <tr>
                 <td style="width: 50%; padding: 5px;">
                   <p><strong>Vehicle Type:</strong>
-                    <span><t t-esc="printout.vehicle_type.name"/></span></p>
+                    <span><t t-esc="printout.vehicle.name"/></span></p>
                   <p><strong>Driver:</strong>
                     <span><t t-esc="printout.driver_name.name"/></span></p>
                 </td>
@@ -34,14 +34,14 @@
                 <td style="width: 50%; padding: 5px;">
                   <p><strong>Date:</strong>
                     <span><t t-esc="printout.date"/></span></p>
-                  <p><strong>Start Time:</strong>
-                    <span><t t-esc="printout.start_time"/></span></p>
+                  <p><strong>Start date:</strong>
+                    <span><t t-esc="printout.start_date"/></span></p>
                 </td>
                 <td style="width: 50%; padding: 5px;">
                   <p><strong>Destination Location:</strong>
                     <span><t t-esc="printout.destination_location"/></span></p>
-                  <p><strong>End Time:</strong>
-                    <span><t t-esc="printout.end_time"/></span></p>
+                  <p><strong>End date:</strong>
+                    <span><t t-esc="printout.end_date"/></span></p>
                 </td>
               </tr>
               <tr>

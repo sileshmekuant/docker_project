@@ -11,22 +11,5 @@
         </field>
     </record>
 
-    <!-- Action to Open res.partner List/Form -->
-    <!-- <record id="action_res_partner_custom" model="ir.actions.act_window">
-        <field name="name">Partners</field>
-        <field name="res_model">res.partner</field>
-        <field name="view_mode">tree,form</field>
-    </record> -->
-
-    <!-- Optional: Create Custom Root Menu -->
-    <!-- <menuitem id="menu_root" name="contacts" sequence="10"/> -->
-
-    <!-- Menu Item for Partners under Custom Menu -->
-    <!-- <menuitem
-        id="menu_regional_team"
-        name="regional_team"
-        parent="menu_root"
-        action="action_regional_team"
-        sequence="10"
-    /> -->
+    
 </odoo>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    Tree View
+    <record id="view_fuel_consumption_report_tree" model="ir.ui.view">
+        <field name="name">fuel.consumption.report.tree</field>
+        <field name="model">fuel.consumption.report</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="vehicle"/>
+                
+                <field name="fuel_consumption"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fuel_consumption_report_form" model="ir.ui.view">
+        <field name="name">fuel.consumption.report.form</field>
+        <field name="model">fuel.consumption.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                        <group>
+                            <field name="vehicle"/>
+                            <field name="is_inventory"/>
+
+                            <field name="fuel_consumption"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Fuel Requests">
+                            <field name="vehicles_consumption" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    
+                                    <field name="warehouse_id"/>
+                                    <field name="dispense_fuel"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_ids" widget="mail_thread" />
+                    <field name="activity_ids" widget="mail_activity" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_fuel_consumption_report_search" model="ir.ui.view">
+        <field name="name">fuel.consumption.report.search</field>
+        <field name="model">fuel.consumption.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="vehicle"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <filter string="This Month" name="this_month" 
+                        domain="[('start_date','&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d')),
+                                ('end_date','&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Vehicle" name="group_by_vehicle" context="{'group_by': 'vehicle'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fuel_consumption_report" model="ir.actions.act_window">
+        <field name="name">Fuel Consumption Reports</field>
+        <field name="res_model">fuel.consumption.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_fuel_consumption_report_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first fuel consumption report!
+            </p>
+        </field>
+    </record>
+
+   
+
+    <!-- Sequence -->
+    <record id="seq_fuel_consumption_report" model="ir.sequence">
+        <field name="name">Fuel Consumption Report</field>
+        <field name="code">fuel.consumption.report</field>
+        <field name="prefix">FCR/%(year)s/</field>
+        <field name="padding">4</field>
+    </record>
+
+     <menuitem id="menu_fuel_consumption_report"
+              name="Fuel Reports"
+             parent="fleet.menu_fleet_reporting"
+              action="action_fuel_consumption_report"
+              sequence="30"/>
+
+</odoo>

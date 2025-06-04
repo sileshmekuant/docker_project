@@ -7,8 +7,8 @@
           <!-- Header Section -->
           <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
             <div style="width: 50%;">
-              <p><strong>Date:</strong> <t t-esc="trip.date.strftime('%Y-%m-%d') if trip.date else ''"/></p>
-              <p><strong>Vehicle:</strong> <t t-esc="trip.vehicle_type.name or ''"/></p>
+              <p><strong>Date:</strong> <t t-esc="trip.date.strfdate('%Y-%m-%d') if trip.date else ''"/></p>
+              <p><strong>Vehicle:</strong> <t t-esc="trip.vehicle.name or ''"/></p>
               <p><strong>Driver:</strong> <t t-esc="trip.driver_name.name or ''"/></p>
             </div>
             <div style="width: 50%;">
@@ -22,7 +22,7 @@
           <table class="table table-sm" style="width: 100%; border: 1px solid black; border-collapse: collapse; margin-top: 10px;">
             <thead>
               <tr>
-                <th style="border: 1px solid black;">Start Time</th>
+                <th style="border: 1px solid black;">Start Date</th>
                 <th style="border: 1px solid black;">Odometer Start</th>
                 <th style="border: 1px solid black;">End Date</th>
                 <th style="border: 1px solid black;">Odometer End</th>
@@ -30,9 +30,9 @@
             </thead>
             <tbody>
               <tr>
-                <td style="border: 1px solid black;"><t t-esc="trip.start_time.strftime('%Y-%m-%d') if trip.start_time else ''"/></td>
+                <td style="border: 1px solid black;"><t t-esc="trip.start_date.strfdate('%Y-%m-%d') if trip.start_date else ''"/></td>
                 <td style="border: 1px solid black;"><t t-esc="trip.odoo_meter or 0.0"/></td>
-                <td style="border: 1px solid black;"><t t-esc="trip.end_date.strftime('%Y-%m-%d') if trip.end_date else ''"/></td>
+                <td style="border: 1px solid black;"><t t-esc="trip.end_date.strfdate('%Y-%m-%d') if trip.end_date else ''"/></td>
                 <td style="border: 1px solid black;"><t t-esc="trip.current_odoo_meter or 0.0"/></td>
               </tr>
             </tbody>

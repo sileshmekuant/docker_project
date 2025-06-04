@@ -7,15 +7,15 @@ class VehicleTripPrintout(models.Model):
 
     trip_id = fields.Many2one('vehicle.trip', string="Original Trip", required=True, ondelete='cascade')
     
-    vehicle_type = fields.Many2one('fleet.vehicle',string="Vehicle Name/Type")
-    plate_number = fields.Char(string="License Plate No.",related="vehicle_type.license_plate")
-    driver_name = fields.Many2one('res.partner',related="vehicle_type.driver_id",string="Driver's Name")
+    vehicle = fields.Many2one('fleet.vehicle',string="Vehicle Name/Type")
+    plate_number = fields.Char(string="License Plate No.",related="vehicle.license_plate")
+    driver_name = fields.Many2one('res.partner',related="vehicle.driver_id",string="Driver's Name")
     start_location = fields.Char("Start Location")
     date = fields.Date(string="Date")   
-    start_time= fields.Char(string="start time")
+    start_date= fields.Date(string="start date")
 
     destination_location = fields.Char(string="Destination Location")
-    end_time= fields.Char(string="Estimated Duration To")
+    end_date= fields.Date(string="end date")
     #total_duration = fields.Char(string="Total Duration")  # or Float with units
 
     reason = fields.Text(string="Reason")

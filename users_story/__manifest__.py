@@ -9,6 +9,7 @@
         'views/sale_order_views.xml',
         'views/res_partner_view.xml',
         'views/website_form.xml',
+        'views/menu.xml',
     ],
     'installable': True,
     'application': False,

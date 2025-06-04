@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="fleet_fuel_request_form_inherit" model="ir.ui.view">
+        <field name="name">fleet.fuel.request.form.inherit</field>
+        <field name="model">fleet.fuel.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="user_request_by" 
+                            string="Request" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="state != 'draft'"
+                            groups="fuels_request.group_request_draft"/>
+                    <button name="employe_checked_by" 
+                            string="Checked" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="state != 'request'"
+                            groups="fuels_request.group_request_confirm"/>
+                    <button name="employe_authorized_by" 
+                            string="Authorized" 
+                            type="object" 
+                            class="oe_highlight"
+                            invisible="state != 'checked'"
+                            groups="fuels_request.group_request_approved"/>
+
+                      <button type="object" 
+                            name="action_view_fuel_siv"
+                            string="Fuel SIV"
+                            class="oe_stat_button"
+                            icon="fa-file-text-o"
+                            groups="base.group_user">
+                        <field name="fuel_siv_count" widget="statinfo" string="Fuel SIV"/>
+                    </button>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,request,checked,authorized"/>
+                </header>
+                <sheet>
+                    <group string="Fuel Request Form" col="2">
+
+                        <group>
+                            <field name="name" readonly="1"/>
+
+                            <field name="store_issue" readonly="state == 'authorized'"/>
+                            <field name="vehicle" readonly="state == 'authorized'"/>
+                            <field name="plate_no" readonly="state == 'authorized'"/>
+                            <field name="driver_name" readonly="state == 'authorized'"/>
+                            <field name="vehicle_type" readonly="state == 'authorized'"/>
+                            <field name="request_time" readonly="state == 'authorized'" invisible="vehicle_type == 'car'"/>
+                            <field name="current_fuel_level" readonly="state == 'authorized'"/>
+
+                        </group>
+
+                        <group>
+                                <field name="is_inventory" readonly="state == 'authorized'"/>
+                                <field name="current_odometer" readonly="state == 'authorized'"/>
+                                <field name="request_fuel" readonly="state == 'authorized'"/>
+                                <field name="dispense_fuel" readonly="state != 'checked'"/>
+                                <field name="date" readonly="1"/>
+                                <field name="starting_place" readonly="state == 'authorized'"/>
+                                <field name="destination_place" readonly="state == 'authorized'"/>
+                                <field name="request_department" readonly="state == 'authorized'"/>
+                                <field name="reason_for_receive" readonly="state == 'authorized'"/>
+
+                        </group>
+                            
+                       
+                    </group>
+                    <notebook>
+                        <page string="Items Info">
+                            <field name="fuel_id" readonly="state == 'authorized'">
+                                <tree editable="bottom" string="Items">
+                                    <field name="item_no" options="{'no_create': False}" context="{'default_type': 'product'}"/>
+                                    <field name="description" widget="html"/>
+                                    <field name="unit"/>
+                                    <field name="qty" string="Quantity"/>
+                                    <field name="approved_qty" string="Approved Qty"/>
+                                    <field name="total_price" string="Total Price"/>
+                                    
+                                    <field name="remark" widget="html"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group col="3">
+                        <group>
+                            <field name="requested_by" readonly="1"/>
+                                <field name="request_date" readonly="1"/>
+
+
+                        </group>
+                        <group>
+
+                            <field name="checked_by" readonly="1"/>
+                                <field name="checked_date" readonly="1"/>
+                        </group>
+                        <group>
+                                <field name="authorized_by" readonly="1"/>
+
+                            <field name="authorized_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="fleet_fuel_request_tree_view" model="ir.ui.view">
+        <field name="name">fleet.fuel.request.tree</field>
+        <field name="model">fleet.fuel.request</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'draft'" 
+                  decoration-warning="state == 'confirm'" 
+                  decoration-success="state == 'authorized'" 
+                  decoration-muted="state == 'dispensed'" 
+                  sample="1">
+
+                <field name="name"/>
+                <field name="store_issue"/>
+                <field name="date"/>
+                <field name="requested_by"/>
+                <field name="vehicle"/>
+                <field name="plate_no"/>
+                <field name="driver_name"/>
+                <field name="starting_km"/>
+                <field name="starting_place"/>
+                <field name="destination_place"/>
+                <field name="request_department"/>
+                <field name="state" widget="badge" 
+                       decoration-info="state == 'draft'" 
+                       decoration-warning="state == 'confirm'" 
+                       decoration-success="state == 'authorized'"
+                       decoration-muted="state == 'dispensed'"/>
+            </tree>
+        </field>
+    </record>
+     <record id="action_fleet_fuel_request" model="ir.actions.act_window">
+        <field name="name">Fuel Requests</field>
+        <field name="res_model">fleet.fuel.request</field>
+        <field name="view_mode">tree,form</field>       
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first fuel request!
+            </p>
+            <p>
+                Create fuel requests to manage vehicle refueling operations.
+                Track fuel levels, mileage, and dispensing status.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_fleet_fuel_request"
+              name="Fuel Requests"
+              parent="fleet.menu_root"
+              sequence="20"/>
+    <menuitem id="menu_fleet_fuel_request_child"
+              name="Fuel Requests"
+              parent="menu_fleet_fuel_request"
+              action="action_fleet_fuel_request"
+              sequence="20"/>
+</odoo>

@@ -26,7 +26,7 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="vehicle_type"/>
+                            <field name="vehicle"/>
                             <field name="plate_number"/>
                             <field name="driver_name"/>
                         </group>
@@ -34,14 +34,14 @@
                         <group>
                             <field name="date"/>
                             <field name="start_location"/>
-                            <field name="start_time"/>
+                            <field name="start_date"/>
                             <field name="odoo_meter"/>
                         </group>
 
                         <group>
                             <field name="destination_location"/>
-                            <field name="end_time"/>
-                            <field name="current_odoo_meter"/>
+                            <field name="end_date"/>
+                            <field name="end_odometer"/>
                             <field name="fuel_consumption"/>
                         </group>
                     </group>
@@ -77,7 +77,7 @@
         <field name="arch" type="xml">
             <tree string="Vehicle Trips">
                 <field name="date"/>
-                <field name="vehicle_type"/>
+                <field name="vehicle"/>
                 <field name="plate_number"/>
                 <field name="driver_name"/>
                 <field name="start_location"/>

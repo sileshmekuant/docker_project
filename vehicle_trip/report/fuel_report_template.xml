@@ -1,0 +1,56 @@
+<odoo>
+    <template id="report_fuel_consumption">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <!-- Title -->
+                        <h2 class="text-center" style="color:rgb(36, 179, 0); margin-bottom: 30px;">Fleet Fuel Report</h2>
+
+                        <!-- Metadata Section -->
+                        <table style="width: 100%; text-align: left; margin-top: 10px;">
+                            <tr>
+                                <td style="width: 50%; padding: 5px;">
+                                    <p><strong>Reference:</strong> <span t-esc="doc.name"/></p>
+                                    <p><strong>Start Date:</strong> <span t-esc="doc.start_date"/></p>
+                                </td>
+                                <td style="width: 50%; padding: 5px;">
+                                    <p><strong>End Date:</strong> <span t-esc="doc.end_date"/></p>
+                                    <p><strong>Vehicle:</strong> <span t-esc="doc.vehicle.name if doc.vehicle else 'All Vehicles'"/></p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Table Section -->
+                        <table class="table table-sm" style="border-collapse: collapse; width: 100%;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid #000;">
+                                    <th style="text-align:left; padding: 8px; color: green;">#</th>
+                                    <th style="text-align:left; padding: 8px; color: green;">Vehicle</th>
+                                    <th style="text-align:left; padding: 8px; color: green;">Start Date</th>
+                                    <th style="text-align:left; padding: 8px; color: green;">Fuel Consumption</th>
+                                    <th style="text-align:left; padding: 8px; color: green;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               <!-- <t t-set="counter" t-value="0"/> -->
+                                <t t-foreach="doc.vehicles_consumption" t-as="trip">
+                                    <tr>
+                                        <td style="padding: 8px;"><t t-esc="trip_index + 1"/></td>
+                                        <td style="padding: 8px;"><t t-esc="trip.vehicle.name"/></td>
+                                        <td style="padding: 8px;"><t t-esc="trip.start_date"/></td>
+                                        <td style="padding: 8px;"><t t-esc="trip.fuel_consumption"/></td>
+                                        <td style="padding: 8px;"><t t-esc="trip.state"/></td>
+                                    </tr>
+                                    <!-- <t t-set="counter" t-value="counter + 1"/> -->
+                                </t>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

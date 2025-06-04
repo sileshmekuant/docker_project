@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_vehicle_trip_user,access.vehicle.trip.user,model_vehicle_trip,base.group_user,1,1,1,1
 access_vehicle_trip_printout_user,access.vehicle.trip.printout.user,model_vehicle_trip_printout,base.group_user,1,1,1,1
 
+access_fuel_consump_report,fuel.consump.report,model_fuel_consump_report,,1,1,1,1

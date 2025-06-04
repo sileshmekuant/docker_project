@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fuel_consumption_report_user,fuel.consumption.report.user,model_fuel_consumption_report,,1,1,1,0
+access_fuel_request, Fuel request access,model_fleet_fuel_request,,1,1,1,1
+
+access_oil_form_lubricant,oil.form.lubricant,model_oil_form_lubricant,,1,1,1,1
+

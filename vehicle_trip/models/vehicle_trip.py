@@ -8,21 +8,25 @@ class VehicleTrip(models.Model):
     _description = "Vehicle Trip"
 
     # Vehicle Info
-    vehicle_type = fields.Many2one('fleet.vehicle', string="Vehicle")
-    plate_number = fields.Char("Plate Number",related='vehicle_type.license_plate')
-    driver_name = fields.Many2one('res.partner',related="vehicle_type.driver_id", string="driver")
+    vehicle = fields.Many2one('fleet.vehicle', string="Vehicle")
+    plate_number = fields.Char("Plate Number",related='vehicle.license_plate')
+    driver_name = fields.Many2one('res.partner',related="vehicle.driver_id", string="driver")
 
     # Trip Start Info
-    date = fields.Date("Date")
+    name = fields.Char(string="Reference", readonly=True, default="New")
+    date = fields.Date("Date",default=fields.Date.today())
     start_location = fields.Char("Start Location")
-    start_time = fields.Char("Start Time")
+    start_date = fields.Date("Start Time")
     odoo_meter = fields.Float("Odometer Start")
 
     # Trip End Info
     destination_location = fields.Char("Destination location")
-    end_time = fields.Char("End time")
-    current_odoo_meter = fields.Float("Odometer End")
-    fuel_consumption = fields.Float("Fuel Consumption (L)")
+    end_date = fields.Date("End date")
+    # current_odoo_meter = fields.Float("Odometer End")
+    fuel_consumption = fields.Float("Fuel Consumption")
+    dispense_fuel = fields.Float(string="Dispensed Fuel (Litres)")
+    end_odometer = fields.Float(string="End Odometer")
+
 
     # Status Workflow
     state = fields.Selection([
@@ -88,14 +92,14 @@ class VehicleTrip(models.Model):
         # Create related printout and store in variable
         printout = self.env['vehicle.trip.printout'].create({
             'trip_id': trip.id,
-            'vehicle_type': trip.vehicle_type.id,
+            'vehicle': trip.vehicle.id,
             # 'plate_number': trip.plate_number,
             'driver_name': trip.driver_name.id,
             'start_location': trip.start_location,
             'date': trip.date,
             'destination_location': trip.destination_location,
-            'start_time': trip.start_time,
-            'end_time': trip.end_time,
+            'start_date': trip.start_date,
+            'end_date': trip.end_date,
             #'total_duration': total_duration,
             'reason': '',
             'requester_name': trip.request_by.id if trip.request_by else '',
@@ -111,3 +115,8 @@ class VehicleTrip(models.Model):
             'view_mode': 'form',
             'target': 'current',
         }
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code('vehicle.trip') or 'New'
+        return super().create(vals)

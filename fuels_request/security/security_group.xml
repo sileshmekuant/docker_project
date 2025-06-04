@@ -1,0 +1,32 @@
+<!-- security/groups.xml -->
+<odoo>
+    <data noupdate="1">
+
+        <!-- Custom Security Group for Fuel Request Manager -->
+        <!-- Custom Security Group for Fuel Request Manager -->
+        <record id="module_category_fuel_request" model="ir.module.category">
+            <field name="name">Fuel Request</field>
+            <field name="description">Fuel Request Description</field>
+            <field name="sequence">1</field>
+        </record> 
+        
+        <record id="group_request_draft" model="res.groups">
+            <field name="name">Request </field>
+            <field name="category_id" ref="module_category_fuel_request"/>
+            <field name="comment"> Request</field>
+        </record>
+        
+        <record id="group_request_confirm" model="res.groups">
+            <field name="name">checked </field>
+            <field name="category_id" ref="module_category_fuel_request"/>
+            <field name="comment">Checked </field>
+        </record>
+        
+        <record id="group_request_approved" model="res.groups">
+            <field name="name">Request Approved</field>
+            <field name="category_id" ref="module_category_fuel_request"/>
+            <field name="comment">Approved Request</field>
+        </record>
+
+    </data>
+</odoo>

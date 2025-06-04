@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- QWeb Template for Fuel Request Report -->
+    <template id="fuel_request_report" name="Fuel Request Report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <!-- Header -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 style="text-transform: uppercase; font-weight: bold; text-align: center">Fuel Request Form</h2>
+                                <h4>Reference: <span t-field="doc.name"/></h4>
+                            </div>
+                        </div>
+
+                        <!-- Split Content: Two Columns -->
+                        <div class="row mt-3">
+                            <div class="col-6">
+                               <div>
+                                    <strong style="display:inline-block; min-width: 150px;">Store Center:</strong> <span t-field="doc.store_issue"/><br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Vehicle:</strong> <span t-field="doc.vehicle.name"/><br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Plate Number:</strong> <span t-field="doc.plate_no"/><br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Driver Name:</strong> <span t-field="doc.driver_name.name"/><br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Vehicle Type:</strong> <span t-field="doc.vehicle_type"/><br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Current Fuel Level:</strong> <span t-field="doc.current_fuel_level"/> <br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Requesting Department:</strong> <span t-field="doc.request_department.name"/><br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Reason of Receive:</strong> <span t-field="doc.reason_for_receive"/><br/>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                              <div>
+                                    <strong style="display:inline-block; min-width: 150px;">Current Odometer:</strong> <span t-field="doc.current_odometer"/><br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Request Fuel:</strong> <span t-field="doc.qty_requested"/> <br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Dispense Fuel:</strong> <span t-field="doc.qty_dispensed"/><br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Date:</strong> <span t-field="doc.date"/><br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Place of Starting:</strong> <span t-field="doc.starting_place"/><br/>
+                                    <strong style="display:inline-block; min-width: 150px;">Place of Destination:</strong> <span t-field="doc.destination_place"/><br/>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div style="clear: both;"></div>
+
+                        <!-- Item Info Section -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h5 style="padding: 5px; font-weight: bold;">Item Information</h5>
+                                <table class="table table-bordered" style="font-size: 14px;">
+                                    <thead>
+                                        <tr>
+                                            <th>Item No</th>
+                                            <th>Description</th>
+                                            <th>Unit</th>
+                                            <th>Quantity</th>
+                                            <th>Approved Quantity</th>
+                                            <th>Total Price</th>
+                                            <th>Remark</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.fuel_id" t-as="item">
+                                            <td><span t-field="item.item_no.name"/></td>
+                                            <td><span t-field="item.description"/></td>
+                                            <td><span t-field="item.unit.name"/></td>
+                                            <td><span t-field="item.qty"/></td>
+                                            <td><span t-field="item.approved_qty"/></td>
+                                            <td><span t-field="item.total_price"/></td>
+                                            <td><span t-field="item.remark"/></td>
+                                        </tr>
+                                        <tr t-if="not doc.fuel_id">
+                                            <td colspan="7" style="text-align: center;">No items available</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Approval Section -->
+                        <div class="row mt-4">
+                            <div class="col-4" style="padding: 10px;">
+                                <strong>Requested By:</strong>
+                                <span t-field="doc.requested_by.name"/>
+                                <strong>Request Date:</strong>
+                                <span t-field="doc.request_date"/>
+                            </div>
+                            <div class="col-4" style="padding: 10px;">
+                                <strong>Checked By:  </strong>
+                                <span t-field="doc.checked_by.name"/><br/>
+                                <strong>Checked Date:</strong>
+                                <span t-field="doc.checked_date"/>
+                            </div>
+                            <div class="col-4" style="padding: 10px;">
+                                <strong>Authorized By:</strong>
+                                <span t-field="doc.authorized_by.name"/>
+                                <strong>Authorized Date:</strong>
+                                <span t-field="doc.authorized_date"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Report Action for Fuel Request Report -->
+    <record id="action_fuel_request_report" model="ir.actions.report">
+        <field name="name">Fuel Request Report</field>
+        <field name="model">fleet.fuel.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">fuels_request.fuel_request_report</field>
+        <field name="report_file">fuels_request.fuel_request_report</field>
+        <field name="print_report_name">('Fuel Request Report - %s' % object.name)</field>
+        <field name="binding_model_id" ref="model_fleet_fuel_request"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

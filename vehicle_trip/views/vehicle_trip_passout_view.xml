@@ -6,14 +6,14 @@
             <form string="Vehicle Trip Printout">
                 <sheet>
                     <group string="General">
-                        <field name="vehicle_type" readonly="1"/>
+                        <field name="vehicle" readonly="1"/>
                         <field name="plate_number"/>
                         <field name="driver_name"/>
                         <field name="start_location"/>
                         <field name="date" readonly="1"/>
                         <field name="destination_location" readonly="1"/>
-                        <field name="start_time" readonly="1"/>
-                        <field name="end_time"/>
+                        <field name="start_date" readonly="1"/>
+                        <field name="end_date"/>
                         <!-- <field name="total_duration"/> -->
                         <field name="reason"/>
                     </group>
@@ -38,14 +38,14 @@
         <field name="model">vehicle.trip.printout</field>
         <field name="arch" type="xml">
             <tree string="gate pass">
-                <field name="vehicle_type"/>
+                <field name="vehicle"/>
                 <field name="plate_number"/>
                 <field name="driver_name"/>
                 <field name="start_location"/>
                 <field name="date"/>
                 <field name="destination_location"/>
-                <field name="start_time"/>
-                <field name="end_time"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
                 <!-- <field name="total_duration"/> -->
                 <field name="requester_name"/>
                 <field name="authorizer_name"/>
