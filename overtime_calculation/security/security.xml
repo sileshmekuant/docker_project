@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <!-- Example security group for managing overtime -->
+        <record id="group_hr_overtime_manager" model="res.groups">
+            <field name="name">Overtime Manager</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+        </record>
+    </data>
+</odoo>

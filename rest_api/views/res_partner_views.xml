@@ -1,0 +1,29 @@
+<odoo>
+    <record id="view_partner_form_inherit_crm_sync" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.crm.sync</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group//field[@name='email']" position="after">
+                <field name="synced_to_crm" string="Synced to External CRM" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+    <!-- Include this below the form view if needed -->
+    <record id="action_partner_sync_customers" model="ir.actions.act_window">
+        <field name="name">Synced Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('customer_rank', '&gt;', 0)]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem id="menu_partner_sync_root" name="CRM Sync"
+              parent="contacts.menu_contacts"
+              sequence="20"/>
+
+    <menuitem id="menu_partner_sync_customers"
+              name="Synced Customers"
+              parent="menu_partner_sync_root"
+              action="action_partner_sync_customers"/>
+</odoo>

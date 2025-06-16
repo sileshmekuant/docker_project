@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_hr_attendance_form_extra_hours" model="ir.ui.view">
+        <field name="name">hr.attendance.form.extra.hours</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='overtime_hours']" position="attributes">
+                <attribute name="string">overtime_hours</attribute>
+                <attribute name="readonly">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_attendance_tree_extra_hours" model="ir.ui.view">
+        <field name="name">hr.attendance.tree.extra.hours</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='overtime_hours']" position="attributes">
+                <attribute name="string">overtime_hours</attribute>
+                <attribute name="readonly">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
