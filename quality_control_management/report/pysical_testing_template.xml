@@ -1,0 +1,74 @@
+<odoo>
+  <template id="report_physical_testing_parameters">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="doc">
+        <t t-call="web.external_layout">
+          <div class="page" style="font-size: 13px;">
+            <!-- Title -->
+            <h2 style="text-align: center;">PHYSICAL TESTING PARAMETER</h2>
+
+            <div style="display: flex; justify-content: space-between;">
+               <div style="width: 65%; text-align: right;">
+                    <p><strong>Date:</strong> <t t-esc="doc.date.strftime('%Y-%m-%d') if doc.date else ''"/></p>
+                </div>
+                <div style="width: 65%; text-align: left;">
+                    <p><strong>Product Type:</strong> <t t-esc="doc.product_type.display_name"/></p>
+                    <p><strong>Order Code:</strong> <t t-esc="doc.order_code"/></p>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <table class="table table-sm" style="width: 100%; border: 1px solid black; border-collapse: collapse; margin-top: 10px;">
+              <thead>
+                <tr>
+                  <th style="border: 1px solid black; width: 5%;">S.N</th>
+                  <th style="border: 1px solid black; width: 15%;">Parameter</th>
+                  <th style="border: 1px solid black;">Equipment Name</th>
+                  <th style="border: 1px solid black; width: 10%;">Standard</th>
+                  <th style="border: 1px solid black; width: 10%;">Actual</th>
+                  <th style="border: 1px solid black; width: 20%;">Remark</th>
+                </tr>
+              </thead>
+              <tbody>
+                <t t-foreach="doc.quality_line_ids" t-as="line" t-as-index="line_index">
+                  <tr>
+                    <td style="border: 1px solid black; text-align: center;"><t t-esc="line_index + 1"/></td>
+                    <td style="border: 1px solid black;"><t t-esc="line.parameter.name or ''"/></td>
+                    <td style="border: 1px solid black;"><t t-esc="line.equipment_name.name or ''"/></td>
+                    <td style="border: 1px solid black; text-align: center;"><t t-esc="line.standard or ''"/></td>
+                    <td style="border: 1px solid black; text-align: center;"><t t-esc="line.actual or ''"/></td>
+                    <td style="border: 1px solid black;"><t t-esc="line.remark or ''"/></td>
+                  </tr>
+                </t>
+              </tbody>
+            </table>
+            <!-- Footer Section -->
+               <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+                <div style="width: 45%; text-align: left;">
+                    <p style="margin: 0 0 10px 0;">
+                        <strong>Prepared By:</strong> 
+                        <span style="margin-left: 10px;"><t t-esc="doc.prepared_by.name or ''"/></span>
+                    </p>
+                    <p style="display: flex; align-items: center; margin: 0;">
+                        <strong>Signature:</strong> 
+                          <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+                    </p>
+                </div>
+                <div style="width: 45%; text-align: left;">
+                    <p style="margin: 0 0 10px 0;">
+                        <strong>Approved By:</strong> 
+                        <span style="margin-left: 10px;"><t t-esc="doc.approved_by.name or ''"/></span>
+                    </p>
+                    <p style="display: flex; align-items: center; margin: 0;">
+                        <strong>Signature:</strong> 
+                         <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+                    </p>
+                </div>
+            </div>
+
+          </div>
+        </t>
+      </t>
+    </t>
+  </template>
+</odoo>

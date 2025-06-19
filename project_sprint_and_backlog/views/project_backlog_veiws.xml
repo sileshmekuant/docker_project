@@ -1,0 +1,60 @@
+<odoo>
+    <record id="view_project_backlog_kanban" model="ir.ui.view">
+        <field name="name">project.backlog.kanban</field>
+        <field name="model">project.backlog</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="project_id"/>
+                 <field name="backlog_task_ids"/> 
+                <!-- <field name="date_deadline"/> -->
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            <div>
+                                <strong><t t-esc="record.name.value"/></strong>
+                            </div>
+                            <div>
+                                <t t-esc="record.project_id.display_name"/>
+                            </div>
+                            <div>
+                                <t t-esc="record.backlog_task_ids.value"/>
+                            </div>
+                            <div>
+                                <!-- <t t-esc="record.date_deadline.value"/> -->
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_project_backlog_tree" model="ir.ui.view">
+        <field name="name">project.backlog.tree</field>
+        <field name="model">project.backlog</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="backlog_task_ids"/> 
+                <!-- <field name="date_deadline"/> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_project_backlog" model="ir.actions.act_window">
+        <field name="name">Project Backlogs</field>
+        <field name="res_model">project.backlog</field>
+        <field name="view_mode">tree,kanban</field>
+        <field name="view_id" ref="view_project_backlog_tree"/>
+    </record>
+   
+   <menuitem id="menu_project_backlog"
+          name="Backlogs"
+          parent="project.menu_main_pm"
+          action="action_project_backlog"
+          sequence="25"/>
+
+
+</odoo>

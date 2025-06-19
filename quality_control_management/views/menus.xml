@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Quality Menu -->
+    <menuitem id="menu_quality_root" name="Quality Management" sequence="10"/>
+
+    <!-- Submenus -->
+    <menuitem id="menu_quality_branch"
+             name="quality branch"
+              parent="menu_quality_root"
+              sequence="10"/>
+
+    <menuitem id="menu_defect_wastage"
+             name="Defect/Wastage follow up"
+             parent="menu_quality_branch"
+             action="action_defect_wastage"
+              /> 
+
+    <menuitem id="menu_product_quality_check"
+              name="Physical Testing Parameters"
+              parent="menu_quality_branch"
+              action="action_product_quality_check"
+              />
+
+    <menuitem id="menu_calibration"
+              name="Calibration Plan"
+              parent="menu_quality_branch"
+              action="action_calibration_plan"
+              />
+
+    <menuitem id="menu_raw_material_inspection"
+              name="Raw Material Inspection"
+              parent="menu_quality_branch"
+              action="action_raw_material_inspection"
+              />
+
+    <menuitem id="menu_non_conforming_product"
+              name="Non-Conforming Product Log"
+              parent="menu_quality_root"
+              action="action_non_conforming_product"
+              sequence="50"/>
+
+     <!-- <menuitem id="menu_qc_root" 
+             name="Quality Control"
+             parent="menu_pipe_dimension_root"/>  -->
+
+    <menuitem id="menu_pipe_dimension_root" 
+             name="Pipe Dimensions" 
+             parent="menu_quality_root"/>
+    <menuitem id="menu_pipe_dimension_sheet"
+            name="Dimension Sheets" 
+            parent="menu_pipe_dimension_root" 
+            action="action_pipe_dimension_sheet"/>
+
+
+    <menuitem id="menu_qc_reports" 
+            name="QC Reports" 
+            parent="menu_pipe_dimension_root" 
+            action="action_qc_report"/> 
+
+
+    <!-- <menuitem id="model_quality_control_management" 
+            name="customer complain and notification"
+            sequence="10"/> -->
+    <!-- <menuitem id="menu_weight_notification_root" 
+            parent="model_quality_control_management" 
+            name="Weight Notification"/> -->
+    <!-- <menuitem id="menu_weight_notification"
+            name="Notifications"
+            parent="menu_pipe_dimension_root"/> -->
+  <menuitem id="menu_weight_notification_action"
+            name="weight Notifications"
+            parent="menu_pipe_dimension_root" 
+            action="quality_control_management.action_weight_notification"/>
+
+    <!-- <menuitem id="menu_customer_complaint_root"
+            name="Customer Complaint"
+            parent="menu_pipe_dimension_root" /> -->
+
+    <!-- <menuitem id="menu_customer_complaint" 
+    name="Reports"
+    parent="menu_customer_complaint_root"/> -->
+
+    <menuitem id="menu_customer_complaint_main"
+              name="Complaint Reports"
+              parent="menu_pipe_dimension_root"
+              action="view_customer_complaint_action"/>
+
+     <menuitem id="menu_parameter" 
+                name="Parameter Logs"
+                parent="menu_quality_branch" 
+                action="action_parameter"/>
+
+
+</odoo>

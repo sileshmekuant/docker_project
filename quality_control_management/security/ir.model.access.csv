@@ -1,0 +1,19 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_defect_wastage_user,defect.wastage.user,model_defect_wastage,,1,1,1,1
+access_product_quality_user,product.quality.user,model_product_quality_check,,1,1,1,1
+access_product_quality_line_user,product.quality.line.user,model_product_quality_check_line,,1,1,1,1
+access_calibration_user,calibration.user,model_calibration_plan,,1,1,1,1
+access_calibration_line_user,calibration.line.user,model_calibration_line,,1,1,1,1
+access_raw_material_inspection_user,raw.material.inspection.user,model_raw_material_inspection,,1,1,1,1
+access_non_conforming_product,non.conforming.product,model_non_conforming_product,base.group_user,1,1,1,1
+access_non_conforming_product_line,non.conforming.product.line,model_non_conforming_product_line,base.group_user,1,1,1,1
+
+access_weight_notification_user,access_weight_notification_user,model_weight_notification,,1,1,1,1
+access_weight_notification_line_user,access_weight_notification_line_user,model_weight_notification_line,,1,1,1,1
+access_qc_report_user,qc.report user,model_qc_report,,1,1,1,1
+access_qc_report_line_user,qc.report.line user,model_qc_report_line,,1,1,1,1
+access_customer_complaint_user,customer.complaint user,model_customer_complaint,,1,1,1,1
+access_customer_complaint_user_line,customer.complaint.line user,model_customer_complaint_line,,1,1,1,1
+access_pipe_dimension_sheet,access_pipe_dimension_sheet,model_pipe_dimension_sheet,,1,1,1,1
+access_pipe_dimension_line,access_pipe_dimension_line,model_pipe_dimension_line,,1,1,1,1
+access_parameter_parameter_user,access.parameter.parameter,model_parameter_parameter,base.group_user,1,1,1,1

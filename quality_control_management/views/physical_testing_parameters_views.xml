@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_product_quality_check_form" model="ir.ui.view">
+        <field name="name">product.quality.check.form</field>
+        <field name="model">product.quality.check</field>
+        <field name="arch" type="xml">
+            <form string="PHYSICAL TESTING PARAMETER">
+                <sheet>
+
+                    <header>
+                        <button name="action_prepared" 
+                                type="object" 
+                                string="Prepared" 
+                                class="btn-primary"
+                                invisible="state != 'draft'"/>
+
+                        <button name="action_approve"
+                                type="object" 
+                                string="Approve" 
+                                class="btn-success"
+                                invisible="state != 'prepared'"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,prepared,approved"/>
+                    </header>
+
+                    <div style="text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 15px;">
+                       PHYSICAL TESTING PARAMETER
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date" required="1"/>
+                            <field name="product_type" required="1"/>
+                        </group>
+                        <group>
+                            <field name="order_code" required="1"/>
+                            <field name="inspector" required="1"/>
+                        </group>
+                    </group>
+
+                    <field name="quality_line_ids">
+                        <tree editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="parameter" required="1"/>
+                            <field name="equipment_name"/>
+                            <field name="standard" required="1"/>
+                            <field name="actual" required="1"/>
+                            <field name="remark"/>
+                        </tree>
+                    </field>
+
+                    <group string="Authorization">
+                        <group>
+                            <field name="prepared_by" readonly="1"/>
+                            
+                        </group>
+                        <group>
+                            <field name="approved_by"/>
+                            
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_product_quality_check_tree" model="ir.ui.view">
+        <field name="name">product.quality.check.tree</field>
+        <field name="model">product.quality.check</field>
+        <field name="arch" type="xml">
+            <tree string="Physical Testing Parameters">
+                <field name="date"/>
+                <field name="product_type"/>
+                <field name="order_code"/>
+                <field name="inspector"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action Definition -->
+    <record id="action_product_quality_check" model="ir.actions.act_window">
+        <field name="name">Physical Testing Parameters</field>
+        <field name="res_model">product.quality.check</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Record and monitor product physical testing parameters.
+            </p>
+        </field>
+    </record>
+</odoo>

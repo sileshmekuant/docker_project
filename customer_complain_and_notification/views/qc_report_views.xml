@@ -1,0 +1,64 @@
+<odoo>
+
+  <record id="qc_report_form_view" model="ir.ui.view">
+    <field name="name">qc.report.form</field>
+    <field name="model">qc.report</field>
+    <field name="arch" type="xml">
+      <form string="QC Report">
+        <sheet>
+          <group>
+            <group>
+              <field name="to"/>
+              <field name="from_field"/>
+              <field name="product_type"/>
+            </group>
+            <group>
+              <field name="date"/>
+              <field name="rec_no"/>
+              <field name="machine_line"/>
+              <field name="remark"/>
+            </group>
+          </group>
+
+          <notebook>
+            <page string="Components">
+              <field name="line_ids" nolabel="1">
+                <tree editable="bottom">
+                  <field name="sequence" string="S/N" readonly="1"/>
+                  <field name="component"/>
+                  <field name="weight"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  
+  <record id="view_qc_report_tree" model="ir.ui.view">
+      <field name="name">qc.report.tree</field>
+      <field name="model">qc.report</field>
+      <field name="arch" type="xml">
+        <tree string="QC Reports">
+          <field name="to"/>
+          <field name="from_field"/>
+          <field name="product_type"/>
+          <field name="date"/>
+          <field name="rec_no"/>
+          <field name="machine_line"/>
+          <field name="remark"/>
+        </tree>
+      </field>
+    </record>
+
+  <record id="action_qc_report" model="ir.actions.act_window">
+    <field name="name">QC Reports</field>
+    <field name="res_model">qc.report</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+ 
+  <menuitem id="menu_qc_root" name="Quality Control" parent="model_customer_complain_and_notification"/>
+  <menuitem id="menu_qc_reports" name="QC Reports" parent="menu_qc_root" action="action_qc_report"/>
+</odoo>

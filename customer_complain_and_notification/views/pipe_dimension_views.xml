@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_pipe_dimension_sheet_form" model="ir.ui.view">
+        <field name="name">pipe.dimension.sheet.form</field>
+        <field name="model">pipe.dimension.sheet</field>
+        <field name="arch" type="xml">
+            <form string="Pipe Dimension Sheet">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <field name="line_ids">
+                        <tree editable="bottom">
+                            <field name="od_mm"/>
+                            <field name="sdr26_min"/>
+                            <field name="sdr26_max"/>
+                            <field name="sdr21_min"/>
+                            <field name="sdr21_max"/>
+                            <field name="sdr17_min"/>
+                            <field name="sdr17_max"/>
+                            <field name="sdr136_min"/>
+                            <field name="sdr136_max"/>
+                            <field name="sdr11_min"/>
+                            <field name="sdr11_max"/>
+                            <field name="sdr9_min"/>
+                            <field name="sdr9_max"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pipe_dimension_sheet_tree" model="ir.ui.view">
+        <field name="name">pipe.dimension.sheet.tree</field>
+        <field name="model">pipe.dimension.sheet</field>
+        <field name="arch" type="xml">
+            <tree string="Pipe Dimension Sheets">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_pipe_dimension_sheet" model="ir.actions.act_window">
+        <field name="name">Pipe Dimension Sheets</field>
+        <field name="res_model">pipe.dimension.sheet</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_pipe_dimension_root" name="Pipe Dimensions" parent="model_customer_complain_and_notification" />
+    <menuitem id="menu_pipe_dimension_sheet" name="Dimension Sheets" parent="menu_pipe_dimension_root" action="action_pipe_dimension_sheet"/>
+</odoo>

@@ -1,0 +1,28 @@
+{
+    'name': 'Quality & Defect Management',
+    'version': '1.0',
+    'summary': 'Manage Product Quality Checks and Defect/Wastage Tracking',
+    'category': 'Quality',
+    'depends': ['base','product'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/defect_wastage_views.xml',
+        'views/physical_testing_parameters_views.xml',
+        'views/calibration_plan_views.xml',
+        'views/raw_material_inspection_views.xml',
+        'views/non_conforming_product_views.xml',
+        'views/weight_notification_view.xml', 
+        'views/qc_report_views.xml',
+        'views/customer_complaint_views.xml',
+        'views/pipe_dimension_views.xml',
+        'views/parameters.xml',
+        'views/menus.xml',
+        'report/defate_report_action.xml',
+        'report/defate_report_template.xml',
+        'report/pysical_testing_report_action.xml',
+        'report/pysical_testing_template.xml',
+        
+    ],
+    'installable': True,
+    'application': True,
+}

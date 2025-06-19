@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_raw_material_inspection_form" model="ir.ui.view">
+        <field name="name">raw.material.inspection.form</field>
+        <field name="model">raw.material.inspection</field>
+        <field name="arch" type="xml">
+            <form string="Raw Material Inspection Record">
+                <sheet>
+                
+                    <header>
+                        <button name="action_prepared" 
+                                type="object" 
+                                string="Prepared" 
+                                class="btn-primary"
+                                invisible="state != 'draft'"/>
+
+                        <button name="action_approve"
+                                type="object" 
+                                string="Approve" 
+                                class="btn-success"
+                                invisible="state != 'prepared'"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,prepared,approved"/>
+                    </header>
+
+                    <div style="text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 15px;">
+                       INCOMING RAW MATERIALS INSPECTION RECORD
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="material_type"/>
+                            <field name="supplier"/>
+                            <field name="date_received"/>
+                        </group>
+                        <group>
+                            <field name="quantity_received" widget="monetary"/>
+                            <field name="grn_no"/>
+                            <field name="batch_no"/>
+                            <field name="mfg_date"/>
+                            <field name="expiry_date"/>
+                        </group>
+                    </group>
+
+                    <group string="Inspection Parameters">
+                        <field name="packaging_condition"/>
+                        <field name="weight_per_package" widget="monetary"/>
+                        <field name="coa_available"/>
+                        <field name="load_on_machine"/>
+                    </group>
+
+                    <group>
+                        <field name="remark" placeholder="Add remarks or observations..." colspan="2" nolabel="1"/>
+                        
+                    </group>
+
+                    <group string="Authorization">
+                        <group>
+                            <field name="prepared_by" readonly="1"/>
+                            
+                        </group>
+                        <group>
+                            <field name="approved_by"/>
+                            
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_raw_material_inspection_tree" model="ir.ui.view">
+        <field name="name">raw.material.inspection.tree</field>
+        <field name="model">raw.material.inspection</field>
+        <field name="arch" type="xml">
+            <tree string="Raw Material Inspection Records">
+                <field name="date"/>
+                <field name="material_type"/>
+                <field name="supplier"/>
+                <field name="quantity_received" widget="monetary"/>
+                <field name="grn_no"/>
+                <field name="batch_no"/>
+               
+                <field name="prepared_by"/>
+                <field name="approved_by"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_raw_material_inspection" model="ir.actions.act_window">
+        <field name="name">Raw Material Inspection</field>
+        <field name="res_model">raw.material.inspection</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocentent_smiling_face">
+                Record and track raw material inspections.
+            </p>
+        </field>
+    </record>
+</odoo>

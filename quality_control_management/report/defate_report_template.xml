@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Report Template -->
+    <template id="report_defect_wastage">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 style="text-align: center;">WEEKLY DEFECT/WASTAGE FOLLOW UP FORM</h2>
+
+                        <div style="margin-top: 20px;">
+                            <table class="table" style="border: 1px solid black; border-collapse: collapse; width: 100%;">
+                                <thead>
+                                    <tr style="border: 1px solid black;">
+                                        <th style="border: 1px solid black;">Date</th>
+                                        <th style="border: 1px solid black;">Shift</th>
+                                        <th style="border: 1px solid black;">Product Type</th>
+                                        <th style="border: 1px solid black;">Total Wastage (kg)</th>
+                                        <th style="border: 1px solid black;">Total Product (kg)</th>
+                                        <th style="border: 1px solid black;">Wastage (%)</th>
+                                        <th style="border: 1px solid black;">Mixer</th>
+                                        <th style="border: 1px solid black;">Hopper</th>
+                                        <th style="border: 1px solid black;">Extruder</th>
+                                        <th style="border: 1px solid black;">Cooling System</th>
+                                        <th style="border: 1px solid black;">Haul Off</th>
+                                        <th style="border: 1px solid black;">Cutter</th>
+                                        <th style="border: 1px solid black;">Belling</th>
+                                        <th style="border: 1px solid black;">Starting</th>
+                                        <th style="border: 1px solid black;">Impurity/Dust</th>
+                                        <th style="border: 1px solid black;">Power Off</th>
+                                        <th style="border: 1px solid black;">Order No</th>
+                                        <th style="border: 1px solid black;">Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border: 1px solid black;">
+                                        <td style="border: 1px solid black;"><span t-field="o.date"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.shift"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.product_type"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.total_wastage"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.total_product"/></td>
+                                        <td style="border: 1px solid black;"><span t-esc="o.wastage_percent if o.total_product else 0"/>%</td>
+                                        <td style="border: 1px solid black;"><span t-field="o.mixer"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.hopper"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.extruder"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.cooling_system"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.haul_off"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.cutter"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.belling"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.starting_dust"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.impurity"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.power_off"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.order_no"/></td>
+                                        <td style="border: 1px solid black;"><span t-field="o.remark"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table style="width: 100%; margin-top: 40px;">
+                                <tr>
+                                    <td style="width: 50%;">
+                                        <strong>PREPARED BY:</strong><br/>
+                                        <span t-field="o.prepared_by"/><br/>
+                                       <strong>Signature:</strong><br/>
+                                      <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+              
+                                    </td>
+                                    <td style="width: 50%;">
+                                        <strong>APPROVED BY:</strong><br/>
+                                        <span t-field="o.approved_by"/><br/>
+                                        <strong>Signature:</strong><br/>
+                                     <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+              
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

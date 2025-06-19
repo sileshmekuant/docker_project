@@ -1,0 +1,65 @@
+<odoo>
+  <record id="view_weight_notification_form" model="ir.ui.view">
+    <field name="name">weight.notification.form</field>
+    <field name="model">weight.notification</field>
+    <field name="arch" type="xml">
+      <form string="Weight Notification">
+        <sheet>
+          <group>
+            <group>
+              <field name="to_person"/>
+              <field name="from_person"/>
+            </group>
+            <group>
+              <field name="date"/>
+              <field name="recipe_no"/>
+            </group>
+            <group>
+              <field name="product_type"/>
+              <field name="machine_line"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Notification Lines">
+              <field name="line_ids">
+                <tree editable="bottom">
+                  <field name="diameter"/>
+                  <field name="thickness"/>
+                  <field name="weight"/>
+                  <field name="length"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="view_weight_notification_tree" model="ir.ui.view">
+      <field name="name">weight.notification.tree</field>
+      <field name="model">weight.notification</field>
+      <field name="arch" type="xml">
+        <tree string="Weight Notifications">
+          <field name="to_person"/>
+          <field name="from_person"/>
+          <field name="date"/>
+          <field name="recipe_no"/>
+          <field name="product_type"/>
+          <field name="machine_line"/>
+        </tree>
+      </field>
+    </record>
+  
+
+  <record id="action_weight_notification" model="ir.actions.act_window">
+    <field name="name">Weight Notifications</field>
+    <field name="res_model">weight.notification</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  
+  <menuitem id="model_customer_complain_and_notification" name="customer complain and notification" sequence="10"/>
+  <menuitem id="menu_weight_notification_root" parent="model_customer_complain_and_notification" name="Weight Notification"/>
+  <menuitem id="menu_weight_notification" name="Notifications" parent="menu_weight_notification_root"/>
+  <menuitem id="menu_weight_notification_action" name="Manage Notifications"
+            parent="menu_weight_notification" action="customer_complain_and_notification.action_weight_notification"/>
+</odoo>

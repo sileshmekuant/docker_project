@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View for Non-Conforming Product Log -->
+    <record id="view_non_conforming_product_form" model="ir.ui.view">
+        <field name="name">non.conforming.product.form</field>
+        <field name="model">non.conforming.product</field>
+        <field name="arch" type="xml">
+            <form string="Non-Conforming Product Log">
+                <sheet>
+                 <header>
+                        <button name="action_prepared" 
+                                type="object" 
+                                string="Prepared" 
+                                class="btn-primary"
+                                invisible="state != 'draft'"/>
+
+                        <button name="action_approve"
+                                type="object" 
+                                string="Approve" 
+                                class="btn-success"
+                                invisible="state != 'prepared'"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,prepared,approved"/>
+                    </header>
+                    <div style="text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 15px;">
+                       NON-CONFORMING PRODUCT LOGGING SHEET
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="shift"/>
+                            <field name="job_order_no"/>
+                        </group>
+                        
+                    </group>
+                    <field name="non_conforming_lines">
+                        <tree editable="bottom">
+                            <field name="sequence" readonly="1"/>
+                            <field name="product_type"/>
+                            <field name="quantity" widget="monetary"/>
+                            <field name="defect_type"/>
+                            <field name="correction"/>
+                        </tree>
+                    </field>
+                    <field name="remark" placeholder="Add remarks or special observations..." colspan="2" nolabel="1"/>
+                    <group string="Authorization">               
+                            <field name="prepared_by" readonly="1"/>
+                            <field name="approved_by"/>
+                    </group>
+                   
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Tree View for Non-Conforming Product Log -->
+    <record id="view_non_conforming_product_tree" model="ir.ui.view">
+        <field name="name">non.conforming.product.tree</field>
+        <field name="model">non.conforming.product</field>
+        <field name="arch" type="xml">
+            <tree string="Non-Conforming Product Log">
+                <field name="date"/>
+                <field name="shift"/>
+                <field name="job_order_no"/>
+                <field name="prepared_by"/>
+                <field name="approved_by"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Action for Non-Conforming Product Log -->
+    <record id="action_non_conforming_product" model="ir.actions.act_window">
+        <field name="name">Non-Conforming Product Log</field>
+        <field name="res_model">non.conforming.product</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocentent_smiling_face">
+                Log and track non-conforming products during production.
+            </p>
+        </field>
+    </record>
+</odoo>

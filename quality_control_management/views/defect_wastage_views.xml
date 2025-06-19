@@ -1,0 +1,107 @@
+<odoo>
+    <record id="view_defect_wastage_form" model="ir.ui.view">
+        <field name="name">defect.wastage.form</field>
+        <field name="model">defect.wastage</field>
+        <field name="arch" type="xml">
+            <form string="WEEKLY DEFECT/WASTAGE FOLLOW UP FORM">
+                <sheet>
+                <header>
+                        <button name="action_prepared" 
+                                type="object" 
+                                string="Prepared" 
+                                class="btn-primary"
+                                invisible="state != 'draft'"/>
+
+                        <button name="action_approve"
+                                type="object" 
+                                string="Approve" 
+                                class="btn-success"
+                                invisible="state != 'prepared'"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,prepared,approved"/>
+                    </header>
+
+
+                     <div style="text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 15px;">
+                        WEEKLY DEFECT/WASTAGE FOLLOW UP FORM
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="shift"/>
+                            <field name="product_type"/>
+                            <field name="order_no"/>
+                        </group>
+                        <group>
+                            <field name="total_product" widget="monetary"/>
+                            <field name="total_wastage" widget="monetary"/>
+                            <field name="wastage_percent"/>
+                        </group>
+                    </group>
+
+                    <group string="Defect Breakdown (kg)" col="4">
+                        <field name="mixer"/>
+                        <field name="hopper"/>
+                        <field name="extruder"/>
+                        <field name="cooling_system"/>
+                        <field name="haul_off"/>
+                        <field name="cutter"/>
+                        <field name="belling"/>
+                        <field name="starting_dust"/>
+                        <field name="impurity"/>
+                        <field name="power_off"/>
+                    </group>
+
+                    <field name="remark" placeholder="Add remarks or special observations..." colspan="2" nolabel="1"/>
+
+                    <group>
+                        <group>
+                            <field name="prepared_by" readonly="1"/>
+                            
+                        </group>
+                        <group>
+                            <field name="approved_by"/>
+                            
+                        </group>
+                    </group>
+
+                    <!-- <separator string="Distribution" colspan="2"/>
+                    <div class="oe_structure"/>
+                    <div class="o_form_label" colspan="2">C.C:</div>
+                    <ul style="padding-left:15px;">
+                        <li>1st Production Manager</li>
+                        <li>2nd Finance Manager</li>
+                    </ul>  -->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_defect_wastage_tree" model="ir.ui.view">
+        <field name="name">defect.wastage.tree</field>
+        <field name="model">defect.wastage</field>
+        <field name="arch" type="xml">
+            <tree string="Weekly Defect/Wastage Follow Up">
+                <field name="date"/>
+                <field name="shift"/>
+                <field name="product_type"/>
+                <field name="total_product" widget="monetary"/>
+                <field name="total_wastage" widget="monetary"/>
+                <field name="wastage_percent"/>
+                <field name="prepared_by"/>
+                <field name="approved_by"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_defect_wastage" model="ir.actions.act_window">
+        <field name="name">Defect/Wastage Follow Up</field>
+        <field name="res_model">defect.wastage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocentent_smiling_face">
+                Track and monitor weekly production defects and wastage.
+            </p>
+        </field>
+    </record>
+</odoo>

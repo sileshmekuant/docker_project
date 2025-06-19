@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id,perm_read,perm_write,perm_create,perm_unlink
+access_weight_notification_user,access_weight_notification_user,model_weight_notification,,1,1,1,1
+access_weight_notification_line_user,access_weight_notification_line_user,model_weight_notification_line,,1,1,1,1
+access_qc_report_user,qc.report user,model_qc_report,,1,1,1,1
+access_qc_report_line_user,qc.report.line user,model_qc_report_line,,1,1,1,1
+access_customer_complaint_user,customer.complaint user,model_customer_complaint,,1,1,1,1
+access_customer_complaint_user_line,customer.complaint.line user,model_customer_complaint_line,,1,1,1,1
+access_pipe_dimension_sheet,access_pipe_dimension_sheet,model_pipe_dimension_sheet,,1,1,1,1
+access_pipe_dimension_line,access_pipe_dimension_line,model_pipe_dimension_line,,1,1,1,1
+
