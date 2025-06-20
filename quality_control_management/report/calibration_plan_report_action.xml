@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_report_calibration_plan" model="ir.actions.report">
+        <field name="name">calibration plan report</field>
+        <field name="model">calibration.plan</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">quality_control_management.report_calibration_plan</field>
+        <field name="report_file">quality_control_management.report_calibration_plan</field>
+        <field name="binding_model_id" ref="model_calibration_plan"/>
+       <field name="binding_type">report</field>
+        <field name="print_report_name">"calibration_plan_report%s" % (object.date)</field>
+    </record>
+</odoo>

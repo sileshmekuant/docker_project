@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_report_pipe_dimension_sheet" model="ir.actions.report">
+        <field name="name">pipe dimension line</field>
+        <field name="model">pipe.dimension.sheet</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">quality_control_management.report_pipe_dimension_sheet</field>
+        <field name="report_file">quality_control_management.report_pipe_dimension_sheet</field>
+        <field name="binding_model_id" ref="model_pipe_dimension_sheet"/>
+       <field name="binding_type">report</field>
+        <field name="print_report_name">"pipe_dimension_sheet_%s" % (object.date)</field>
+    </record>
+</odoo>

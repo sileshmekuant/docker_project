@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_report_qc_report" model="ir.actions.report">
+        <field name="name">qc Report</field>
+        <field name="model">qc.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">quality_control_management.report_qc_report</field>
+        <field name="report_file">quality_control_management.report_qc_report</field>
+        <field name="binding_model_id" ref="model_qc_report"/>
+       <field name="binding_type">report</field>
+        <field name="print_report_name">"qc_report_%s" % (object.date)</field>
+    </record>
+</odoo>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_raw_material_inspection">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Raw Material Inspection Record</h2>
+                          <table style="width: 100%; font-size: 13px;">
+                             <tr>
+                                <!-- Left Column -->
+                                <td style="vertical-align: top; width: 50%; padding-right: 20px;">
+                                <table>
+                                    <tr><td><strong>Date:</strong></td><td><span t-field="doc.date"/></td></tr>
+                                    <tr><td><strong>Type of Raw Material:</strong></td><td><span t-field="doc.material_type"/></td></tr>
+                                    <tr><td><strong>Supplier:</strong></td><td><span t-field="doc.supplier"/></td></tr>
+                                    <tr><td><strong>GRN No.:</strong></td><td><span t-field="doc.grn_no"/></td></tr>
+                                    <tr><td><strong>Batch No.:</strong></td><td><span t-field="doc.batch_no"/></td></tr>
+                                </table>
+                                </td>
+
+                                <!-- Right Column -->
+                                <td style="vertical-align: top; width: 50%; padding-left: 20px;">
+                                <table>
+                                    <tr><td><strong>Date Received:</strong></td><td><span t-field="doc.date_received"/></td></tr>
+                                    <tr><td><strong>Quantity Received:</strong></td><td><span t-field="doc.quantity_received"/> kg</td></tr>
+                                    <tr><td><strong>Mfg. Date:</strong></td><td><span t-field="doc.mfg_date"/></td></tr>
+                                    <tr><td><strong>Expiry Date:</strong></td><td><span t-field="doc.expiry_date"/></td></tr>
+                                </table>
+                                </td>
+                              </tr>
+                         </table>
+
+
+                        <h3>Inspection Parameters</h3>
+                        <table>
+                            <tr>
+                                <td>Packaging Condition:</td>
+                                <td>
+                                    <input type="checkbox" t-att-checked="doc.packaging_condition == 'good'" disabled="disabled"/> Good
+                                    <input type="checkbox" t-att-checked="doc.packaging_condition == 'damaged'" disabled="disabled"/> Damaged
+                                </td>
+                            </tr>
+                            <tr><td>Weight per Package:</td><td><span t-field="doc.weight_per_package"/> kg</td></tr>
+                            <tr>
+                                <td>Certificate of Analysis:</td>
+                                <td>
+                                    <span t-field="doc.coa_available"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Load on Machine:</td>
+                                <td>
+                                    <span t-field="doc.load_on_machine"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h3>Remarks and Status</h3>
+                        <table>
+                            <tr><td>Remarks:</td><td><span t-field="doc.remark"/></td></tr>
+                            <tr><td>Status:</td><td><span t-field="doc.state"/></td></tr>
+                        </table>
+
+                         <table style="width: 100%; margin-top: 40px;">
+                                <tr>
+                                    <td style="width: 50%;">
+                                        <strong>Inspected by:</strong><br/>
+                                        <span t-field="doc.prepared_by"/><br/>
+                                        <strong>Date:</strong>
+                                       <span t-field="doc.date"/><br/>
+                                       <strong>Signature:</strong><br/>
+                                      <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+              
+                                    </td>
+                                    <td style="width: 50%;">
+                                        <strong>Verified by:</strong><br/>
+                                        <span t-field="doc.approved_by"/><br/>
+                                        <strong>Date:</strong>
+                                        <span t-field="doc.date"/><br/>
+                                        <strong>Signature:</strong><br/>
+                                     <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+              
+                                    </td>
+                                </tr>
+                            </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

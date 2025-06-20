@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Report Template -->
+    <template id="report_customer_complaint">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 style="text-align: center;">Customer Complaint</h2>
+
+                        <div style="margin-top: 20px;">
+                            <table class="table" style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: 12px;">
+                                <thead>
+                                    <tr style="border: 1px solid black;">
+                                        <th style="border: 1px solid black;">S.N</th>
+                                        <th style="border: 1px solid black;">Date</th>
+                                        <th style="border: 1px solid black;">Type of Product</th>
+                                        <th style="border: 1px solid black;">Complaint Description</th>
+                                        <th style="border: 1px solid black;">Cause of Complaint</th>
+                                        <th style="border: 1px solid black;">Corrective Action Taken</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.line_ids" t-as="line">
+                                        <tr>
+                                            <td style="border: 1px solid black; text-align: center;">
+                                                <span t-esc="line.sequence"/>
+                                            </td>
+                                            <td style="border: 1px solid black; text-align: center;">
+                                                <span t-esc="line.date"/>
+                                            </td>
+                                            <td style="border: 1px solid black; text-align: center;">
+                                                <span t-esc="line.product_type.display_name or ''"/>
+                                            </td>
+                                            <td style="border: 1px solid black;">
+                                                <span t-esc="line.complaint_description"/>
+                                            </td>
+                                            <td style="border: 1px solid black;">
+                                                <span t-esc="line.cause_of_complaint or ''"/>
+                                            </td>
+                                            <td style="border: 1px solid black;">
+                                                <span t-esc="line.corrective_action_taken or ''"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                            <!-- Signature Section -->
+                            <table style="width: 100%; margin-top: 40px; font-size: 13px;">
+                                <tr>
+                                    <td style="width: 50%;">
+                                        <strong>INSPECTED BY 1:</strong><br/>
+                                        <span t-field="o.inspected_by_1"/><br/>
+                                        <strong>Signature:</strong><br/>
+                                        <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+                                    </td>
+                                    <td style="width: 50%;">
+                                        <strong>APPROVED BY:</strong><br/>
+                                        <span t-field="o.approved_by"/><br/>
+                                        <strong>Signature:</strong><br/>
+                                        <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

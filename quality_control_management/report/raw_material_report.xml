@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_report_raw_material_inspection" model="ir.actions.report">
+        <field name="name">raw material Report</field>
+        <field name="model">raw.material.inspection</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">quality_control_management.report_raw_material_inspection</field>
+        <field name="report_file">quality_control_management.report_raw_material_inspection</field>
+        <field name="binding_model_id" ref="model_raw_material_inspection"/>
+       <field name="binding_type">report</field>
+        <field name="print_report_name">"raw_material_inspection_%s" % (object.date)</field>
+    </record>
+</odoo>

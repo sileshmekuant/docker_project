@@ -40,9 +40,10 @@
                             <field name="quantity" widget="monetary"/>
                             <field name="defect_type"/>
                             <field name="correction"/>
+                            <field name="remark"/>
                         </tree>
                     </field>
-                    <field name="remark" placeholder="Add remarks or special observations..." colspan="2" nolabel="1"/>
+                    <!-- <field name="remark" placeholder="Add remarks or special observations..." colspan="2" nolabel="1"/> -->
                     <group string="Authorization">               
                             <field name="prepared_by" readonly="1"/>
                             <field name="approved_by"/>

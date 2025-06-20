@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Report Template -->
+        <template id="report_pipe_dimension_sheet">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2>HDPE Pipes ranging from OD 16-63mm, thickness from PN6 - PN25</h2>
+                            <table class="table table-condensed" style="border-collapse: collapse; border: 1px solid black;">
+                                <thead>
+                                    <tr>
+                                        <th style="border: 1px solid black;">SDR</th>
+                                        <th style="border: 1px solid black;" colspan="2">SDR26</th>
+                                        <th style="border: 1px solid black;" colspan="2">SDR21</th>
+                                        <th style="border: 1px solid black;" colspan="2">SDR17</th>
+                                        <th style="border: 1px solid black;" colspan="2">SDR13.6</th>
+                                        <th style="border: 1px solid black;" colspan="2">SDR11</th>
+                                        <th style="border: 1px solid black;" colspan="2">SDR9</th>
+                                        <th style="border: 1px solid black;" colspan="2">SDR7.4</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black;">PN for PE100</th>
+                                        <th style="border: 1px solid black;" colspan="2">PN6</th>
+                                        <th style="border: 1px solid black;" colspan="2">PN8</th>
+                                        <th style="border: 1px solid black;" colspan="2">PN10</th>
+                                        <th style="border: 1px solid black;" colspan="2">PN12.5</th>
+                                        <th style="border: 1px solid black;" colspan="2">PN16</th>
+                                        <th style="border: 1px solid black;" colspan="2">PN20</th>
+                                        <th style="border: 1px solid black;" colspan="2">PN25</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black;" rowspan="2">OD (mm)</th>
+                                        <th style="border: 1px solid black;" colspan="14"><span>Nominal wall thickness en (mm)</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black;">Min</th>
+                                        <th style="border: 1px solid black;">Max</th>
+                                        <th style="border: 1px solid black;">Min</th>
+                                        <th style="border: 1px solid black;">Max</th>
+                                        <th style="border: 1px solid black;">Min</th>
+                                        <th style="border: 1px solid black;">Max</th>
+                                        <th style="border: 1px solid black;">Min</th>
+                                        <th style="border: 1px solid black;">Max</th>
+                                        <th style="border: 1px solid black;">Min</th>
+                                        <th style="border: 1px solid black;">Max</th>
+                                        <th style="border: 1px solid black;">Min</th>
+                                        <th style="border: 1px solid black;">Max</th>
+                                        <th style="border: 1px solid black;">Min</th>
+                                        <th style="border: 1px solid black;">Max</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <tr>
+                                            <td style="border: 1px solid black;"><t t-esc="line.od_mm"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr26_min"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr26_max"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr21_min"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr21_max"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr17_min"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr17_max"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr136_min"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr136_max"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr11_min"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr11_max"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr9_min"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr9_max"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr74_min"/></td>
+                                            <td style="border: 1px solid black;"><t t-esc="line.sdr74_max"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

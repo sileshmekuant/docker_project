@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_report_non_conforming_product_line" model="ir.actions.report">
+        <field name="name">non conforming product report</field>
+        <field name="model">non.conforming.product</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">quality_control_management.report_non_conforming_product_line</field>
+        <field name="report_file">quality_control_management.report_non_conforming_product_line</field>
+        <field name="binding_model_id" ref="model_non_conforming_product"/>
+       <field name="binding_type">report</field>
+        <field name="print_report_name">"non_conforming_product_%s" % (object.date)</field>
+    </record>
+</odoo>

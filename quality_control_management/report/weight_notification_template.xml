@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_weight_notification">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 style="text-align: center;">QC Report</h2>
+
+                        <!-- Header Table -->
+                        <table style="width: 100%; font-size: 13px;">
+                            <tr>
+                                <!-- Left Column -->
+                                <td style="vertical-align: top; width: 50%; padding-right: 20px;">
+                                    <table>
+                                        <tr><td><strong>To:</strong></td><td><span t-field="doc.to_person"/></td></tr>
+                                        <tr><td><strong>From:</strong></td><td><span t-field="doc.from_person"/></td></tr>
+                                        <tr><td><strong>Product Type:</strong></td><td><span t-field="doc.product_type.name"/></td></tr>
+                                    </table>
+                                </td>
+                                <!-- Right Column -->
+                                <td style="vertical-align: top; width: 50%; padding-left: 20px;">
+                                    <table>
+                                        <tr><td><strong>Date:</strong></td><td><span t-field="doc.date"/></td></tr>
+                                        <tr><td><strong>Recipe No:</strong></td><td><span t-field="doc.recipe_no"/></td></tr>
+                                        <tr><td><strong>Machine Line:</strong></td><td><span t-field="doc.machine_line"/></td></tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Component Table -->
+                        <table class="table table-sm" style="width: 100%; border: 1px solid black; border-collapse: collapse; margin-top: 20px; font-size: 13px;">
+                            <thead>
+                                <tr>
+                                 <th colspan="5" style="border: 1px solid black; text-align: center;">LINE TWO</th>
+                                </tr>
+                                <tr>
+                                    <th style="border: 1px solid black; width: 5%;">S.N</th>
+                                    <th style="border: 1px solid black; width: 25%;">DIAMETER (mm)</th>
+                                    <th style="border: 1px solid black; width: 25%;">THICKNESS (mm)</th>
+                                    <th style="border: 1px solid black; width: 25%;">WEIGHT (Kg/PCS)</th>
+                                    <th style="border: 1px solid black; width: 20%;">LENGTH (m)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="sn" t-value="1"/>
+                                <t t-set="total_weight" t-value="0"/>
+                                <t t-foreach="doc.line_ids" t-as="line">
+                                    
+                                    <tr>
+                                        <td style="border: 1px solid black; text-align: center;"><t t-esc="sn"/></td>
+                                        <td style="border: 1px solid black; text-align: center;"><t t-esc="line.diameter"/></td>
+                                        <td style="border: 1px solid black; text-align: center;"><t t-esc="line.thickness"/></td>
+                                        <td style="border: 1px solid black; text-align: center;"><t t-esc="line.weight"/></td>
+                                        <td style="border: 1px solid black; text-align: center;"><t t-esc="line.length"/></td>
+                                    </tr>
+                                </t>
+                                
+                               
+                            </tbody>
+                        </table>
+
+                        
+                        
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

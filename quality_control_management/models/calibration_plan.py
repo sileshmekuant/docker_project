@@ -36,7 +36,7 @@ class CalibrationLine(models.Model):
     _description = 'Calibration Line'
 
     plan_id = fields.Many2one('calibration.plan', string='Calibration Plan', required=True, ondelete='cascade')
-    equipment_name = fields.Char(string='Equipment Name', required=True)
+    equipment_name = fields.Many2one('maintenance.request', string='Equipment Name', required=True)
     serial_no = fields.Char(string='Serial No.', required=True)
     capacity_range = fields.Char(string='Capacity/Range of Measurement', required=True)
     last_calibration = fields.Date(string='Last Calibration')

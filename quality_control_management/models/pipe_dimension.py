@@ -7,6 +7,7 @@ class PipeDimensionSheet(models.Model):
 
     name = fields.Char(string="Name", required=True)
     line_ids = fields.One2many('pipe.dimension.line', 'sheet_id', string='Dimensions')
+    date = fields.Date(string="Date", required=True)
 
 
 class PipeDimensionLine(models.Model):
@@ -34,3 +35,6 @@ class PipeDimensionLine(models.Model):
 
     sdr9_min = fields.Float(string='SDR9 Min')
     sdr9_max = fields.Float(string='SDR9 Max')
+
+    sdr74_min = fields.Float(string='SDR7.4 Min')  
+    sdr74_max = fields.Float(string='SDR7.4 Max')

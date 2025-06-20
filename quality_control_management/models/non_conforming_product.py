@@ -37,7 +37,7 @@ class NonConformingProduct(models.Model):
             rec.state = 'approved'
 
     # Others
-    remark = fields.Text(string='Remark')
+    
     prepared_by = fields.Many2one('res.users', string='Prepared By', default=lambda self: self.env.user, readonly=True)
     approved_by = fields.Many2one('res.users', string='Approved By', required=True)
     
@@ -59,6 +59,7 @@ class NonConformingProductLine(models.Model):
     quantity = fields.Float(string='Quantity (kg)', required=True, digits=(12, 2))
     defect_type = fields.Char(string='Type of Defect', required=True)
     correction = fields.Text(string='Correction')
+    remark = fields.Text(string='remark')
 
     @api.constrains('quantity')
     def _check_quantity(self):

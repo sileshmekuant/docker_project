@@ -7,6 +7,7 @@
             <form string="Pipe Dimension Sheet">
                 <sheet>
                     <group>
+                      <field name="date"/>
                         <field name="name"/>
                     </group>
                     <field name="line_ids">
@@ -24,6 +25,8 @@
                             <field name="sdr11_max"/>
                             <field name="sdr9_min"/>
                             <field name="sdr9_max"/>
+                            <field name="sdr74_min"/>
+                            <field name="sdr74_max"/>
                         </tree>
                     </field>
                 </sheet>
@@ -36,6 +39,7 @@
         <field name="model">pipe.dimension.sheet</field>
         <field name="arch" type="xml">
             <tree string="Pipe Dimension Sheets">
+                <field name="date"/>
                 <field name="name"/>
             </tree>
         </field>

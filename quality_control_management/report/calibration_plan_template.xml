@@ -1,0 +1,85 @@
+<odoo>
+  <template id="report_calibration_plan">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="doc">
+        <t t-call="web.external_layout">
+          <div class="page" style="font-size: 13px;">
+            <!-- Title -->
+            <h2 style="text-align: center;">Calibration Plan</h2>
+
+            <div style="display: flex; justify-content: space-between;">
+              <div style="width: 65%; text-align: right;">
+                <p><strong>Date:</strong> <t t-esc="doc.date.strftime('%Y-%m-%d') if doc.date else ''"/></p>
+              </div>
+            </div>
+
+            <!-- Table Section -->
+            <table class="table table-sm" style="width: 100%; border: 1px solid black; border-collapse: collapse; margin-top: 10px;">
+              <thead>
+                <tr>
+                  <th style="border: 1px solid black; width: 5%;">S.N</th>
+                  <th style="border: 1px solid black; width: 15%;">Equipment Name</th>
+                  <th style="border: 1px solid black;">Serial No.</th>
+                  <th style="border: 1px solid black; width: 10%;">Capacity/Range</th>
+                  <th style="border: 1px solid black; width: 10%;">Last Calibration</th>
+                  <th style="border: 1px solid black; width: 20%;">Calibration Frequency</th>
+                  <th style="border: 1px solid black; width: 20%;">Due Date</th>
+                  <th style="border: 1px solid black; width: 20%;">Calibration Type</th>
+                  <th style="border: 1px solid black; width: 20%;">Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <t t-foreach="doc.calibration_lines" t-as="line" t-as-index="line_index">
+                  <tr>
+                    <td style="border: 1px solid black; text-align: center;"><t t-esc="line_index + 1"/></td>
+                    <td style="border: 1px solid black;"><t t-esc="line.equipment_name.name"/></td>
+                    <td style="border: 1px solid black;"><t t-esc="line.serial_no"/></td>
+                    <td style="border: 1px solid black;"><t t-esc="line.capacity_range"/></td>
+                    <td style="border: 1px solid black; text-align: center;">
+                      <t t-esc="line.last_calibration.strftime('%Y-%m-%d') if line.last_calibration else ''"/>
+                    </td>
+                    <td style="border: 1px solid black;"><t t-esc="line.calibration_frequency"/></td>
+                    <td style="border: 1px solid black; text-align: center;">
+                      <t t-esc="line.calibration_due_date.strftime('%Y-%m-%d') if line.calibration_due_date else ''"/>
+                    </td>
+                    <td style="border: 1px solid black; text-align: center;">
+                      <t t-esc="dict({'in_house': 'In-House', 'third_party': '3rd Party'}).get(line.calibration_party, '')"/>
+                    </td>
+                    <td style="border: 1px solid black;"><t t-esc="line.remarks or ''"/></td>
+                  </tr>
+                </t>
+              </tbody>
+            </table>
+
+            <!-- Footer Section -->
+            <table style="width:100%; margin-top: 40px; font-size: 14px;">
+              <tr>
+                <td style="width: 50%; vertical-align: top;">
+                  <strong>Prepared By:</strong><br/>
+                  <t t-esc="doc.prepared_by.name"/><br/>
+                  <div style="margin-top: 20px;">
+                    <strong>Date:</strong>
+                    <t t-esc="doc.date.strftime('%d %B %Y') if doc.date else ''"/><br/>
+                    <strong>Signature:</strong><br/>
+                    <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+                  </div>
+                </td>
+                <td style="width: 50%; vertical-align: top;">
+                  <strong>Approved By:</strong><br/>
+                  <t t-esc="doc.approved_by.name if doc.approved_by else ''"/><br/>
+                  <div style="margin-top: 20px;">
+                    <strong>Date:</strong>
+                    <t t-esc="doc.date.strftime('%d %B %Y') if doc.date else ''"/><br/>
+                    <strong>Signature:</strong><br/>
+                    <span style="border-bottom: 1px solid black; display: inline-block; width: 70%; height: 20px;"></span>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+          </div>
+        </t>
+      </t>
+    </t>
+  </template>
+</odoo>
