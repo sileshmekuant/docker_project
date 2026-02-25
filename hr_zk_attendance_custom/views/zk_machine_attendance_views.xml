@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- =========================
+             ACTION
+        ========================== -->
+        <record id="action_zk_machine_attendance" model="ir.actions.act_window">
+            <field name="name">Biometric Attendance</field>
+            <field name="res_model">zk.machine.attendance</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Biometric Attendance records found.
+                </p>
+                <p>Biometric data synced from devices will appear here.</p>
+            </field>
+        </record>
+
+
+        
+        <!-- =========================
+             tree VIEW
+        ========================== -->
+        <record id="view_zk_machine_attendance_tree" model="ir.ui.view">
+            <field name="name">zk.machine.attendance.tree</field>
+            <field name="model">zk.machine.attendance</field>
+            <field name="arch" type="xml">
+                <tree string="Biometric Attendance" create="false" edit="false">
+                    <field name="employee_id"/>
+                    <field name="device_id_num"/>
+                    <field name="punch_type"/>
+                    <field name="attendance_type"/>
+                    <field name="punching_time"/>
+                    <field name="address_id"/>
+                    <field name="check_in"/>
+                    <field name="check_out"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- =========================
+             FORM VIEW
+        ========================== -->
+        <record id="view_zk_machine_attendance_form" model="ir.ui.view">
+            <field name="name">zk.machine.attendance.form</field>
+            <field name="model">zk.machine.attendance</field>
+            <field name="arch" type="xml">
+                <form string="Biometric Attendance" create="false" edit="false">
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="device_id_num"/>
+                            <field name="address_id"/>
+                        </group>
+                        <group>
+                            <field name="punch_type"/>
+                            <field name="attendance_type"/>
+                            <field name="punching_time"/>
+                        </group>
+                    </group>
+                    <group string="Attendance Detail">
+                        <field name="check_in"/>
+                        <field name="check_out"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- =========================
+             SEARCH VIEW
+        ========================== -->
+        <record id="view_zk_machine_attendance_search" model="ir.ui.view">
+            <field name="name">zk.machine.attendance.search</field>
+            <field name="model">zk.machine.attendance</field>
+            <field name="arch" type="xml">
+                <search string="Search Biometric Attendance">
+                    <field name="employee_id"/>
+                    <field name="device_id_num"/>
+                    <field name="punch_type"/>
+                    <field name="attendance_type"/>
+                    <field name="address_id"/>
+                    <field name="punching_time"/>
+                    <filter string="Check In" name="filter_check_in" domain="[('punch_type','=','0')]"/>
+                    <filter string="Check Out" name="filter_check_out" domain="[('punch_type','=','1')]"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>
